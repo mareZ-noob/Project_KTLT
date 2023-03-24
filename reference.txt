@@ -1,5 +1,6 @@
 https://learn.microsoft.com/en-us/cpp/?view=msvc-170
 https://stackoverflow.com/
 https://cplusplus.com/forum/beginner/
+https://cplusplus.com/forum/general/55170/
 https://codelearn.io/sharing/windowsh-va-ham-dinh-dang-console-p1
 https://codelearn.io/sharing/windowsh-ham-dinh-dang-noi-dung-console

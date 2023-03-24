@@ -4,9 +4,10 @@ void quit()
 {
     clearScreen();
     consoleColor(BLACK, CYAN);
+    clearScreen();
     art("ascii_art\\goodbye.txt");
     consoleColor(BLACK, WHITE);
-    Sleep(2000);
+    Sleep(5000);
     clearScreen();
     exit(1);
 }
@@ -77,7 +78,7 @@ void menu(int choice)
     while (choice != 2)
     {   
         consoleTitle(); 
-        consoleColor(LIGHT_WHITE, LIGHT_BLUE);
+        // consoleColor(LIGHT_WHITE, LIGHT_BLUE);
         clearScreen();
         PlaySound(TEXT(POKEMON_SOUND), NULL, SND_ASYNC);
         cout << "1. Login" << endl;

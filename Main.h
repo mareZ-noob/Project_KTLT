@@ -4,6 +4,10 @@
 #include <iostream>
 #include <conio.h>
 #include <Windows.h>
+#include <algorithm>
+#include <random>
+#include <chrono>
+#include <ctime>
 #include <mmsystem.h>
 #include <cstdlib>
 #include <fstream>
@@ -40,6 +44,12 @@ using std::string;
 #define LIGHT_WHITE 15
 
 // KEY CHARS
+#define KEY_W 'w'
+#define KEY_S 's'
+#define KEY_A 'a'
+#define KEY_D 'd'
+#define KEY_H 'h'
+
 #define KEY_UP 72
 #define KEY_DOWN 80
 #define KEY_LEFT 75

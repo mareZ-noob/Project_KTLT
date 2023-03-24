@@ -4,13 +4,8 @@
 #include <iomanip>
 #include <chrono>
 #include <thread>
-#include <mutex>
 
 using namespace std;
-
-// declare a global mutex lock
-std::mutex console_mutex;
-
 HWND consoleWindow = GetConsoleWindow();
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -22,7 +17,8 @@ void moveCursor(int posX, int posY)
     SetConsoleCursorPosition(console, CursorPosition);
 }
 
-void clockTime() {
+void clockTime()
+{
     int elapsed_seconds = 0;
 
     while (true)
@@ -39,7 +35,7 @@ void clockTime() {
         int seconds = elapsed_seconds % 60;
 
         // format 00:00
-        moveCursor(40,0);
+        moveCursor(40, 0);
         printf("%02d:%02d", minutes, seconds);
         // std::cout << std::setfill('0') << std::setw(2) << minutes << ":"
         //           << std::setfill('0') << std::setw(2) << seconds << '\r';
@@ -83,6 +79,11 @@ int main()
     printMenu(selection);
 
     std::thread clock_thread(clockTime);
+    clock_thread.detach();
+
+    HANDLE hClockThread = clock_thread.native_handle();
+    SetThreadPriority(hClockThread, THREAD_PRIORITY_HIGHEST);
+
     while (true)
     {
         char c = _getch(); // wait for a key to be pressed

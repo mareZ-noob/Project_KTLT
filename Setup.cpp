@@ -107,14 +107,15 @@ void clearScreen()
 
 void drawRectangle(int left, int top, int width, int height)
 {
+    int i;
     moveCursor(left, top);
     putchar(218);
-    for (int i = 0; i < width; i++)
+    for (i = 0; i < width; i++) {
         putchar(196);
+    }
     putchar(191);
 
-    int i = 0;
-    for (; i < height; i++)
+    for (i = 0; i < height; i++)
     {
         moveCursor(left, top + i + 1);
         putchar(179);
@@ -124,7 +125,8 @@ void drawRectangle(int left, int top, int width, int height)
 
     moveCursor(left, top + i);
     putchar(192);
-    for (i = 0; i < width; i++)
+    for (i = 0; i < width; i++) {
         putchar(196);
+    }
     putchar(217);
 }
