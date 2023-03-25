@@ -3,6 +3,6 @@
 
 #include "Main.h"
 
-void art(string fileName);
+void art(string fileName, int pX, int pY);
 
 #endif // __GRAPHIC_H__
