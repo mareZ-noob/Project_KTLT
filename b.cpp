@@ -1,43 +1,52 @@
 #include <iostream>
+#include <bits/stdc++.h>
 #include <windows.h>
-#include <conio.h>
-#include <iomanip>
-#include <chrono>
-#include <thread>
+#include <conio.h> // for _getch() function
 
 using namespace std;
-HWND consoleWindow = GetConsoleWindow();
-HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 
-void moveCursor(int posX, int posY)
+int getConsoleInput()
 {
-    COORD CursorPosition;
-    CursorPosition.X = posX;
-    CursorPosition.Y = posY;
-    SetConsoleCursorPosition(console, CursorPosition);
-}
-
-void clockTime()
-{
-    int elapsed_seconds = 0;
-
-    while (true)
+    int c = _getch();
+    if (c == 0 || c == 224)
     {
-        // Wait for 1 second
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-
-        // Update elapsed time
-        elapsed_seconds++;
-
-        // Convert elapsed time to minutes and seconds
-        int minutes = elapsed_seconds / 60;
-        int seconds = elapsed_seconds % 60;
-
-        // format 00:00
-        moveCursor(40, 0);
-        printf("%02d:%02d", minutes, seconds);
-        // std::cout << std::setfill('0') << std::setw(2) << minutes << ":"
-        //           << std::setfill('0') << std::setw(2) << seconds << '\r';
+        switch (_getch())
+        {
+        case 72:
+            return 2;
+            break;
+        case 75:
+            return 3;
+            break;
+        case 77:
+            return 4;
+            break;
+        case 80:
+            return 5;
+            break;
+        default:
+            return 0;
+            break;
+        }
+    }
+    else
+    {
+        if (c == 27) // esc
+            return 1;
+        else if (c == 87 || c == 119) // W, w
+            return 2;
+        else if (c == 65 || c == 97) // A, a
+            return 3;
+        else if (c == 68 || c == 100) // D, d
+            return 4;
+        else if (c == 83 || c == 115) // S, s
+            return 5;
+        else if (c == 13) // Enter
+            return 6;
+        else if (c == 72 || c == 104) // H, h
+            return 7;
+        else
+            return 0; // nút khác
     }
 }
 
@@ -116,26 +125,23 @@ int main()
     int selection = 1; // start with the first button selected
     printMenu(selection);
 
-    std::thread clock_thread(clockTime);
-
     while (true)
     {
-        char c = _getch(); // wait for a key to be pressed
-
-        if ((c == 'w' or c == 72) && selection > 1)
+        int c = getConsoleInput(); // wait for a key to be pressed
+        if ((c == 2) && selection > 1)
         { // move selection up
             selection--;
         }
-        else if ((c == 's' or c == 80) && selection < 3)
+        else if ((c == 5) && selection < 3)
         { // move selection down
             selection++;
         }
-        else if (c == '\r' || c == '\n')
+        else if (c == 7)
         { // user pressed enter, so execute the selected option
             switch (selection)
             {
             case 1:
-                system("cls");
+                clearScreen();
                 cout << "You selected Login\n";
                 Sleep(5000);
                 break;

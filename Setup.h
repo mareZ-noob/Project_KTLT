@@ -3,7 +3,7 @@
 
 #include "Main.h"
 
-void SetWindowSize(SHORT width, SHORT height);
+void SetWindowSize(int width, int height);
 void SetScreenBufferSize(SHORT width, SHORT height);
 void DisableResizeWindow();
 void DisableCtrButton(bool Close, bool Min, bool Max);
@@ -18,6 +18,7 @@ void consoleTitle();
 void consoleColor(int background, int text);
 void clearScreen();
 void drawRectangle(int left, int top, int width, int height);
+void initConsole();
 
 #endif // __SETUP_H__
 

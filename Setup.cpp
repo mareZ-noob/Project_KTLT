@@ -4,24 +4,12 @@ HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
 HWND hWnd = GetConsoleWindow();
 
-
-// void SetWindowSize(int width, int height)
-// {
-//     // Get the console handle
-//     HWND hConsole = GetConsoleWindow();
-//     // MoveWindow(window_handle, x, y, width, height, redraw_window);
-//     MoveWindow(hConsole, 200, 200, width, height, TRUE);
-// }
-
-void SetWindowSize(SHORT width, SHORT height)
+void SetWindowSize(int width, int height)
 {
-    SMALL_RECT WindowSize;
-    WindowSize.Top = 0;
-    WindowSize.Left = 0;
-    WindowSize.Right = width;
-    WindowSize.Bottom = height;
- 
-    SetConsoleWindowInfo(console, 1, &WindowSize);
+    // Get the console handle
+    HWND hConsole = GetConsoleWindow();
+    // MoveWindow(window_handle, x, y, width, height, redraw_window);
+    MoveWindow(hConsole, 280, 50, width, height, TRUE);
 }
 
 void SetScreenBufferSize(SHORT width, SHORT height)
@@ -41,7 +29,7 @@ void DisableResizeWindow()
 void DisableCtrButton(bool Close, bool Min, bool Max)
 {
     HMENU hMenu = GetSystemMenu(hWnd, false);
-    
+
     if (Close == 1)
     {
         DeleteMenu(hMenu, SC_CLOSE, MF_BYCOMMAND);
@@ -100,9 +88,44 @@ void consoleColor(int background, int text)
     SetConsoleTextAttribute(console, background * 16 + text);
 }
 
+// https://stackoverflow.com/questions/2347770/how-do-you-clear-the-console-screen-in-c
 void clearScreen()
 {
-    system("cls");
+    HANDLE hStdOut;
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    DWORD count;
+    DWORD cellCount;
+    COORD homeCoords = {0, 0};
+
+    hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (hStdOut == INVALID_HANDLE_VALUE)
+        return;
+
+    // Get the number of cells in the current buffer
+    if (!GetConsoleScreenBufferInfo(hStdOut, &csbi))
+        return;
+    cellCount = csbi.dwSize.X * csbi.dwSize.Y;
+
+    // Fill the entire buffer with spaces
+    if (!FillConsoleOutputCharacter(
+            hStdOut,
+            (TCHAR)' ',
+            cellCount,
+            homeCoords,
+            &count))
+        return;
+
+    // Fill the entire buffer with the current colors and attributes
+    if (!FillConsoleOutputAttribute(
+            hStdOut,
+            csbi.wAttributes,
+            cellCount,
+            homeCoords,
+            &count))
+        return;
+
+    // Move the cursor home
+    SetConsoleCursorPosition(hStdOut, homeCoords);
 }
 
 void drawRectangle(int left, int top, int width, int height)
@@ -110,7 +133,8 @@ void drawRectangle(int left, int top, int width, int height)
     int i;
     moveCursor(left, top);
     putchar(218);
-    for (i = 0; i < width; i++) {
+    for (i = 0; i < width; i++)
+    {
         putchar(196);
     }
     putchar(191);
@@ -125,8 +149,20 @@ void drawRectangle(int left, int top, int width, int height)
 
     moveCursor(left, top + i);
     putchar(192);
-    for (i = 0; i < width; i++) {
+    for (i = 0; i < width; i++)
+    {
         putchar(196);
     }
     putchar(217);
+}
+
+void initConsole()
+{
+    SetWindowSize(1000, 750);
+    consoleTitle();
+    disableMouseInput();
+    showCursor(0);
+    ShowScrollbar(0);
+    DisableSelection();
+    DisableCtrButton(1, 1, 1);
 }

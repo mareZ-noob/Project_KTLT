@@ -2,9 +2,11 @@
 #define __MAIN_H__
 
 #include <iostream>
+#include <stdio.h>
 #include <conio.h>
 #include <Windows.h>
 #include <algorithm>
+#include <vector>
 #include <random>
 #include <chrono>
 #include <ctime>
@@ -18,12 +20,15 @@
 #pragma comment(lib, "Winmm.lib")
 
 using std::cin;
-using std::flush;
 using std::cout;
 using std::endl;
+using std::ios;
+using std::fstream;
 using std::ifstream;
 using std::ofstream;
 using std::string;
+using std::vector;
+using std::sort;
 
 // COLORS
 #define BLACK 0

@@ -48,7 +48,7 @@ void menu(int choice)
     {
         consoleTitle();
         // consoleColor(LIGHT_WHITE, LIGHT_BLUE);
-        clearScreen();
+        // clearScreen();
         PlaySound(TEXT(POKEMON_SOUND), NULL, SND_ASYNC);
         cout << "1. Login" << endl;
         cout << "2. Quit" << endl;
@@ -60,7 +60,7 @@ void menu(int choice)
         {
         case 1:
         {
-            clearScreen();
+            // clearScreen();
             string email;
             login(email);
             if (verify(email))

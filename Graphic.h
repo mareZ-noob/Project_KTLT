@@ -2,6 +2,7 @@
 #define _GRAPHIC_H__
 
 #include "Main.h"
+#include "Setup.h"
 
 void art(string fileName, int pX, int pY);
 
