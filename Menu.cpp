@@ -85,4 +85,3 @@ void menu(int choice)
         Sleep(1000);
         clearScreen();
     }
-}
