@@ -20,7 +20,6 @@ void clearScreen();
 void drawRectangle(int left, int top, int width, int height);
 void initConsole();
 
-//DINH DUY TRIET
 void TextColor(WORD color);
 void button(int x, int y, int w, int h, int color, int buttonColor, int backgroundColor, string text);
 
