@@ -86,4 +86,3 @@ void menu(int choice)
         clearScreen();
     }
 }
-//

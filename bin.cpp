@@ -114,7 +114,7 @@ void printLeaderboard()
 
 int main()
 {
-    Players p{"cac", 50, 2};
+    Players p{"ngu", 100, 2};
     pushRecord(p);
     printLeaderboard();
     system("pause");
