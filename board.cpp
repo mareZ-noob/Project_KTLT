@@ -213,14 +213,17 @@ bool check_L(Board **board, int x1, int y1, int x2, int y2)
         return false;
 }
 
-bool checkRectX(Board **board, int x1, int x2, int y1, int y2) {
-	int minY = min(y1, y2);
-	int maxY = max(y1, y2);
+bool checkRectX(Board **board, int x1, int x2, int y1, int y2)
+{
+    int minY = min(y1, y2);
+    int maxY = max(y1, y2);
 
-	for (int y = minY + 1; y < maxY; y++) {
-		if (checkLineX(board, minY, y, x1));
-	}
-	return false;
+    for (int y = minY + 1; y < maxY; y++)
+    {
+        if (checkLineX(board, minY, y, x1))
+            ;
+    }
+    return false;
 }
 
 // bool checkRectY(int** mang, int x1, int x2, int y1, int y2) {
@@ -250,32 +253,57 @@ int main()
         for (int j = 0; j < x.col; j++)
         {
             cout << board[i][j].ch << " ";
-            freq[board[i][j].ch]++;
+            // freq[board[i][j].ch]++;
         }
         cout << endl;
     }
-
-    for (int i = 0; i < 256; i++)
+    while (1)
     {
-        if (freq[i])
+        int x1, y1, x2, y2;
+        cout << "Nhap x1, y1: ";
+        cin >> x1 >> y1;
+        cout << "Nhap x2, y2: ";
+        cin >> x2 >> y2;
+        if (check_I(board, x1, y1, x2, y2))
         {
-            cout << char(i) << ": " << freq[i] << endl;
+            board[x1][y1].ch = ' ';
+            board[x1][y1].ch = ' ';
+        }
+        else if (check_L(board, x1, y1, x2, y2))
+        {
+            board[x1][y1].ch = ' ';
+            board[x1][y1].ch = ' ';
+        }
+        for (int i = 0; i < x.row; i++)
+        {
+            for (int j = 0; j < x.col; j++)
+            {
+                cout << board[i][j].ch << " ";
+            }
+            cout << endl;
         }
     }
+    // for (int i = 0; i < 256; i++)
+    // {
+    //     if (freq[i])
+    //     {
+    //         cout << char(i) << ": " << freq[i] << endl;
+    //     }
+    // }
     deallocate(board, x.row);
 
-    char ch[26][41];
+    // char ch[26][41];
+    // // getBackground(ch);
+    // for (int i = 0; i < 5; i++)
+    // {
+    //     moveCursor(20, 20 + i);
+    //     cout << box[i];
+    // }
+    // moveCursor(24, 22);
+    // cout << "A";
+    // cout << "\n\n\n\n";
     // getBackground(ch);
-    for (int i = 0; i < 5; i++)
-    {
-        moveCursor(20, 20 + i);
-        cout << box[i];
-    }
-    moveCursor(24, 22);
-    cout << "A";
-    cout << "\n\n\n\n";
-    getBackground(ch);
-    // displayBackground(ch, 40, 20);
+    // // displayBackground(ch, 40, 20);
     system("pause");
     return 0;
 }

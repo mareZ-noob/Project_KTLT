@@ -23,7 +23,6 @@ void initConsole();
 
 void TextColor(WORD color);
 void button(int x, int y, int w, int h, int color, int buttonColor, int backgroundColor, string text);
-void read_file_at_pos(string fileName, int textColor, int backgroundColor, int x, int y);
 
 #endif // __SETUP_H__
 

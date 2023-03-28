@@ -381,9 +381,9 @@ void MainMenu()
                 while (true)
                 {
                     clearScreen();
-                    art_at_pos("CREDITS BIG.txt", 15, backgroundColor, 32, 5);
-                    read_file_at_pos("credits.txt", 15, backgroundColor, 35, 13);
-                    //Sleep(500);
+                    art_at_pos("ascii_art\\credit.txt", 15, backgroundColor, 32, 5);
+                    read_file_at_pos("ascii_art\\content.txt", 15, backgroundColor, 35, 13);
+                    // Sleep(500);
                     if (kbhit())
                     {
                         char key = _getch();
