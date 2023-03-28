@@ -3,9 +3,14 @@
 #include <vector>
 #include <random>
 #include <chrono>
-#include "Setup.h"
+#include <windows.h>
+#include <fstream>
 
 using namespace std;
+
+HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
+HWND hWnd = GetConsoleWindow();
 
 struct Board
 {
@@ -13,25 +18,33 @@ struct Board
     char ch = ' ';
 };
 
-char box[4][9] = {
-    {" ----- "},
-    {"|     |"},
-    {"|     |"},
-    {" ----- "}};
+char box[5][10] = {
+    {" ------- "},
+    {"|       |"},
+    {"|       |"},
+    {"|       |"},
+    {" ------- "}};
 
 void getBackground(char bg[][41])
 {
-    ifstream f("ascii_art\\pikapika.txt");
+    ifstream file("ascii_art\\pikapika.txt");
     for (int i = 0; i < 26; i++)
     {
         for (int j = 0; j < 41; j++)
         {
-            bg[i][j] = f.get();
-            // cout << bg[i][j];
+            bg[i][j] = file.get();
         }
-        f.ignore();
+        file.ignore();
     }
-    f.close();
+    file.close();
+}
+
+void moveCursor(int posX, int posY)
+{
+    COORD CursorPosition;
+    CursorPosition.X = posX;
+    CursorPosition.Y = posY;
+    SetConsoleCursorPosition(console, CursorPosition);
 }
 
 void displayBackground(char bg[][41], int x, int y)
@@ -40,32 +53,33 @@ void displayBackground(char bg[][41], int x, int y)
     {
         for (int j = 0; j < 11; j++)
         {
-            // moveCursor((x + 1) * 10 + j, (y + 1) * 4 + i);
+            moveCursor((x + 1) * 10 + j, (y + 1) * 4 + i);
             cout << bg[y * 4 + i][x * 10 + j];
         }
     }
 }
 
-void deallocate(Board &x, int **board)
+void deallocate(Board **board, int _row)
 {
-    for (int i = 0; i < x.row; i++)
+    for (int i = 0; i < _row; i++)
     {
         delete[] board[i];
     }
     delete[] board;
+    board = nullptr;
 }
 
 void deleteBoard(Board &x)
 {
 }
 
-int **randomEven(int **board, Board &x)
+Board **randomEven(Board **&board, int _row, int _col)
 {
     // 1D from vector
-    vector<int> vec;
-    for (int i = 0; i < x.row; i++)
+    vector<Board> vec;
+    for (int i = 0; i < _row; i++)
     {
-        for (int j = 0; j < x.col; j++)
+        for (int j = 0; j < _col; j++)
         {
             vec.push_back(board[i][j]);
         }
@@ -76,9 +90,9 @@ int **randomEven(int **board, Board &x)
 
     // Push again
     int index = 0;
-    for (int i = 0; i < x.row; i++)
+    for (int i = 0; i < _row; i++)
     {
-        for (int j = 0; j < x.col; j++)
+        for (int j = 0; j < _col; j++)
         {
             board[i][j] = vec[index++];
         }
@@ -86,56 +100,157 @@ int **randomEven(int **board, Board &x)
     return board;
 }
 
-int **createBoard(Board &x)
+void createBoard(Board **&board, int _row, int _col)
 {
     srand(time(0));
-    int **board;
-    board = new int *[x.row];
-    for (int i = 0; i < x.row; i++)
+    board = new Board *[_row];
+    for (int i = 0; i < _row; i++)
     {
-        board[i] = new int[x.col];
+        board[i] = new Board[_col];
+        for (int j = 0; j < _col; j++)
+        {
+            board[i][j].row = i;
+            board[i][j].col = j;
+        }
     }
 
-    if (x.col & 1)
+    if (_col & 1) // _col is odd
     {
-        for (int i = 0; i <= x.row / 2; i++)
+        for (int i = 0; i <= _row / 2; i++)
         {
-            for (int j = 0; j < x.col; j++)
+            for (int j = 0; j < _col; j++)
             {
-                board[i][j] = 65 + rand() % 26;
-                board[x.row - i - 1][x.col - j - 1] = board[i][j];
+                board[i][j].ch = 65 + rand() % 26;
+                board[_row - i - 1][_col - j - 1].ch = board[i][j].ch;
             }
         }
+    }
+    else // _col is even
+    {
+        for (int i = 0; i < _row; i++)
+        {
+            for (int j = 0; j <= _col / 2; j++)
+            {
+                board[i][j].ch = 65 + rand() % 26;
+                board[i][_col - j - 1].ch = board[i][j].ch;
+            }
+        }
+    }
+    randomEven(board, _row, _col);
+    for (int i = 0; i < _row; i++)
+    {
+        for (int j = 0; j < _col; j++)
+        {
+            if (board[i][j].ch == ' ')
+            {
+                board[i][j].ch = 65 + rand() % 26;
+                board[i][_col - j - 1].ch = board[i][j].ch;
+            }
+        }
+    }
+}
+
+// check with line x, from column y1 to y2
+bool checkLineX(Board **board, int y1, int y2, int x)
+{
+    // find point have column max and min
+    int min_val = min(y1, y2);
+    int max_val = max(y1, y2);
+    // run column
+    for (int y = min_val; y <= max_val; y++)
+    {
+        if (board[x][y].ch != ' ')
+            return false;
+    }
+    return true;
+}
+
+// check with line y, from row x1 to x2
+bool checkLineY(Board **board, int x1, int x2, int y)
+{
+    int min_val = min(x1, x2);
+    int max_val = max(x1, x2);
+    for (int x = min_val; x <= max_val; x++)
+    {
+        if (board[x][y].ch != ' ')
+            return false;
+    }
+    return true;
+}
+
+bool check_I(Board **board, int x1, int y1, int x2, int y2)
+{
+    if (board[x1][y1].ch != board[x2][y2].ch)
+        return false;
+
+    if (x1 == x2)
+    {
+        if (checkLineX(board, y1, y2, x1))
+            return true;
+        else
+            return false;
+    }
+    else if (y1 == y2)
+    {
+        if (checkLineY(board, x1, x2, y1))
+            return true;
+        else
+            return false;
     }
     else
-    {
-        for (int i = 0; i < x.row; i++)
-        {
-            for (int j = 0; j <= x.col / 2; j++)
-            {
-                board[i][j] = 65 + rand() % 26;
-                board[i][x.col - j - 1] = board[i][j];
-            }
-        }
-    }
-    randomEven(board, x);
-    return board;
+        return false;
 }
+
+bool check_L(Board **board, int x1, int y1, int x2, int y2)
+{
+    if (board[x1][y1].ch != board[x2][y2].ch)
+        return false;
+    if (board[x2][y1].ch == ' ' && checkLineX(board, y1, y2, x2) && checkLineY(board, x1, x2, y1))
+        return true;
+    else if (board[x1][y2].ch == ' ' && checkLineX(board, y1, y2, x1) && checkLineY(board, x1, x2, y2))
+        return true;
+    else
+        return false;
+}
+
+bool checkRectX(Board **board, int x1, int x2, int y1, int y2) {
+	int minY = min(y1, y2);
+	int maxY = max(y1, y2);
+
+	for (int y = minY + 1; y < maxY; y++) {
+		if (checkLineX(board, minY, y, x1));
+	}
+	return false;
+}
+
+// bool checkRectY(int** mang, int x1, int x2, int y1, int y2) {
+// 	int minY = findMin(y1, y2);
+// 	int maxY = findMax(y1, y2);
+// 	int minX = findMin(x1, x2);
+// 	int maxX = findMax(x1, x2);
+
+// 	for (int x = minX + 1; x < maxX; x++) {
+// 		if (mang[x][minY] != 32)
+// 			return false;
+// 		if (CheckLineY(mang, x - 1, maxX, maxY) && CheckLineX(mang, minY, maxY + 1, x))
+// 			return true;
+// 	}
+// 	return false;
+// }
 
 int main()
 {
     Board x{5, 6, ' '};
-    int **board = new int *[x.row * x.col + 1];
-    board = createBoard(x);
-    // randomEven(board, x.row, x.col);
+    Board **board = new Board *[x.row * x.col + 1];
+    createBoard(board, x.row, x.col);
 
     int freq[256] = {0};
     for (int i = 0; i < x.row; i++)
     {
         for (int j = 0; j < x.col; j++)
         {
-            cout << char(board[i][j]) << " ";
-            freq[board[i][j]]++;
+            cout << board[i][j].ch << " ";
+            freq[board[i][j].ch]++;
         }
         cout << endl;
     }
@@ -147,13 +262,20 @@ int main()
             cout << char(i) << ": " << freq[i] << endl;
         }
     }
-    deallocate(x, board);
+    deallocate(board, x.row);
 
     char ch[26][41];
     // getBackground(ch);
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 5; i++)
+    {
+        moveCursor(20, 20 + i);
         cout << box[i];
     }
+    moveCursor(24, 22);
+    cout << "A";
+    cout << "\n\n\n\n";
+    getBackground(ch);
+    // displayBackground(ch, 40, 20);
     system("pause");
     return 0;
 }
