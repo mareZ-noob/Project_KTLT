@@ -90,7 +90,7 @@ void menu(int choice)
 //DINH DUY TRIET
 
 //Update login function
-void login(string& email)
+void login1(string& email)
 {
 	TextColor(0);
 	drawRectangle(40, 8, 40, 10);
