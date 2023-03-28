@@ -63,6 +63,13 @@ void showCursor(bool visible)
     SetConsoleCursorInfo(console, &lpCursor);
 }
 
+void disableCursor(bool visible)
+{
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO cursor = { 1, visible };
+	SetConsoleCursorInfo(handle, &cursor);
+}
+
 void moveCursor(int posX, int posY)
 {
     COORD CursorPosition;
@@ -221,4 +228,19 @@ void button(int x, int y, int w, int h, int textColor, int buttonColor, int colo
 	moveCursor(x + w, y); cout << char(191);
 	moveCursor(x, y + h); cout << char(192);
 	moveCursor(x + w, y + h); cout << char(217);
+}
+
+void read_file_at_pos(string fileName, int textColor, int backgroundColor, int x, int y)
+{
+    ifstream file;
+    file.open(fileName);
+    string text;
+    while (getline(file, text))
+    {
+        moveCursor(x, y++);
+        consoleColor(backgroundColor, textColor);
+        TextColor(textColor);
+        cout << text << endl;
+    }
+    file.close();
 }
