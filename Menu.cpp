@@ -15,23 +15,24 @@ void quit()
 
 void login(string &email)
 {
-    TextColor(0);
+    TextColor(7);
     drawRectangle(40, 8, 40, 10);
 
-    button(40, 8, 41, 2, 4, 0, 7, " Enter your email to continue");
+    button(40, 8, 41, 2, 4, 7, 0, " Enter your email to continue");
     cout << endl;
     moveCursor(42, 12);
     TextColor(4);
     cout << "Email: ";
     moveCursor(48, 12);
-    button(48, 11, 30, 2, 0, 0, 7, " "); 
+    button(48, 11, 30, 2, 7, 7, 0, " "); 
     cout << endl;
     moveCursor(43, 15);
     TextColor(4);
     cout << "(Using \"@clc.fitus.edu.vn\" to login)";
 
     moveCursor(49, 12);
-    TextColor(0);
+    showCursor(0);
+    TextColor(7);
     getline(cin, email);
     if (verify(email))
     {
@@ -198,8 +199,8 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
 
 void printMenu(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text) // main menu
 {
-    system("color 70");
-    art_at_pos("pikachu.txt", 0, backgroundColor, 27, 5);
+    //system("color 70");
+    art_at_pos("pikachu.txt", 15, backgroundColor, 27, 5);
     selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 }
 
@@ -214,12 +215,12 @@ int MainMenuBack()
     int y = 17;
     int w = 20;
     int h = 2;
-    int textColor = 0;
+    int textColor = 7;
     int buttonColor = 22;
-    int backgroundColor = 7;
+    int backgroundColor = 0;
     string email;
     string text;
-    showCursor(0);
+    disableCursor(0);
     int selection = 1;
     printMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 
@@ -252,10 +253,24 @@ int MainMenuBack()
                 Sleep(5000);
                 // break;
             case 3:
-                clearScreen();
-                cout << "You selected Settings\n";
-                Sleep(5000);
-                break;
+                while (true)
+                {
+                    clearScreen();
+                    art_at_pos("CREDITS BIG.txt", 15, backgroundColor, 32, 5);
+                    read_file_at_pos("credits.txt", 15, backgroundColor, 35, 13);
+                    //Sleep(500);
+                    if (kbhit())
+                    {
+                        char key = _getch();
+                        if (key == 27)
+                        {
+                            clearScreen();
+                            MainMenuBack();
+                        }
+                        break;
+                    }
+                }
+
             case 4:
                 quit();
                 exit(1);
@@ -271,11 +286,11 @@ void MenuLogin()
     int y = 10;
     int w = 20;
     int h = 2;
-    int textColor = 0;
+    int textColor = 7;
     int buttonColor = 22;
-    int backgroundColor = 7;
+    int backgroundColor = 0;
     string text;
-    showCursor(0);
+    disableCursor(0);
     int selection = 1; // start with the first button selected
     printMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 
@@ -327,12 +342,12 @@ void MainMenu()
     int y = 17;
     int w = 20;
     int h = 2;
-    int textColor = 0;
+    int textColor = 7;
     int buttonColor = 22;
-    int backgroundColor = 7;
+    int backgroundColor = 0;
     string email;
     string text;
-    showCursor(0);
+    disableCursor(0);
     int selection = 1; // start with the first button selected
     printMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 
@@ -363,9 +378,22 @@ void MainMenu()
                 cout << "You selected About\n";
                 Sleep(5000);
             case 3:
-                clearScreen();
-                cout << "You selected Settings\n";
-                Sleep(5000);
+                while (true)
+                {
+                    clearScreen();
+                    art_at_pos("CREDITS BIG.txt", 15, backgroundColor, 32, 5);
+                    read_file_at_pos("credits.txt", 15, backgroundColor, 35, 13);
+                    //Sleep(500);
+                    if (kbhit())
+                    {
+                        char key = _getch();
+                        if (key == 27)
+                        {
+                            clearScreen();
+                            MainMenuBack();
+                        }
+                    }
+                }
                 break;
             case 4:
                 clearScreen();
