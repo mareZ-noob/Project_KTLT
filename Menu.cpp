@@ -250,15 +250,8 @@ int MainMenuBack()
             case 2:
                 clearScreen();
                 cout << "You selected About\n";
-                Sleep(5000);
-                // break;
-            case 3:
                 while (true)
                 {
-                    clearScreen();
-                    art_at_pos("CREDITS BIG.txt", 15, backgroundColor, 32, 5);
-                    read_file_at_pos("credits.txt", 15, backgroundColor, 35, 13);
-                    //Sleep(500);
                     if (kbhit())
                     {
                         char key = _getch();
@@ -266,12 +259,29 @@ int MainMenuBack()
                         {
                             clearScreen();
                             MainMenuBack();
+                            break;
                         }
-                        break;
                     }
                 }
-
+            case 3:
+                clearScreen();
+                art_at_pos("CREDITS BIG.txt", 15, backgroundColor, 32, 5);
+                read_file_at_pos("credits.txt", 15, backgroundColor, 35, 13);
+                while (true)
+                {
+                    if (kbhit())
+                    {
+                        char key = _getch();
+                        if (key == 27)
+                        {
+                            clearScreen();
+                            MainMenuBack();
+                            break;
+                        }
+                    }
+                }
             case 4:
+                clearScreen();
                 quit();
                 exit(1);
             }
@@ -376,14 +386,8 @@ void MainMenu()
             case 2:
                 clearScreen();
                 cout << "You selected About\n";
-                Sleep(5000);
-            case 3:
                 while (true)
                 {
-                    clearScreen();
-                    art_at_pos("ascii_art\\credit.txt", 15, backgroundColor, 32, 5);
-                    read_file_at_pos("ascii_art\\content.txt", 15, backgroundColor, 35, 13);
-                    // Sleep(500);
                     if (kbhit())
                     {
                         char key = _getch();
@@ -391,10 +395,27 @@ void MainMenu()
                         {
                             clearScreen();
                             MainMenuBack();
+                            break;
                         }
                     }
                 }
-                break;
+            case 3:
+                clearScreen();
+                art_at_pos("CREDITS BIG.txt", 15, backgroundColor, 32, 5);
+                read_file_at_pos("credits.txt", 15, backgroundColor, 35, 13);
+                while (true)
+                {
+                    if (kbhit())
+                    {
+                        char key = _getch();
+                        if (key == 27)
+                        {
+                            clearScreen();
+                            MainMenuBack();
+                            break;
+                        }
+                    }
+                }
             case 4:
                 clearScreen();
                 quit();
