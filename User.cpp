@@ -110,20 +110,21 @@ void printLeaderboard()
     ifstream infile("players.bin", ios::binary);
     infile.read(reinterpret_cast<char *>(&players_read), sizeof(Players) * 5);
     infile.close();
-    cout << "\t\t\t"
-         << "Name: "
-         << "\t\t\t"
-         << "Point: "
-         << "\t\t\t"
-         << "Time: " << endl;
+
+    TextColor(11);
+    //Draw Column
+    drawRectangle(40, 5, 19, 15);
+    drawRectangle(61, 5, 9, 15);
+    drawRectangle(72, 5, 8, 15);
+    //
+    button(40, 5, 20, 2, 4, 11, 0, "       NAME");
+    button(61, 5, 10, 2, 4, 11, 0, "  POINT");
+    button(72, 5, 9, 2, 4, 11, 0, "  TIME");
+
     for (int i = 0; i < fileSize("players.bin") / sizeof(Players); i++)
     {
-        cout << "\t\t\t"
-             << players_read[i].name
-             << "\t\t\t"
-             << players_read[i].point
-             << "\t\t\t"
-             << players_read[i].time
-             << endl;
+        moveCursor(43, 8 + i); cout << players_read[i].name;
+        moveCursor(65, 8 + i); cout << players_read[i].point;
+        moveCursor(76, 8 + i); cout << players_read[i].time;
     }
 }
