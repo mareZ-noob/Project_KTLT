@@ -2,10 +2,7 @@
 
 int main() {
     clearScreen();
-    DisableResizeWindow();
-    // SetWindowSize(800,600);
-    int choice = 0;
-    menu(choice);
-
+    PlaySound(TEXT(POKEMON_SOUND), NULL, SND_ASYNC);
+    MainMenu();
     return 0;
 }

@@ -6,8 +6,6 @@
 #include "User.h"
 #include "Graphic.h"
 
-void menuSelection();
-void menu(int choice);
 void quit();
 void login(string &email);
 
@@ -19,6 +17,5 @@ void printMenuLogin(int selection, int x, int y, int w, int h, int textColor, in
 int MainMenuBack();
 void MenuLogin();
 void MainMenu();
-void login1(string& email);
 
 #endif // __MENU_H__

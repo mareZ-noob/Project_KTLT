@@ -167,8 +167,6 @@ void initConsole()
     DisableCtrButton(1, 1, 1);
 }
 
-
-
 //Set Text Color
 void TextColor(WORD color)
 {
@@ -186,24 +184,9 @@ void TextColor(WORD color)
 	SetConsoleTextAttribute(hConsoleOutput, wAttributes);
 }
 
-//Set Background Colour
-void BackgroundColor(int background, int text)
+void button(int x, int y, int w, int h, int textColor, int buttonColor, int color, string text)
 {
-	SetConsoleTextAttribute(console, background * 16 + text);
-}
-
-//Disable Cursor
-void ShowCur(bool CursorVisibility)
-{
-	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	CONSOLE_CURSOR_INFO cursor = { 1, CursorVisibility };
-	SetConsoleCursorInfo(handle, &cursor);
-}
-
-//Giong drawRectangle (text included ben trong luon)
-void button(int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text)
-{
-	BackgroundColor(backgroundColor, textColor);
+	consoleColor(color, textColor);
 	for (int iy = y + 1; iy <= y + h - 1; iy++)
 	{
 		for (int ix = x + 1; ix <= x + w - 1; ix++)
@@ -211,12 +194,12 @@ void button(int x, int y, int w, int h, int textColor, int buttonColor, int back
 			moveCursor(ix, iy); cout << " ";
 		}
 	}
-	//TextColor(textColor);
+    
 	moveCursor(x + 1, y + 1);
 	TextColor(textColor);
 	cout << text;
-	//Ve khung
-	BackgroundColor(backgroundColor, textColor);
+
+	consoleColor(color, textColor);
 	TextColor(buttonColor);
 	if (h <= 1 || w <= 1)
 		return;
