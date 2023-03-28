@@ -37,7 +37,7 @@ void login(string &email)
     {
         while (true)
         {
-            char c = _getch(); // wait for a key to be pressed
+            char c = _getch(); 
             if (c == '\r' || c == '\n')
             {
                 clearScreen();
@@ -228,18 +228,18 @@ int MainMenuBack()
         char c = _getch();
 
         if ((c == 'w' or c == 'W') && selection > 1)
-        { // move selection up
+        { // move up
             selection--;
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
         else if ((c == 's' or c == 'S') && selection < 4)
-        { // move selection down
+        { // move down
             selection++;
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
             ;
         }
         else if (c == '\r' || c == '\n')
-        { // user pressed enter, so execute the selected option
+        { // pressed enter
             switch (selection)
             {
             case 1:
@@ -281,20 +281,20 @@ void MenuLogin()
 
     while (true)
     {
-        char c = _getch(); // wait for a key to be pressed
+        char c = _getch(); 
 
         if ((c == 'w' or c == 'W') && selection > 1)
-        { // move selection up
+        { // move up
             selection--;
             selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
         else if ((c == 's' or c == 'S') && selection < 4)
-        { // move selection down
+        { // move down
             selection++;
             selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
         else if (c == '\r' || c == '\n')
-        { // user pressed enter, so execute the selected option
+        { // pressed enter
             switch (selection)
             {
             case 1:
@@ -321,7 +321,6 @@ void MenuLogin()
     system("pause");
 }
 
-// MAIN MENU PROGRESSION
 void MainMenu()
 {
     int x = 50;
@@ -339,20 +338,20 @@ void MainMenu()
 
     while (true)
     {
-        char c = _getch(); // wait for a key to be pressed
+        char c = _getch(); 
 
-        if ((c == 'w' or c == 72 or c == 'W') && selection > 1)
-        { // move selection up
+        if ((c == 'w' or c == 'W') && selection > 1)
+        { // move up
             selection--;
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if ((c == 's' or c == 80 or c == 'S') && selection < 4)
-        { // move selection down
+        else if ((c == 's' or c == 'S') && selection < 4)
+        { // move down
             selection++;
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
         else if (c == '\r' || c == '\n')
-        { // user pressed enter, so execute the selected option
+        { // pressed enter
             switch (selection)
             {
             case 1:
@@ -363,7 +362,6 @@ void MainMenu()
                 clearScreen();
                 cout << "You selected About\n";
                 Sleep(5000);
-                // break;
             case 3:
                 clearScreen();
                 cout << "You selected Settings\n";
