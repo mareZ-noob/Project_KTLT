@@ -200,7 +200,7 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
 void printMenu(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text) // main menu
 {
     //system("color 70");
-    art_at_pos("pikachu.txt", 15, backgroundColor, 27, 5);
+    art_at_pos("ascii_art\\pikachu.txt", 15, backgroundColor, 27, 5);
     selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 }
 
@@ -228,14 +228,20 @@ int MainMenuBack()
     {
         char c = _getch();
 
-        if ((c == 'w' or c == 'W') && selection > 1)
+        if (c == 'w' or c == 'W')
         { // move up
             selection--;
+            if (selection == 0) {
+                selection = 4;
+            }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if ((c == 's' or c == 'S') && selection < 4)
+        else if (c == 's' or c == 'S')
         { // move down
             selection++;
+            if (selection == 5) {
+                selection = 1;
+            }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
             ;
         }
@@ -265,8 +271,8 @@ int MainMenuBack()
                 }
             case 3:
                 clearScreen();
-                art_at_pos("CREDITS BIG.txt", 15, backgroundColor, 32, 5);
-                read_file_at_pos("credits.txt", 15, backgroundColor, 35, 13);
+                art_at_pos("ascii_art\\credit.txt", 15, backgroundColor, 32, 5);
+                read_file_at_pos("ascii_art\\content.txt", 15, backgroundColor, 35, 13);
                 while (true)
                 {
                     if (kbhit())
@@ -308,14 +314,20 @@ void MenuLogin()
     {
         char c = _getch(); 
 
-        if ((c == 'w' or c == 'W') && selection > 1)
+        if (c == 'w' or c == 'W')
         { // move up
             selection--;
+            if (selection == 0) {
+                selection = 4;
+            }
             selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if ((c == 's' or c == 'S') && selection < 4)
+        else if (c == 's' or c == 'S')
         { // move down
             selection++;
+            if (selection == 5) {
+                selection = 1;
+            }
             selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
         else if (c == '\r' || c == '\n')
@@ -365,14 +377,20 @@ void MainMenu()
     {
         char c = _getch(); 
 
-        if ((c == 'w' or c == 'W') && selection > 1)
+        if ((c == 'w' or c == 'W'))
         { // move up
             selection--;
+            if (selection == 0) {
+                selection = 4;
+            }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if ((c == 's' or c == 'S') && selection < 4)
+        else if ((c == 's' or c == 'S'))
         { // move down
             selection++;
+            if (selection == 5) {
+                selection = 1;
+            }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
         else if (c == '\r' || c == '\n')
