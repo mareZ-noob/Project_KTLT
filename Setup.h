@@ -11,6 +11,7 @@ void ShowScrollbar(BOOL Show);
 
 void DisableSelection();
 void showCursor(bool visible);
+void disableCursor(bool visible);
 void moveCursor(int posX, int posY);
 void disableMouseInput();
 
@@ -22,6 +23,7 @@ void initConsole();
 
 void TextColor(WORD color);
 void button(int x, int y, int w, int h, int color, int buttonColor, int backgroundColor, string text);
+void read_file_at_pos(string fileName, int textColor, int backgroundColor, int x, int y);
 
 #endif // __SETUP_H__
 
