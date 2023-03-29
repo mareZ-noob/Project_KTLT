@@ -198,7 +198,9 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
 
 void printMenu(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text) // main menu
 {
-    art_at_pos("ascii_art\\pikachu.txt", 15, backgroundColor, 27, 5);
+    drawRectangle(0, 0, 118, 34);
+    art_at_pos("ascii_art\\pikachu.txt", 15, backgroundColor, 27, 1);
+    pokemon_ball("pokemonball_image.txt", 0, 3, 12);
     selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 }
 
