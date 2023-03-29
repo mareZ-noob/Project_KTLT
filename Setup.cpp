@@ -220,5 +220,6 @@ void button(int x, int y, int w, int h, int textColor, int buttonColor, int colo
 
 void drawBorder()
 {
+    TextColor(LIGHT_WHITE);
     drawRectangle(0, 0, 118, 34);
 }
