@@ -111,21 +111,22 @@ void printLeaderboard()
     infile.read(reinterpret_cast<char *>(&players_read), sizeof(Players) * 5);
     infile.close();
 
-    read_file_at_pos("ascii_art\\leaderboard.txt", 11, 0, 25, 3);
-    TextColor(11);
+    read_file_at_pos("ascii_art\\leaderboard.txt", OCEAN, BLACK, 20, 3);
 
-    drawRectangle(40, 11, 19, 15);
-    drawRectangle(61, 11, 9, 15);
-    drawRectangle(72, 11, 8, 15);
+    TextColor(CYAN);
+    drawRectangle(38, 11, 19, 15);
+    drawRectangle(59, 11, 9, 15);
+    drawRectangle(70, 11, 8, 15);
 
-    button(40, 11, 20, 2, 4, 11, 0, "       NAME");
-    button(61, 11, 10, 2, 4, 11, 0, "  POINT");
-    button(72, 11, 9, 2, 4, 11, 0, "  TIME");
+    button(38, 11, 20, 2, LIGHT_RED, CYAN, BLACK, "       NAME");
+    button(59, 11, 10, 2, LIGHT_RED, CYAN, BLACK, "  POINT");
+    button(70, 11, 9, 2, LIGHT_RED, CYAN, BLACK, "  TIME");
 
+    TextColor(LIGHT_WHITE);
     for (int i = 0; i < fileSize("players.bin") / sizeof(Players); i++)
     {
-        moveCursor(43, 14 + i); cout << players_read[i].name;
-        moveCursor(65, 14 + i); cout << players_read[i].point;
-        moveCursor(76, 14 + i); cout << players_read[i].time;
+        moveCursor(41, 14 + i); cout << players_read[i].name;
+        moveCursor(63, 14 + i); cout << players_read[i].point;
+        moveCursor(74, 14 + i); cout << players_read[i].time;
     }
 }
