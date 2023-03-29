@@ -15,26 +15,25 @@ void quit()
 
 void login(string &email)
 {
-    TextColor(7);
+    TextColor(CYAN);
     drawRectangle(40, 8, 40, 10);
 
-    button(40, 8, 41, 2, 4, 7, 0, " Enter your email to continue");
-    cout << endl;
+    button(40, 8, 41, 2, LIGHT_YELLOW, CYAN, BLACK, " Enter your email to continue");
     moveCursor(42, 12);
-    TextColor(4);
+    TextColor(LIGHT_YELLOW);
     cout << "Email: ";
     moveCursor(48, 12);
-    button(48, 11, 30, 2, 7, 7, 0, " "); 
-    //cout << endl;
+    button(48, 11, 30, 2, LIGHT_WHITE, CYAN, BLACK, " "); 
     moveCursor(43, 14);
-    TextColor(4);
+    TextColor(LIGHT_GREEN);
     cout << "(Using \"@clc.fitus.edu.vn\" to login)";
     moveCursor(49, 16);
+    TextColor(LIGHT_YELLOW);
     cout << "Press ENTER to continue";
 
     moveCursor(49, 12);
-    TextColor(7);
-    showCursor(0);
+    TextColor(LIGHT_WHITE);
+    showCursor(1);
     getline(cin, email);
     if (verify(email))
     {
@@ -50,9 +49,11 @@ void login(string &email)
     }
     else
     {
-        moveCursor(47, 20);
-        TextColor(4);
-        cout << "Please enter your email again!";
+        TextColor(LIGHT_RED);
+        moveCursor(51, 20);
+        cout << "INVALID EMAIL ADDRESS!";
+        moveCursor(47, 21);
+        cout << "Please enter your email again";
         return login(email);
     }
 }
@@ -63,7 +64,7 @@ void selectionMenu(int selection, int x, int y, int w, int h, int textColor, int
 
     if (selection == 1)
     {
-        textColor = 4;
+        textColor = LIGHT_RED;
         button(x, y, w, h, textColor, buttonColor, backgroundColor, "     > LOGIN <");
     }
     else
@@ -73,7 +74,7 @@ void selectionMenu(int selection, int x, int y, int w, int h, int textColor, int
 
     if (selection == 2)
     {
-        textColor = 4;
+        textColor = LIGHT_RED;
         button(x, y + 2, w, h, textColor, buttonColor, backgroundColor, "  > HOW TO PLAY <");
         moveCursor(x, y + 2);
         cout << char(195);
@@ -91,7 +92,7 @@ void selectionMenu(int selection, int x, int y, int w, int h, int textColor, int
 
     if (selection == 3)
     {
-        textColor = 4;
+        textColor = LIGHT_RED;
         button(x, y + 4, w, h, textColor, buttonColor, backgroundColor, "    > CREDITS <");
         moveCursor(x, y + 4);
         cout << char(195);
@@ -109,7 +110,7 @@ void selectionMenu(int selection, int x, int y, int w, int h, int textColor, int
 
     if (selection == 4)
     {
-        textColor = 4;
+        textColor = LIGHT_RED;
         button(x, y + 6, w, h, textColor, buttonColor, backgroundColor, "     > EXIT <");
         moveCursor(x, y + 6);
         cout << char(195);
@@ -132,7 +133,7 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
 
     if (selection == 1)
     {
-        textColor = 4;
+        textColor = LIGHT_RED;
         button(x, y, w, h, textColor, buttonColor, backgroundColor, "   > PLAY GAME <");
     }
     else
@@ -143,8 +144,8 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
 
     if (selection == 2)
     {
-        textColor = 4;
-        button(x, y + 2, w, h, textColor, buttonColor, backgroundColor, "  > HIGH SCORES <");
+        textColor = LIGHT_RED;
+        button(x, y + 2, w, h, textColor, buttonColor, backgroundColor, "  > LEADERBOARD <");
         moveCursor(x, y + 2);
         cout << char(195);
         moveCursor(x + w, y + 2);
@@ -153,7 +154,7 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
     else
     {
         textColor = Color;
-        button(x, y + 2, w, h, Color, buttonColor, backgroundColor, "    HIGH SCORES");
+        button(x, y + 2, w, h, Color, buttonColor, backgroundColor, "    LEADERBOARD");
         moveCursor(x, y + 2);
         cout << char(195);
         moveCursor(x + w, y + 2);
@@ -162,7 +163,7 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
 
     if (selection == 3)
     {
-        textColor = 4;
+        textColor = LIGHT_RED;
         button(x, y + 4, w, h, textColor, buttonColor, backgroundColor, "  > FORGET EMAIL <");
         moveCursor(x, y + 4);
         cout << char(195);
@@ -181,7 +182,7 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
 
     if (selection == 4)
     {
-        textColor = 4;
+        textColor = LIGHT_RED;
         button(x, y + 6, w, h, textColor, buttonColor, backgroundColor, "     > BACK <");
         moveCursor(x, y + 6);
         cout << char(195);
@@ -201,16 +202,14 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
 
 void printMenu(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text) // main menu
 {
-    TextColor(15);
     drawBorder();
-    art_at_pos("ascii_art\\pikachu.txt", 15, backgroundColor, 27, 1);
-    pokemon_ball("ascii_art\\pokemonball.txt", 0, 3, 12);
+    art_at_pos("ascii_art\\pikachu.txt", LIGHT_YELLOW, backgroundColor, 27, 1);
+    //pokemon_ball("ascii_art\\pokemonball.txt", BLACK, 3, 15);
     selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 }
 
 void printMenuLogin(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text) // menu when users press "LOGIN"
 {
-    TextColor(LIGHT_WHITE);
     drawBorder();
     selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 }
@@ -221,9 +220,9 @@ int MainMenuBack()
     int y = 17;
     int w = 20;
     int h = 2;
-    int textColor = 7;
-    int buttonColor = 22;
-    int backgroundColor = 0;
+    int textColor = CYAN;
+    int buttonColor = PURPLE;
+    int backgroundColor = BLACK;
     string email;
     string text;
     showCursor(0);
@@ -262,7 +261,8 @@ int MainMenuBack()
             case 2:
                 clearScreen();
                 drawBorder();
-                TextColor(15);
+                moveCursor(2, 33);
+                TextColor(LIGHT_WHITE);
                 cout << "<< Press Esc to back";
                 while (true)
                 {
@@ -280,10 +280,11 @@ int MainMenuBack()
             case 3:
                 clearScreen();
                 drawBorder();
+                moveCursor(2, 33);
                 TextColor(LIGHT_WHITE);
                 cout << "<< Press Esc to back";
-                art_at_pos("credit.txt", LIGHT_WHITE, backgroundColor, 32, 5);
-                read_file_at_pos("content.txt", LIGHT_WHITE, backgroundColor, 35, 13);
+                art_at_pos("ascii_art\\credit.txt", LIGHT_GREEN, backgroundColor, 36, 5);
+                read_file_at_pos("ascii_art\\content.txt", CYAN, backgroundColor, 35, 13);
                 while (true)
                 {
                     if (kbhit())
@@ -314,9 +315,9 @@ void MenuLoginBack()
     int y = 10;
     int w = 20;
     int h = 2;
-    int textColor = 7;
-    int buttonColor = 22;
-    int backgroundColor = 0;
+    int textColor = CYAN;
+    int buttonColor = PURPLE;
+    int backgroundColor = BLACK;
     string text;
     showCursor(0);
     int selection = 1; // start with the first button selected
@@ -349,13 +350,28 @@ void MenuLoginBack()
             case 1:
                 clearScreen();
                 drawBorder();
-                cout << "You selected PLAY GAME";
-                Sleep(5000);
-                break;
+                
+                moveCursor(2, 33);
+                TextColor(LIGHT_WHITE);
+                cout << "<< Press Esc to back";
+                while (true)
+                {
+                    if (kbhit())
+                    {
+                        char key = _getch();
+                        if (key == ESC_KEY)
+                        {
+                            clearScreen();
+                            MenuLoginBack();
+                            break;
+                        }
+                    }
+                }
             case 2:
                 clearScreen();
                 drawBorder();
-                TextColor(15);
+                moveCursor(2, 33);
+                TextColor(LIGHT_WHITE);
                 cout << "<< Press Esc to back";
                 printLeaderboard();
                 while (true)
@@ -374,7 +390,8 @@ void MenuLoginBack()
             case 3:
                 clearScreen();
                 drawBorder();
-                TextColor(15);
+                moveCursor(2, 33);
+                TextColor(LIGHT_WHITE);
                 cout << "<< Press Esc to back";
                 while (true)
                 {
@@ -406,9 +423,9 @@ void MenuLogin()
     int y = 10;
     int w = 20;
     int h = 2;
-    int textColor = 7;
-    int buttonColor = 93;
-    int backgroundColor = 0;
+    int textColor = CYAN;
+    int buttonColor = PURPLE;
+    int backgroundColor = BLACK;
     string text;
     showCursor(0);
     int selection = 1; // start with the first button selected
@@ -441,13 +458,28 @@ void MenuLogin()
             case 1:
                 clearScreen();
                 drawBorder();
-                cout << "You selected PLAY GAME";
-                Sleep(5000);
-                break;
+                
+                moveCursor(2, 33);
+                TextColor(LIGHT_WHITE);
+                cout << "<< Press Esc to back";
+                while (true)
+                {
+                    if (kbhit())
+                    {
+                        char key = _getch();
+                        if (key == ESC_KEY)
+                        {
+                            clearScreen();
+                            MenuLoginBack();
+                            break;
+                        }
+                    }
+                }
             case 2:
                 clearScreen();
                 drawBorder();
-                TextColor(15);
+                moveCursor(2, 33);
+                TextColor(LIGHT_WHITE);
                 cout << "<< Press Esc to back";
                 printLeaderboard();
                 while (true)
@@ -466,7 +498,8 @@ void MenuLogin()
             case 3:
                 clearScreen();
                 drawBorder();
-                TextColor(15);
+                moveCursor(2, 33);
+                TextColor(LIGHT_WHITE);
                 cout << "<< Press Esc to back";
                 while (true)
                 {
@@ -498,9 +531,9 @@ void MainMenu()
     int y = 17;
     int w = 20;
     int h = 2;
-    int textColor = 7;
-    int buttonColor = 93;
-    int backgroundColor = 0;
+    int textColor = CYAN;
+    int buttonColor = PURPLE;
+    int backgroundColor = BLACK;
     string email;
     string text;
     showCursor(0);
@@ -539,7 +572,8 @@ void MainMenu()
             case 2:
                 clearScreen();
                 drawBorder();
-                TextColor(15);
+                moveCursor(2, 33);
+                TextColor(LIGHT_WHITE);
                 cout << "<< Press Esc to back";
                 while (true)
                 {
@@ -555,12 +589,13 @@ void MainMenu()
                     }
                 }
             case 3:
-                clearScreen();
+               clearScreen();
                 drawBorder();
-                TextColor(15);
+                moveCursor(2, 33);
+                TextColor(LIGHT_WHITE);
                 cout << "<< Press Esc to back";
-                art_at_pos("ascii_art\\credit.txt", 15, backgroundColor, 32, 5);
-                read_file_at_pos("ascii_art\\content.txt", 15, backgroundColor, 35, 13);
+                art_at_pos("ascii_art\\credit.txt", LIGHT_GREEN, backgroundColor, 36, 5);
+                read_file_at_pos("ascii_art\\content.txt", CYAN, backgroundColor, 35, 13);
                 while (true)
                 {
                     if (kbhit())
