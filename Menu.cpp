@@ -5,9 +5,9 @@ void quit()
     clearScreen();
     consoleColor(BLACK, CYAN);
     clearScreen();
-    art("ascii_art\\goodbye.txt", 30, 13);
+    art("ascii_art\\good    bye.txt", 30, 13);
     consoleColor(BLACK, WHITE);
-    Sleep(5000);
+    Sleep(4000);
     clearScreen();
     exit(1);
 }
@@ -25,16 +25,14 @@ void login(string &email)
     cout << "Email: ";
     moveCursor(48, 12);
     button(48, 11, 30, 2, 7, 7, 0, " "); 
-    //cout << endl;
-    moveCursor(43, 14);
+    cout << endl;
+    moveCursor(43, 15);
     TextColor(4);
     cout << "(Using \"@clc.fitus.edu.vn\" to login)";
-    moveCursor(49, 16);
-    cout << "Press ENTER to continue";
 
     moveCursor(49, 12);
-    TextColor(7);
     showCursor(0);
+    TextColor(7);
     getline(cin, email);
     if (verify(email))
     {
@@ -74,7 +72,7 @@ void selectionMenu(int selection, int x, int y, int w, int h, int textColor, int
     if (selection == 2)
     {
         textColor = 4;
-        button(x, y + 2, w, h, textColor, buttonColor, backgroundColor, "  > HOW TO PLAY <");
+        button(x, y + 2, w, h, textColor, buttonColor, backgroundColor, "     > ABOUT <\n");
         moveCursor(x, y + 2);
         cout << char(195);
         moveCursor(x + w, y + 2);
@@ -82,7 +80,7 @@ void selectionMenu(int selection, int x, int y, int w, int h, int textColor, int
     }
     else
     {
-        button(x, y + 2, w, h, Color, buttonColor, backgroundColor, "    HOW TO PLAY");
+        button(x, y + 2, w, h, Color, buttonColor, backgroundColor, "       ABOUT");
         moveCursor(x, y + 2);
         cout << char(195);
         moveCursor(x + w, y + 2);
@@ -202,7 +200,7 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
 void printMenu(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text) // main menu
 {
     //system("color 70");
-    art_at_pos("pikachu.txt", 15, backgroundColor, 27, 5);
+    art_at_pos("ascii_art\\pikachu.txt", 15, backgroundColor, 27, 5);
     selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 }
 
@@ -230,14 +228,20 @@ int MainMenuBack()
     {
         char c = _getch();
 
-        if ((c == 'w' or c == 72 or c == 'W') && selection > 1)
+        if (c == 'w' or c == 'W')
         { // move up
             selection--;
+            if (selection == 0) {
+                selection = 4;
+            }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if ((c == 's' or c == 80 or c == 'S') && selection < 4)
+        else if (c == 's' or c == 'S')
         { // move down
             selection++;
+            if (selection == 5) {
+                selection = 1;
+            }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
             ;
         }
@@ -251,8 +255,7 @@ int MainMenuBack()
                 break;
             case 2:
                 clearScreen();
-                TextColor(15);
-                cout << "<< Press Esc to back";
+                cout << "You selected About\n";
                 while (true)
                 {
                     if (kbhit())
@@ -268,10 +271,8 @@ int MainMenuBack()
                 }
             case 3:
                 clearScreen();
-                TextColor(15);
-                cout << "<< Press Esc to back";
-                art_at_pos("CREDITS BIG.txt", 15, backgroundColor, 32, 5);
-                read_file_at_pos("credits.txt", 15, backgroundColor, 35, 13);
+                art_at_pos("ascii_art\\credit.txt", 15, backgroundColor, 32, 5);
+                read_file_at_pos("ascii_art\\content.txt", 15, backgroundColor, 35, 13);
                 while (true)
                 {
                     if (kbhit())
@@ -289,88 +290,6 @@ int MainMenuBack()
                 clearScreen();
                 quit();
                 exit(1);
-            }
-        }
-    }
-    system("pause");
-}
-
-void MenuLoginBack()
-{
-    int x = 50;
-    int y = 10;
-    int w = 20;
-    int h = 2;
-    int textColor = 7;
-    int buttonColor = 22;
-    int backgroundColor = 0;
-    string text;
-    disableCursor(0);
-    int selection = 1; // start with the first button selected
-    printMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-
-    while (true)
-    {
-        char c = _getch();
-
-        if ((c == 'w' or c == 72 or c == 'W') && selection > 1)
-        { // move up
-            selection--;
-            selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-        }
-        else if ((c == 's' or c == 80 or c == 'S') && selection < 4)
-        { // move down
-            selection++;
-            selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-        }
-        else if (c == '\r' || c == '\n')
-        { // pressed enter
-            switch (selection)
-            {
-            case 1:
-                clearScreen();
-                cout << "You selected PLAY GAME";
-                Sleep(5000);
-                break;
-            case 2:
-                clearScreen();
-                TextColor(15);
-                cout << "<< Press Esc to back";
-                printLeaderboard();
-                while (true)
-                {
-                    if (kbhit())
-                    {
-                        char key = _getch();
-                        if (key == 27)
-                        {
-                            clearScreen();
-                            MenuLoginBack();
-                            break;
-                        }
-                    }
-                }
-            case 3:
-                clearScreen();
-                TextColor(15);
-                cout << "<< Press Esc to back";
-                while (true)
-                {
-                    if (kbhit())
-                    {
-                        char key = _getch();
-                        if (key == 27)
-                        {
-                            clearScreen();
-                            MenuLoginBack();
-                            break;
-                        }
-                    }
-                }
-            case 4:
-                clearScreen();
-                MainMenuBack();
-                Sleep(5000);
             }
         }
     }
@@ -395,14 +314,20 @@ void MenuLogin()
     {
         char c = _getch(); 
 
-        if ((c == 'w' or c == 72 or c == 'W') && selection > 1)
+        if (c == 'w' or c == 'W')
         { // move up
             selection--;
+            if (selection == 0) {
+                selection = 4;
+            }
             selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if ((c == 's' or c == 80 or c == 'S') && selection < 4)
+        else if (c == 's' or c == 'S')
         { // move down
             selection++;
+            if (selection == 5) {
+                selection = 1;
+            }
             selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
         else if (c == '\r' || c == '\n')
@@ -416,39 +341,13 @@ void MenuLogin()
                 break;
             case 2:
                 clearScreen();
-                TextColor(15);
-                cout << "<< Press Esc to back";
                 printLeaderboard();
-                while (true)
-                {
-                    if (kbhit())
-                    {
-                        char key = _getch();
-                        if (key == 27)
-                        {
-                            clearScreen();
-                            MenuLoginBack();
-                            break;
-                        }
-                    }
-                }
+                break;
             case 3:
                 clearScreen();
-                TextColor(15);
-                cout << "<< Press Esc to back";
-                while (true)
-                {
-                    if (kbhit())
-                    {
-                        char key = _getch();
-                        if (key == 27)
-                        {
-                            clearScreen();
-                            MenuLoginBack();
-                            break;
-                        }
-                    }
-                }
+                cout << "You selected Settings\n";
+                Sleep(5000);
+                break;
             case 4:
                 clearScreen();
                 MainMenuBack();
@@ -478,14 +377,20 @@ void MainMenu()
     {
         char c = _getch(); 
 
-        if ((c == 'w' or c == 72 or c == 'W') && selection > 1)
+        if ((c == 'w' or c == 'W'))
         { // move up
             selection--;
+            if (selection == 0) {
+                selection = 4;
+            }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if ((c == 's' or c == 80 or c == 'S') && selection < 4)
+        else if ((c == 's' or c == 'S'))
         { // move down
             selection++;
+            if (selection == 5) {
+                selection = 1;
+            }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
         else if (c == '\r' || c == '\n')
@@ -498,8 +403,7 @@ void MainMenu()
                 break;
             case 2:
                 clearScreen();
-                TextColor(15);
-                cout << "<< Press Esc to back";
+                cout << "You selected About\n";
                 while (true)
                 {
                     if (kbhit())
@@ -515,10 +419,8 @@ void MainMenu()
                 }
             case 3:
                 clearScreen();
-                TextColor(15);
-                cout << "<< Press Esc to back";
-                art_at_pos("CREDITS BIG.txt", 15, backgroundColor, 32, 5);
-                read_file_at_pos("credits.txt", 15, backgroundColor, 35, 13);
+                art_at_pos("ascii_art\\credit.txt", 15, backgroundColor, 32, 5);
+                read_file_at_pos("ascii_art\\content.txt", 15, backgroundColor, 35, 13);
                 while (true)
                 {
                     if (kbhit())
