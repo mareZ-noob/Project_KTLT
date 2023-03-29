@@ -43,3 +43,33 @@ void read_file_at_pos(string fileName, int textColor, int backgroundColor, int x
     }
     file.close();
 }
+
+void pokemon_ball(string fileName, int backgroundColor, int x, int y) {
+    ifstream file(fileName);
+
+    if (file.is_open()) {
+        char c;
+        int posX = x, posY = y;
+        while (file.get(c)) {
+            if (c == '7') {
+                consoleColor(backgroundColor, 4);
+                moveCursor(posX, posY);
+                TextColor(4);
+                cout << c;
+                posX++;
+            }
+            else if (c == '\n') {
+                posY++;
+                posX = x;
+            }
+            else {
+                consoleColor(backgroundColor, 15);
+                moveCursor(posX, posY);
+                TextColor(15);
+                cout << c;
+                posX++;
+            }
+        }
+        file.close();
+    }
+}
