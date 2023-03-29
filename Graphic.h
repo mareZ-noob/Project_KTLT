@@ -7,5 +7,6 @@
 void art(string fileName, int pX, int pY);
 void art_at_pos(string fileName, int textColor, int backgroundColor, int x, int y);//Draw art at position (x, y);
 void read_file_at_pos(string fileName, int textColor, int backgroundColor, int x, int y);
+void pokemon_ball(string fileName, int backgroundColor, int x, int y);
 
 #endif // __GRAPHIC_H__
