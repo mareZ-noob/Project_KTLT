@@ -218,3 +218,7 @@ void button(int x, int y, int w, int h, int textColor, int buttonColor, int colo
 	moveCursor(x + w, y + h); cout << char(217);
 }
 
+void drawBorder(int left, int top, int width, int height)
+{
+    void drawRectangle(int left, int top, int width, int height);
+}
