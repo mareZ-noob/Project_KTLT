@@ -56,18 +56,8 @@ void DisableSelection()
 
 void showCursor(bool visible)
 {
-    CONSOLE_CURSOR_INFO lpCursor;
-
-    lpCursor.dwSize = 200;
-    lpCursor.bVisible = visible;
-    SetConsoleCursorInfo(console, &lpCursor);
-}
-
-void disableCursor(bool visible)
-{
-	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO cursor = { 1, visible };
-	SetConsoleCursorInfo(handle, &cursor);
+	SetConsoleCursorInfo(console, &cursor);
 }
 
 void moveCursor(int posX, int posY)
@@ -95,7 +85,6 @@ void consoleColor(int background, int text)
     SetConsoleTextAttribute(console, background * 16 + text);
 }
 
-// https://stackoverflow.com/questions/2347770/how-do-you-clear-the-console-screen-in-c
 void clearScreen()
 {
     HANDLE hStdOut;
@@ -174,7 +163,6 @@ void initConsole()
     DisableCtrButton(1, 1, 1);
 }
 
-//Set Text Color
 void TextColor(WORD color)
 {
 	HANDLE hConsoleOutput;

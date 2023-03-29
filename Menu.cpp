@@ -11,7 +11,6 @@ void quit()
     clearScreen();
     exit(1);
 }
-// PlaySound(TEXT(POKEMON_SOUND), NULL, SND_ASYNC);
 
 void login(string &email)
 {
@@ -24,7 +23,7 @@ void login(string &email)
     TextColor(4);
     cout << "Email: ";
     moveCursor(48, 12);
-    button(48, 11, 30, 2, 7, 7, 0, " "); 
+    button(48, 11, 30, 2, 7, 7, 0, " ");
     cout << endl;
     moveCursor(43, 15);
     TextColor(4);
@@ -38,8 +37,8 @@ void login(string &email)
     {
         while (true)
         {
-            char c = _getch(); 
-            if (c == '\r' || c == '\n')
+            char c = _getch();
+            if (c == ENTER_KEY || c == '\n')
             {
                 clearScreen();
                 MenuLogin();
@@ -199,7 +198,6 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
 
 void printMenu(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text) // main menu
 {
-    //system("color 70");
     art_at_pos("ascii_art\\pikachu.txt", 15, backgroundColor, 27, 5);
     selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 }
@@ -220,7 +218,7 @@ int MainMenuBack()
     int backgroundColor = 0;
     string email;
     string text;
-    disableCursor(0);
+    showCursor(0);
     int selection = 1;
     printMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 
@@ -228,24 +226,25 @@ int MainMenuBack()
     {
         char c = _getch();
 
-        if (c == 'w' or c == 'W')
+        if (c == KEY_w or c == KEY_W)
         { // move up
             selection--;
-            if (selection == 0) {
+            if (selection == 0)
+            {
                 selection = 4;
             }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if (c == 's' or c == 'S')
+        else if (c == KEY_s or c == KEY_S)
         { // move down
             selection++;
-            if (selection == 5) {
+            if (selection == 5)
+            {
                 selection = 1;
             }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-            ;
         }
-        else if (c == '\r' || c == '\n')
+        else if (c == ENTER_KEY || c == '\n')
         { // pressed enter
             switch (selection)
             {
@@ -261,7 +260,7 @@ int MainMenuBack()
                     if (kbhit())
                     {
                         char key = _getch();
-                        if (key == 27)
+                        if (key == ESC_KEY)
                         {
                             clearScreen();
                             MainMenuBack();
@@ -278,7 +277,7 @@ int MainMenuBack()
                     if (kbhit())
                     {
                         char key = _getch();
-                        if (key == 27)
+                        if (key == ESC_KEY)
                         {
                             clearScreen();
                             MainMenuBack();
@@ -306,31 +305,33 @@ void MenuLogin()
     int buttonColor = 22;
     int backgroundColor = 0;
     string text;
-    disableCursor(0);
-    int selection = 1; // start with the first button selected
+    showCursor(0);
+    int selection = 1; 
     printMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 
     while (true)
     {
-        char c = _getch(); 
+        char c = _getch();
 
-        if (c == 'w' or c == 'W')
+        if (c == KEY_w or c == KEY_W)
         { // move up
             selection--;
-            if (selection == 0) {
+            if (selection == 0)
+            {
                 selection = 4;
             }
             selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if (c == 's' or c == 'S')
+        else if (c == KEY_s or c == KEY_S)
         { // move down
             selection++;
-            if (selection == 5) {
+            if (selection == 5)
+            {
                 selection = 1;
             }
             selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if (c == '\r' || c == '\n')
+        else if (c == ENTER_KEY || c == '\n')
         { // pressed enter
             switch (selection)
             {
@@ -369,31 +370,33 @@ void MainMenu()
     int backgroundColor = 0;
     string email;
     string text;
-    disableCursor(0);
-    int selection = 1; // start with the first button selected
+    showCursor(0);
+    int selection = 1; 
     printMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 
     while (true)
     {
-        char c = _getch(); 
+        char c = _getch();
 
-        if ((c == 'w' or c == 'W'))
+        if (c == KEY_w or c == KEY_W)
         { // move up
             selection--;
-            if (selection == 0) {
+            if (selection == 0)
+            {
                 selection = 4;
             }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if ((c == 's' or c == 'S'))
+        else if ((c == KEY_s or c == KEY_S))
         { // move down
             selection++;
-            if (selection == 5) {
+            if (selection == 5)
+            {
                 selection = 1;
             }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if (c == '\r' || c == '\n')
+        else if (c == ENTER_KEY || c == '\n')
         { // pressed enter
             switch (selection)
             {
@@ -409,7 +412,7 @@ void MainMenu()
                     if (kbhit())
                     {
                         char key = _getch();
-                        if (key == 27)
+                        if (key == ESC_KEY)
                         {
                             clearScreen();
                             MainMenuBack();
@@ -426,7 +429,7 @@ void MainMenu()
                     if (kbhit())
                     {
                         char key = _getch();
-                        if (key == 27)
+                        if (key == ESC_KEY)
                         {
                             clearScreen();
                             MainMenuBack();
