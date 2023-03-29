@@ -5,7 +5,7 @@ void quit()
     clearScreen();
     consoleColor(BLACK, CYAN);
     clearScreen();
-    art("ascii_art\\good    bye.txt", 30, 13);
+    art("ascii_art\\goodbye.txt", 30, 13);
     consoleColor(BLACK, WHITE);
     Sleep(4000);
     clearScreen();
