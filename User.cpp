@@ -111,20 +111,21 @@ void printLeaderboard()
     infile.read(reinterpret_cast<char *>(&players_read), sizeof(Players) * 5);
     infile.close();
 
+    read_file_at_pos("LEADERBOARD BIG.txt", 11, 0, 25, 3);
     TextColor(11);
     //Draw Column
-    drawRectangle(40, 5, 19, 15);
-    drawRectangle(61, 5, 9, 15);
-    drawRectangle(72, 5, 8, 15);
+    drawRectangle(40, 11, 19, 15);
+    drawRectangle(61, 11, 9, 15);
+    drawRectangle(72, 11, 8, 15);
     //
-    button(40, 5, 20, 2, 4, 11, 0, "       NAME");
-    button(61, 5, 10, 2, 4, 11, 0, "  POINT");
-    button(72, 5, 9, 2, 4, 11, 0, "  TIME");
+    button(40, 11, 20, 2, 4, 11, 0, "       NAME");
+    button(61, 11, 10, 2, 4, 11, 0, "  POINT");
+    button(72, 11, 9, 2, 4, 11, 0, "  TIME");
 
     for (int i = 0; i < fileSize("players.bin") / sizeof(Players); i++)
     {
-        moveCursor(43, 8 + i); cout << players_read[i].name;
-        moveCursor(65, 8 + i); cout << players_read[i].point;
-        moveCursor(76, 8 + i); cout << players_read[i].time;
+        moveCursor(43, 14 + i); cout << players_read[i].name;
+        moveCursor(65, 14 + i); cout << players_read[i].point;
+        moveCursor(76, 14 + i); cout << players_read[i].time;
     }
 }
