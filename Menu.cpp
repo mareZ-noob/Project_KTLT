@@ -202,7 +202,7 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
 void printMenu(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text) // main menu
 {
     TextColor(15);
-    void drawBorder();
+    drawBorder();
     art_at_pos("ascii_art\\pikachu.txt", 15, backgroundColor, 27, 1);
     pokemon_ball("ascii_art\\pokemonball.txt", 0, 3, 12);
     selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
@@ -210,8 +210,8 @@ void printMenu(int selection, int x, int y, int w, int h, int textColor, int but
 
 void printMenuLogin(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text) // menu when users press "LOGIN"
 {
-    TextColor(15);
-    void drawBorder();
+    TextColor(LIGHT_WHITE);
+    drawBorder();
     selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 }
 
@@ -256,10 +256,12 @@ int MainMenuBack()
             {
             case 1:
                 clearScreen();
+                drawBorder();
                 login(email);
                 break;
             case 2:
                 clearScreen();
+                drawBorder();
                 TextColor(15);
                 cout << "<< Press Esc to back";
                 while (true)
@@ -277,10 +279,11 @@ int MainMenuBack()
                 }
             case 3:
                 clearScreen();
-                TextColor(15);
+                drawBorder();
+                TextColor(LIGHT_WHITE);
                 cout << "<< Press Esc to back";
-                art_at_pos("credit.txt", 15, backgroundColor, 32, 5);
-                read_file_at_pos("content.txt", 15, backgroundColor, 35, 13);
+                art_at_pos("credit.txt", LIGHT_WHITE, backgroundColor, 32, 5);
+                read_file_at_pos("content.txt", LIGHT_WHITE, backgroundColor, 35, 13);
                 while (true)
                 {
                     if (kbhit())
@@ -296,6 +299,7 @@ int MainMenuBack()
                 }
             case 4:
                 clearScreen();
+                drawBorder();
                 quit();
                 exit(1);
             }
@@ -344,11 +348,13 @@ void MenuLoginBack()
             {
             case 1:
                 clearScreen();
+                drawBorder();
                 cout << "You selected PLAY GAME";
                 Sleep(5000);
                 break;
             case 2:
                 clearScreen();
+                drawBorder();
                 TextColor(15);
                 cout << "<< Press Esc to back";
                 printLeaderboard();
@@ -367,6 +373,7 @@ void MenuLoginBack()
                 }
             case 3:
                 clearScreen();
+                drawBorder();
                 TextColor(15);
                 cout << "<< Press Esc to back";
                 while (true)
@@ -384,6 +391,7 @@ void MenuLoginBack()
                 }
             case 4:
                 clearScreen();
+                drawBorder();
                 MainMenuBack();
                 Sleep(5000);
             }
@@ -432,11 +440,13 @@ void MenuLogin()
             {
             case 1:
                 clearScreen();
+                drawBorder();
                 cout << "You selected PLAY GAME";
                 Sleep(5000);
                 break;
             case 2:
                 clearScreen();
+                drawBorder();
                 TextColor(15);
                 cout << "<< Press Esc to back";
                 printLeaderboard();
@@ -455,6 +465,7 @@ void MenuLogin()
                 }
             case 3:
                 clearScreen();
+                drawBorder();
                 TextColor(15);
                 cout << "<< Press Esc to back";
                 while (true)
@@ -472,6 +483,7 @@ void MenuLogin()
                 }
             case 4:
                 clearScreen();
+                drawBorder();
                 MainMenuBack();
                 Sleep(5000);
             }
@@ -521,10 +533,12 @@ void MainMenu()
             {
             case 1:
                 clearScreen();
+                drawBorder();
                 login(email);
                 break;
             case 2:
                 clearScreen();
+                drawBorder();
                 TextColor(15);
                 cout << "<< Press Esc to back";
                 while (true)
@@ -542,6 +556,7 @@ void MainMenu()
                 }
             case 3:
                 clearScreen();
+                drawBorder();
                 TextColor(15);
                 cout << "<< Press Esc to back";
                 art_at_pos("ascii_art\\credit.txt", 15, backgroundColor, 32, 5);
@@ -561,6 +576,7 @@ void MainMenu()
                 }
             case 4:
                 clearScreen();
+                drawBorder();
                 quit();
                 exit(1);
             }
