@@ -23,6 +23,7 @@ void initConsole();
 
 void TextColor(WORD color);
 void button(int x, int y, int w, int h, int color, int buttonColor, int backgroundColor, string text);
+void drawBorder(int left, int top, int width, int height);
 
 #endif // __SETUP_H__
 
