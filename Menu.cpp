@@ -202,7 +202,7 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
 void printMenu(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text) // main menu
 {
     TextColor(15);
-    drawRectangle(0, 0, 118, 34);
+    void drawBorder();
     art_at_pos("ascii_art\\pikachu.txt", 15, backgroundColor, 27, 1);
     pokemon_ball("ascii_art\\pokemonball.txt", 0, 3, 12);
     selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
@@ -211,7 +211,7 @@ void printMenu(int selection, int x, int y, int w, int h, int textColor, int but
 void printMenuLogin(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text) // menu when users press "LOGIN"
 {
     TextColor(15);
-    drawRectangle(0, 0, 118, 34);
+    void drawBorder();
     selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 }
 
