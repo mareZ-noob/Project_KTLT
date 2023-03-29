@@ -7,10 +7,11 @@ void quit()
     clearScreen();
     art("ascii_art\\goodbye.txt", 30, 13);
     consoleColor(BLACK, WHITE);
-    Sleep(4000);
+    Sleep(5000);
     clearScreen();
     exit(1);
 }
+// PlaySound(TEXT(POKEMON_SOUND), NULL, SND_ASYNC);
 
 void login(string &email)
 {
@@ -23,22 +24,24 @@ void login(string &email)
     TextColor(4);
     cout << "Email: ";
     moveCursor(48, 12);
-    button(48, 11, 30, 2, 7, 7, 0, " ");
-    cout << endl;
-    moveCursor(43, 15);
+    button(48, 11, 30, 2, 7, 7, 0, " "); 
+    //cout << endl;
+    moveCursor(43, 14);
     TextColor(4);
     cout << "(Using \"@clc.fitus.edu.vn\" to login)";
+    moveCursor(49, 16);
+    cout << "Press ENTER to continue";
 
     moveCursor(49, 12);
-    showCursor(0);
     TextColor(7);
+    showCursor(0);
     getline(cin, email);
     if (verify(email))
     {
         while (true)
         {
-            char c = _getch();
-            if (c == ENTER_KEY || c == '\n')
+            char c = _getch(); 
+            if (c == '\r' || c == '\n')
             {
                 clearScreen();
                 MenuLogin();
@@ -71,7 +74,7 @@ void selectionMenu(int selection, int x, int y, int w, int h, int textColor, int
     if (selection == 2)
     {
         textColor = 4;
-        button(x, y + 2, w, h, textColor, buttonColor, backgroundColor, "     > ABOUT <\n");
+        button(x, y + 2, w, h, textColor, buttonColor, backgroundColor, "  > HOW TO PLAY <");
         moveCursor(x, y + 2);
         cout << char(195);
         moveCursor(x + w, y + 2);
@@ -79,7 +82,7 @@ void selectionMenu(int selection, int x, int y, int w, int h, int textColor, int
     }
     else
     {
-        button(x, y + 2, w, h, Color, buttonColor, backgroundColor, "       ABOUT");
+        button(x, y + 2, w, h, Color, buttonColor, backgroundColor, "    HOW TO PLAY");
         moveCursor(x, y + 2);
         cout << char(195);
         moveCursor(x + w, y + 2);
@@ -198,14 +201,17 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
 
 void printMenu(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text) // main menu
 {
+    TextColor(15);
     drawRectangle(0, 0, 118, 34);
-    art_at_pos("ascii_art\\pikachu.txt", 15, backgroundColor, 27, 1);
+    art_at_pos("pikachu.txt", 15, backgroundColor, 27, 1);
     pokemon_ball("pokemonball_image.txt", 0, 3, 12);
     selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 }
 
 void printMenuLogin(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text) // menu when users press "LOGIN"
 {
+    TextColor(15);
+    drawRectangle(0, 0, 118, 34);
     selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 }
 
@@ -220,7 +226,7 @@ int MainMenuBack()
     int backgroundColor = 0;
     string email;
     string text;
-    showCursor(0);
+    disableCursor(0);
     int selection = 1;
     printMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 
@@ -228,25 +234,18 @@ int MainMenuBack()
     {
         char c = _getch();
 
-        if (c == KEY_w or c == KEY_W)
+        if ((c == 'w' or c == 72 or c == 'W') && selection > 1)
         { // move up
             selection--;
-            if (selection == 0)
-            {
-                selection = 4;
-            }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if (c == KEY_s or c == KEY_S)
+        else if ((c == 's' or c == 80 or c == 'S') && selection < 4)
         { // move down
             selection++;
-            if (selection == 5)
-            {
-                selection = 1;
-            }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+            ;
         }
-        else if (c == ENTER_KEY || c == '\n')
+        else if (c == '\r' || c == '\n')
         { // pressed enter
             switch (selection)
             {
@@ -256,13 +255,14 @@ int MainMenuBack()
                 break;
             case 2:
                 clearScreen();
-                cout << "You selected About\n";
+                TextColor(15);
+                cout << "<< Press Esc to back";
                 while (true)
                 {
                     if (kbhit())
                     {
                         char key = _getch();
-                        if (key == ESC_KEY)
+                        if (key == 27)
                         {
                             clearScreen();
                             MainMenuBack();
@@ -272,14 +272,16 @@ int MainMenuBack()
                 }
             case 3:
                 clearScreen();
-                art_at_pos("ascii_art\\credit.txt", 15, backgroundColor, 32, 5);
-                read_file_at_pos("ascii_art\\content.txt", 15, backgroundColor, 35, 13);
+                TextColor(15);
+                cout << "<< Press Esc to back";
+                art_at_pos("CREDITS BIG.txt", 15, backgroundColor, 32, 5);
+                read_file_at_pos("credits.txt", 15, backgroundColor, 35, 13);
                 while (true)
                 {
                     if (kbhit())
                     {
                         char key = _getch();
-                        if (key == ESC_KEY)
+                        if (key == 27)
                         {
                             clearScreen();
                             MainMenuBack();
@@ -297,7 +299,7 @@ int MainMenuBack()
     system("pause");
 }
 
-void MenuLogin()
+void MenuLoginBack()
 {
     int x = 50;
     int y = 10;
@@ -307,33 +309,25 @@ void MenuLogin()
     int buttonColor = 22;
     int backgroundColor = 0;
     string text;
-    showCursor(0);
-    int selection = 1; 
+    disableCursor(0);
+    int selection = 1; // start with the first button selected
     printMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 
     while (true)
     {
         char c = _getch();
 
-        if (c == KEY_w or c == KEY_W)
+        if ((c == 'w' or c == 72 or c == 'W') && selection > 1)
         { // move up
             selection--;
-            if (selection == 0)
-            {
-                selection = 4;
-            }
             selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if (c == KEY_s or c == KEY_S)
+        else if ((c == 's' or c == 80 or c == 'S') && selection < 4)
         { // move down
             selection++;
-            if (selection == 5)
-            {
-                selection = 1;
-            }
             selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if (c == ENTER_KEY || c == '\n')
+        else if (c == '\r' || c == '\n')
         { // pressed enter
             switch (selection)
             {
@@ -344,13 +338,121 @@ void MenuLogin()
                 break;
             case 2:
                 clearScreen();
+                TextColor(15);
+                cout << "<< Press Esc to back";
                 printLeaderboard();
-                break;
+                while (true)
+                {
+                    if (kbhit())
+                    {
+                        char key = _getch();
+                        if (key == 27)
+                        {
+                            clearScreen();
+                            MenuLoginBack();
+                            break;
+                        }
+                    }
+                }
             case 3:
                 clearScreen();
-                cout << "You selected Settings\n";
+                TextColor(15);
+                cout << "<< Press Esc to back";
+                while (true)
+                {
+                    if (kbhit())
+                    {
+                        char key = _getch();
+                        if (key == 27)
+                        {
+                            clearScreen();
+                            MenuLoginBack();
+                            break;
+                        }
+                    }
+                }
+            case 4:
+                clearScreen();
+                MainMenuBack();
+                Sleep(5000);
+            }
+        }
+    }
+    system("pause");
+}
+
+void MenuLogin()
+{
+    int x = 50;
+    int y = 10;
+    int w = 20;
+    int h = 2;
+    int textColor = 7;
+    int buttonColor = 93;
+    int backgroundColor = 0;
+    string text;
+    disableCursor(0);
+    int selection = 1; // start with the first button selected
+    printMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+
+    while (true)
+    {
+        char c = _getch(); 
+
+        if ((c == 'w' or c == 72 or c == 'W') && selection > 1)
+        { // move up
+            selection--;
+            selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+        }
+        else if ((c == 's' or c == 80 or c == 'S') && selection < 4)
+        { // move down
+            selection++;
+            selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+        }
+        else if (c == '\r' || c == '\n')
+        { // pressed enter
+            switch (selection)
+            {
+            case 1:
+                clearScreen();
+                cout << "You selected PLAY GAME";
                 Sleep(5000);
                 break;
+            case 2:
+                clearScreen();
+                TextColor(15);
+                cout << "<< Press Esc to back";
+                printLeaderboard();
+                while (true)
+                {
+                    if (kbhit())
+                    {
+                        char key = _getch();
+                        if (key == 27)
+                        {
+                            clearScreen();
+                            MenuLoginBack();
+                            break;
+                        }
+                    }
+                }
+            case 3:
+                clearScreen();
+                TextColor(15);
+                cout << "<< Press Esc to back";
+                while (true)
+                {
+                    if (kbhit())
+                    {
+                        char key = _getch();
+                        if (key == 27)
+                        {
+                            clearScreen();
+                            MenuLoginBack();
+                            break;
+                        }
+                    }
+                }
             case 4:
                 clearScreen();
                 MainMenuBack();
@@ -368,37 +470,29 @@ void MainMenu()
     int w = 20;
     int h = 2;
     int textColor = 7;
-    int buttonColor = 22;
+    int buttonColor = 93;
     int backgroundColor = 0;
     string email;
     string text;
-    showCursor(0);
-    int selection = 1; 
+    disableCursor(0);
+    int selection = 1; // start with the first button selected
     printMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 
     while (true)
     {
-        char c = _getch();
+        char c = _getch(); 
 
-        if (c == KEY_w or c == KEY_W)
+        if ((c == 'w' or c == 72 or c == 'W') && selection > 1)
         { // move up
             selection--;
-            if (selection == 0)
-            {
-                selection = 4;
-            }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if ((c == KEY_s or c == KEY_S))
+        else if ((c == 's' or c == 80 or c == 'S') && selection < 4)
         { // move down
             selection++;
-            if (selection == 5)
-            {
-                selection = 1;
-            }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if (c == ENTER_KEY || c == '\n')
+        else if (c == '\r' || c == '\n')
         { // pressed enter
             switch (selection)
             {
@@ -408,13 +502,14 @@ void MainMenu()
                 break;
             case 2:
                 clearScreen();
-                cout << "You selected About\n";
+                TextColor(15);
+                cout << "<< Press Esc to back";
                 while (true)
                 {
                     if (kbhit())
                     {
                         char key = _getch();
-                        if (key == ESC_KEY)
+                        if (key == 27)
                         {
                             clearScreen();
                             MainMenuBack();
@@ -424,14 +519,16 @@ void MainMenu()
                 }
             case 3:
                 clearScreen();
-                art_at_pos("ascii_art\\credit.txt", 15, backgroundColor, 32, 5);
-                read_file_at_pos("ascii_art\\content.txt", 15, backgroundColor, 35, 13);
+                TextColor(15);
+                cout << "<< Press Esc to back";
+                art_at_pos("CREDITS BIG.txt", 15, backgroundColor, 32, 5);
+                read_file_at_pos("credits.txt", 15, backgroundColor, 35, 13);
                 while (true)
                 {
                     if (kbhit())
                     {
                         char key = _getch();
-                        if (key == ESC_KEY)
+                        if (key == 27)
                         {
                             clearScreen();
                             MainMenuBack();
