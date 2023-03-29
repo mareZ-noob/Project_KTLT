@@ -11,7 +11,6 @@ void ShowScrollbar(BOOL Show);
 
 void DisableSelection();
 void showCursor(bool visible);
-void disableCursor(bool visible);
 void moveCursor(int posX, int posY);
 void disableMouseInput();
 
