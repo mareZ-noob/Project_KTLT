@@ -111,13 +111,13 @@ void printLeaderboard()
     infile.read(reinterpret_cast<char *>(&players_read), sizeof(Players) * 5);
     infile.close();
 
-    read_file_at_pos("LEADERBOARD BIG.txt", 11, 0, 25, 3);
+    read_file_at_pos("ascii_art\\leaderboard.txt", 11, 0, 25, 3);
     TextColor(11);
-    //Draw Column
+
     drawRectangle(40, 11, 19, 15);
     drawRectangle(61, 11, 9, 15);
     drawRectangle(72, 11, 8, 15);
-    //
+
     button(40, 11, 20, 2, 4, 11, 0, "       NAME");
     button(61, 11, 10, 2, 4, 11, 0, "  POINT");
     button(72, 11, 9, 2, 4, 11, 0, "  TIME");
