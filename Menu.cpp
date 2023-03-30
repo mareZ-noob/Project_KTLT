@@ -204,7 +204,8 @@ void printMenu(int selection, int x, int y, int w, int h, int textColor, int but
 {
     drawBorder();
     art_at_pos("ascii_art\\pikachu.txt", LIGHT_YELLOW, backgroundColor, 27, 1);
-    //pokemon_ball("ascii_art\\pokemonball.txt", BLACK, 3, 15);
+    pokemon_ball("ascii_art\\pokemonball.txt", BLACK, 4, 14);
+    pikachu_small("ascii_art\\pikachu_small.txt", BLACK, 70, 11);
     selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 }
 
@@ -217,7 +218,7 @@ void printMenuLogin(int selection, int x, int y, int w, int h, int textColor, in
 int MainMenuBack()
 {
     int x = 50;
-    int y = 17;
+    int y = 24;
     int w = 20;
     int h = 2;
     int textColor = CYAN;
@@ -528,7 +529,7 @@ void MenuLogin()
 void MainMenu()
 {
     int x = 50;
-    int y = 17;
+    int y = 24;
     int w = 20;
     int h = 2;
     int textColor = CYAN;
