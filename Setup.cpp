@@ -224,6 +224,16 @@ void drawBorder()
     drawRectangle(0, 0, 118, 34);
 }
 
+void drawBackButton()
+{
+    button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
+    TextColor(YELLOW);
+    moveCursor(0, 32);
+    cout << char(195);
+    moveCursor(22, 34);
+    cout << char(193);
+}
+
 void box(double x, double y, double w, double h, int textColor, int buttonColor, int color, char chr)
 {
    consoleColor(color, textColor);
@@ -258,13 +268,8 @@ void box(double x, double y, double w, double h, int textColor, int buttonColor,
 		cout << char(179);
 	}
 
-	//moveCursor(x, y); cout << char(218);
-	//moveCursor(x + w, y); cout << char(191);
-	//moveCursor(x, y + h); cout << char(192);
-	//moveCursor(x + w, y + h); cout << char(217);
-
-	moveCursor(x, y); cout << char(197);
-	moveCursor(x + w, y); cout << char(197);
-	moveCursor(x, y + h); cout << char(197);
-	moveCursor(x + w, y + h); cout << char(187);
+	moveCursor(x, y); cout << char(218);
+	moveCursor(x + w, y); cout << char(191);
+	moveCursor(x, y + h); cout << char(192);
+	moveCursor(x + w, y + h); cout << char(217);
 }

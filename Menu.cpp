@@ -16,22 +16,26 @@ void quit()
 void login(string &email)
 {
     TextColor(CYAN);
-    drawRectangle(40, 8, 40, 10);
+    drawRectangle(40, 12, 40, 10);
+    button(40, 12, 41, 2, LIGHT_YELLOW, CYAN, BLACK, " Enter your email to continue");
+    moveCursor(40, 14);
+    cout << char(195);
+    moveCursor(81, 14);
+    cout << char(180);
 
-    button(40, 8, 41, 2, LIGHT_YELLOW, CYAN, BLACK, " Enter your email to continue");
-    moveCursor(42, 12);
+    moveCursor(42, 16);
     TextColor(LIGHT_YELLOW);
     cout << "Email: ";
-    moveCursor(48, 12);
-    button(48, 11, 30, 2, LIGHT_WHITE, CYAN, BLACK, " "); 
-    moveCursor(43, 14);
+    moveCursor(48, 16);
+    button(48, 15, 30, 2, LIGHT_WHITE, CYAN, BLACK, " "); 
+    moveCursor(43, 18);
     TextColor(LIGHT_GREEN);
     cout << "(Using \"@clc.fitus.edu.vn\" to login)";
-    moveCursor(49, 16);
+    moveCursor(49, 20);
     TextColor(LIGHT_YELLOW);
     cout << "Press ENTER to continue";
 
-    moveCursor(49, 12);
+    moveCursor(49, 16);
     TextColor(LIGHT_WHITE);
     showCursor(1);
     getline(cin, email);
@@ -51,9 +55,9 @@ void login(string &email)
     else
     {
         TextColor(LIGHT_RED);
-        moveCursor(51, 20);
+        moveCursor(51, 24);
         cout << "INVALID EMAIL ADDRESS!";
-        moveCursor(47, 21);
+        moveCursor(47, 25);
         cout << "Please enter your email again";
         return login(email);
     }
@@ -258,13 +262,13 @@ int MainMenuBack()
             case 1:
                 clearScreen();
                 drawBorder();
-                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
+                drawBackButton();
                 login(email);
                 break;
             case 2:
                 clearScreen();
                 drawBorder();
-                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
+                drawBackButton();
                 while (true)
                 {
                     if (kbhit())
@@ -281,7 +285,7 @@ int MainMenuBack()
             case 3:
                 clearScreen();
                 drawBorder();
-                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
+                drawBackButton();
                 art_at_pos("ascii_art\\credit.txt", LIGHT_GREEN, backgroundColor, 36, 5);
                 read_file_at_pos("ascii_art\\content.txt", CYAN, backgroundColor, 35, 13);
                 while (true)
@@ -349,7 +353,7 @@ void MenuLoginBack()
             case 1:
                 clearScreen();
                 drawBorder();
-                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
+                drawBackButton();
                 while (true)
                 {
                     if (kbhit())
@@ -366,7 +370,7 @@ void MenuLoginBack()
             case 2:
                 clearScreen();
                 drawBorder();
-                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
+                drawBackButton();
                 printLeaderboard();
                 while (true)
                 {
@@ -384,7 +388,7 @@ void MenuLoginBack()
             case 3:
                 clearScreen();
                 drawBorder();
-                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
+                drawBackButton();
                 while (true)
                 {
                     if (kbhit())
@@ -450,7 +454,7 @@ void MenuLogin()
             case 1:
                 clearScreen();
                 drawBorder();          
-                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
+                drawBackButton();
                 while (true)
                 {
                     if (kbhit())
@@ -467,8 +471,8 @@ void MenuLogin()
             case 2:
                 clearScreen();
                 drawBorder();
-                moveCursor(2, 33);
-                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
+                drawBackButton();
+                printLeaderboard();
                 while (true)
                 {
                     if (kbhit())
@@ -485,7 +489,7 @@ void MenuLogin()
             case 3:
                 clearScreen();
                 drawBorder();
-                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
+                drawBackButton();
                 while (true)
                 {
                     if (kbhit())
@@ -552,13 +556,13 @@ void MainMenu()
             case 1:
                 clearScreen();
                 drawBorder();
-                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
+                drawBackButton();
                 login(email);
                 break;
             case 2:
                 clearScreen();
                 drawBorder();
-                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
+                drawBackButton();
                 while (true)
                 {
                     if (kbhit())
@@ -575,7 +579,7 @@ void MainMenu()
             case 3:
                clearScreen();
                 drawBorder();
-                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
+                drawBackButton();
                 art_at_pos("ascii_art\\credit.txt", LIGHT_GREEN, backgroundColor, 36, 5);
                 read_file_at_pos("ascii_art\\content.txt", CYAN, backgroundColor, 35, 13);
                 while (true)
