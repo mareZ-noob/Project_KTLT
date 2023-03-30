@@ -65,6 +65,7 @@ using std::sort;
 #define KEY_DOWN 80
 #define KEY_LEFT 75
 #define KEY_RIGHT 77
+#define TAB_KEY 9
 #define ENTER_KEY 13
 #define ESC_KEY 27
 

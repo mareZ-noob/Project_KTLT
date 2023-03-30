@@ -223,3 +223,48 @@ void drawBorder()
     TextColor(YELLOW);
     drawRectangle(0, 0, 118, 34);
 }
+
+void box(double x, double y, double w, double h, int textColor, int buttonColor, int color, char chr)
+{
+   consoleColor(color, textColor);
+	for (double iy = y + 1; iy <= y + h - 1; iy++)
+	{
+		for (double ix = x + 1; ix <= x + w - 1; ix++)
+		{
+			moveCursor(ix, iy); cout << " ";
+		}
+	}
+    
+	moveCursor((double)x + w / 2, (double)y + h / 2);
+	TextColor(textColor);
+	cout << chr;
+
+	consoleColor(color, textColor);
+	TextColor(buttonColor);
+	if (h <= 1 || w <= 1)
+		return;
+	for (double ix = x; ix <= x + w; ix++)
+	{
+		moveCursor(ix, y);
+		cout << char(196);
+		moveCursor(ix, y + h);
+		cout << char(196);
+	}
+	for (double iy = y; iy <= y + h; iy++)
+	{
+		moveCursor(x, iy);
+		cout << char(179);
+		moveCursor(x + w, iy);
+		cout << char(179);
+	}
+
+	//moveCursor(x, y); cout << char(218);
+	//moveCursor(x + w, y); cout << char(191);
+	//moveCursor(x, y + h); cout << char(192);
+	//moveCursor(x + w, y + h); cout << char(217);
+
+	moveCursor(x, y); cout << char(197);
+	moveCursor(x + w, y); cout << char(197);
+	moveCursor(x, y + h); cout << char(197);
+	moveCursor(x + w, y + h); cout << char(187);
+}

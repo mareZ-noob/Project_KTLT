@@ -35,6 +35,7 @@ void login(string &email)
     TextColor(LIGHT_WHITE);
     showCursor(1);
     getline(cin, email);
+
     if (verify(email))
     {
         while (true)
@@ -203,7 +204,7 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
 void printMenu(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text) // main menu
 {
     drawBorder();
-    art_at_pos("ascii_art\\pikachu.txt", LIGHT_YELLOW, backgroundColor, 27, 1);
+    art_at_pos("ascii_art\\pikachu.txt", LIGHT_YELLOW, backgroundColor, 21, 1);
     pokemon_ball("ascii_art\\pokemonball.txt", BLACK, 4, 14);
     pikachu_small("ascii_art\\pikachu_small.txt", BLACK, 70, 11);
     selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
@@ -257,14 +258,13 @@ int MainMenuBack()
             case 1:
                 clearScreen();
                 drawBorder();
+                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
                 login(email);
                 break;
             case 2:
                 clearScreen();
                 drawBorder();
-                moveCursor(2, 33);
-                TextColor(LIGHT_WHITE);
-                cout << "<< Press Esc to back";
+                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
                 while (true)
                 {
                     if (kbhit())
@@ -281,9 +281,7 @@ int MainMenuBack()
             case 3:
                 clearScreen();
                 drawBorder();
-                moveCursor(2, 33);
-                TextColor(LIGHT_WHITE);
-                cout << "<< Press Esc to back";
+                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
                 art_at_pos("ascii_art\\credit.txt", LIGHT_GREEN, backgroundColor, 36, 5);
                 read_file_at_pos("ascii_art\\content.txt", CYAN, backgroundColor, 35, 13);
                 while (true)
@@ -351,10 +349,7 @@ void MenuLoginBack()
             case 1:
                 clearScreen();
                 drawBorder();
-                
-                moveCursor(2, 33);
-                TextColor(LIGHT_WHITE);
-                cout << "<< Press Esc to back";
+                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
                 while (true)
                 {
                     if (kbhit())
@@ -371,9 +366,7 @@ void MenuLoginBack()
             case 2:
                 clearScreen();
                 drawBorder();
-                moveCursor(2, 33);
-                TextColor(LIGHT_WHITE);
-                cout << "<< Press Esc to back";
+                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
                 printLeaderboard();
                 while (true)
                 {
@@ -391,9 +384,7 @@ void MenuLoginBack()
             case 3:
                 clearScreen();
                 drawBorder();
-                moveCursor(2, 33);
-                TextColor(LIGHT_WHITE);
-                cout << "<< Press Esc to back";
+                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
                 while (true)
                 {
                     if (kbhit())
@@ -458,11 +449,8 @@ void MenuLogin()
             {
             case 1:
                 clearScreen();
-                drawBorder();
-                
-                moveCursor(2, 33);
-                TextColor(LIGHT_WHITE);
-                cout << "<< Press Esc to back";
+                drawBorder();          
+                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
                 while (true)
                 {
                     if (kbhit())
@@ -480,9 +468,7 @@ void MenuLogin()
                 clearScreen();
                 drawBorder();
                 moveCursor(2, 33);
-                TextColor(LIGHT_WHITE);
-                cout << "<< Press Esc to back";
-                printLeaderboard();
+                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
                 while (true)
                 {
                     if (kbhit())
@@ -499,9 +485,7 @@ void MenuLogin()
             case 3:
                 clearScreen();
                 drawBorder();
-                moveCursor(2, 33);
-                TextColor(LIGHT_WHITE);
-                cout << "<< Press Esc to back";
+                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
                 while (true)
                 {
                     if (kbhit())
@@ -568,14 +552,13 @@ void MainMenu()
             case 1:
                 clearScreen();
                 drawBorder();
+                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
                 login(email);
                 break;
             case 2:
                 clearScreen();
                 drawBorder();
-                moveCursor(2, 33);
-                TextColor(LIGHT_WHITE);
-                cout << "<< Press Esc to back";
+                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
                 while (true)
                 {
                     if (kbhit())
@@ -592,9 +575,7 @@ void MainMenu()
             case 3:
                clearScreen();
                 drawBorder();
-                moveCursor(2, 33);
-                TextColor(LIGHT_WHITE);
-                cout << "<< Press Esc to back";
+                button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
                 art_at_pos("ascii_art\\credit.txt", LIGHT_GREEN, backgroundColor, 36, 5);
                 read_file_at_pos("ascii_art\\content.txt", CYAN, backgroundColor, 35, 13);
                 while (true)
