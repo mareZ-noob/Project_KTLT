@@ -318,8 +318,8 @@ void MenuLoginBack()
     int y = 10;
     int w = 20;
     int h = 2;
-    int textColor = CYAN;
-    int buttonColor = PURPLE;
+    int textColor = LIGHT_WHITE;
+    int buttonColor = BLUE;
     int backgroundColor = BLACK;
     string text;
     showCursor(0);
@@ -419,8 +419,8 @@ void MenuLogin()
     int y = 10;
     int w = 20;
     int h = 2;
-    int textColor = CYAN;
-    int buttonColor = PURPLE;
+    int textColor = LIGHT_WHITE;
+    int buttonColor = BLUE;
     int backgroundColor = BLACK;
     string text;
     showCursor(0);
