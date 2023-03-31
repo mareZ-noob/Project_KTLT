@@ -226,7 +226,16 @@ void drawBorder()
 
 void drawBackButton()
 {
-    button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
+    //button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
+    drawRectangle(0, 32, 21 ,2);
+    moveCursor(1,33);
+    TextColor(LIGHT_WHITE);
+    cout << "<< Press ";
+    TextColor(LIGHT_RED);
+    cout << "Esc";
+    TextColor(LIGHT_WHITE);
+    cout << " to back";
+
     TextColor(YELLOW);
     moveCursor(0, 32);
     cout << char(195);

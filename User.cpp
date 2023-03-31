@@ -114,19 +114,28 @@ void printLeaderboard()
     read_file_at_pos("ascii_art\\leaderboard.txt", OCEAN, BLACK, 20, 3);
 
     TextColor(CYAN);
-    drawRectangle(38, 11, 19, 15);
-    drawRectangle(59, 11, 9, 15);
-    drawRectangle(70, 11, 8, 15);
+    drawRectangle(33, 12, 32, 15);
+    drawRectangle(66, 12, 9, 15);
+    drawRectangle(76, 12, 8, 15);
 
-    button(38, 11, 20, 2, LIGHT_RED, CYAN, BLACK, "       NAME");
-    button(59, 11, 10, 2, LIGHT_RED, CYAN, BLACK, "  POINT");
-    button(70, 11, 9, 2, LIGHT_RED, CYAN, BLACK, "  TIME");
+    button(33, 12, 33, 2, LIGHT_RED, CYAN, BLACK, "              NAME");
+    button(66, 12, 10, 2, LIGHT_RED, CYAN, BLACK, "  POINT");
+    button(76, 12, 9, 2, LIGHT_RED, CYAN, BLACK, "  TIME");
+
+    moveCursor(33, 14); cout << char(195);
+    moveCursor(66, 14); cout << char(197);
+    moveCursor(76, 14); cout << char(197);
+    moveCursor(85, 14); cout << char(180);
+    moveCursor(66, 12); cout << char(194);
+    moveCursor(66, 27); cout << char(193);
+    moveCursor(76, 12); cout << char(194);
+    moveCursor(76, 27); cout << char(193);
 
     TextColor(LIGHT_WHITE);
     for (int i = 0; i < fileSize("players.bin") / sizeof(Players); i++)
     {
-        moveCursor(41, 14 + i); cout << players_read[i].name;
-        moveCursor(63, 14 + i); cout << players_read[i].point;
-        moveCursor(74, 14 + i); cout << players_read[i].time;
+        moveCursor(35, 15 + i); cout << i + 1 << ". " << players_read[i].name;
+        moveCursor(70, 15 + i); cout << players_read[i].point;
+        moveCursor(80, 15 + i); cout << players_read[i].time;
     }
 }

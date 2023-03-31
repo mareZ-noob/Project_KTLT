@@ -226,8 +226,8 @@ int MainMenuBack()
     int y = 24;
     int w = 20;
     int h = 2;
-    int textColor = CYAN;
-    int buttonColor = PURPLE;
+    int textColor = LIGHT_WHITE;
+    int buttonColor = BLUE;
     int backgroundColor = BLACK;
     string email;
     string text;
@@ -520,8 +520,8 @@ void MainMenu()
     int y = 24;
     int w = 20;
     int h = 2;
-    int textColor = CYAN;
-    int buttonColor = PURPLE;
+    int textColor = LIGHT_WHITE;
+    int buttonColor = BLUE;
     int backgroundColor = BLACK;
     string email;
     string text;
