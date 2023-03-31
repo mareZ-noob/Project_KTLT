@@ -239,7 +239,7 @@ int MainMenuBack()
     {
         char c = _getch();
 
-        if (c == KEY_w or c == KEY_W)
+        if (c == KEY_w || c == KEY_W)
         { // move up
             selection--;
             if (selection == 0) {
@@ -247,7 +247,7 @@ int MainMenuBack()
             }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if (c == KEY_s or c == KEY_S)
+        else if (c == KEY_s || c == KEY_S)
         { // move down
             selection++;
             if (selection == 5) {
@@ -255,7 +255,7 @@ int MainMenuBack()
             }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if (c == ENTER_KEY or c == '\n')
+        else if (c == ENTER_KEY || c == '\n')
         { // pressed enter
             switch (selection)
             {
@@ -330,7 +330,7 @@ void MenuLoginBack()
     {
         char c = _getch();
 
-        if (c == KEY_w or c == KEY_W)
+        if (c == KEY_w || c == KEY_W)
         { // move up
             selection--;
             if (selection == 0) {
@@ -338,7 +338,7 @@ void MenuLoginBack()
             }
             selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if (c == KEY_s or c == KEY_S)
+        else if (c == KEY_s || c == KEY_S)
         { // move down
             selection++;
             if (selection == 5) {
@@ -346,7 +346,7 @@ void MenuLoginBack()
             }
             selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if (c == ENTER_KEY or c == '\n')
+        else if (c == ENTER_KEY || c == '\n')
         { // pressed enter
             switch (selection)
             {
@@ -431,7 +431,7 @@ void MenuLogin()
     {
         char c = _getch(); 
 
-        if (c == KEY_w or c == KEY_W)
+        if (c == KEY_w || c == KEY_W)
         { // move up
             selection--;
             if (selection == 0) {
@@ -439,7 +439,7 @@ void MenuLogin()
             }
             selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if (c == KEY_s or c == KEY_S)
+        else if (c == KEY_s || c == KEY_S)
         { // move down
             selection++;
             if (selection == 5) {
@@ -447,7 +447,7 @@ void MenuLogin()
             }
             selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if (c == ENTER_KEY or c == '\n')
+        else if (c == ENTER_KEY || c == '\n')
         { // pressed enter
             switch (selection)
             {
@@ -533,7 +533,7 @@ void MainMenu()
     {
         char c = _getch(); 
 
-        if (c == KEY_w or c == KEY_W)
+        if (c == KEY_w || c == KEY_W)
         { // move up
             selection--;
             if (selection == 0) {
@@ -541,7 +541,7 @@ void MainMenu()
             }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if (c == KEY_s or c == KEY_S)
+        else if (c == KEY_s || c == KEY_S)
         { // move down
             selection++;
             if (selection == 5) {
@@ -549,7 +549,7 @@ void MainMenu()
             }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
         }
-        else if (c == ENTER_KEY or c == '\n')
+        else if (c == ENTER_KEY || c == '\n')
         { // pressed enter
             switch (selection)
             {

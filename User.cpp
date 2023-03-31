@@ -60,7 +60,8 @@ void pushRecord(Players p)
 
         // rewrite and sort
         int curSize = fileSize("players.bin") / sizeof(Players);
-        Players players_read[curSize];
+        //Players players_read[curSize];
+        Players* players_read = new Players[curSize];
         ifstream fi;
         fi.open("players.bin", ios::binary);
         fi.read(reinterpret_cast<char *>(&players_read), sizeof(Players) * curSize);
@@ -69,6 +70,7 @@ void pushRecord(Players p)
 
         ofstream f("players.bin", ios::binary);
         f.write(reinterpret_cast<const char *>(&players_read), sizeof(Players) * curSize);
+        delete [] players_read;
         f.close();
     }
     else
