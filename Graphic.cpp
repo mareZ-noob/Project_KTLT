@@ -131,3 +131,40 @@ void pikachu_small(string fileName, int backgroundColor, int x, int y) {
         file.close();
     }
 }
+
+void login_icon(string fileName, int backgroundColor, int x, int y) {
+    ifstream file(fileName);
+
+    if (file.is_open()) {
+        char c;
+        int posX = x, posY = y;
+        while (file.get(c)) {
+            if (c == '@') {
+                consoleColor(backgroundColor, LIGHT_YELLOW);
+                moveCursor(posX, posY);
+                TextColor(LIGHT_WHITE);
+                cout << c;
+                posX++;
+            }
+            else if (c == 'J') {
+                consoleColor(backgroundColor, GRAY);
+                moveCursor(posX, posY);
+                TextColor(GRAY);
+                cout << c;
+                posX++;
+            }
+            else if (c == '\n') {
+                posY++;
+                posX = x;
+            }
+            else {
+                consoleColor(backgroundColor, LIGHT_WHITE);
+                moveCursor(posX, posY);
+                TextColor(BLACK);
+                cout << c;
+                posX++;
+            }
+        }
+        file.close();
+    }
+}

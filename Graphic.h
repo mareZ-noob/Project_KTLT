@@ -9,5 +9,6 @@ void art_at_pos(string fileName, int textColor, int backgroundColor, int x, int 
 void read_file_at_pos(string fileName, int textColor, int backgroundColor, int x, int y);
 void pokemon_ball(string fileName, int backgroundColor, int x, int y);
 void pikachu_small(string fileName, int backgroundColor, int x, int y);
+void login_icon(string fileName, int backgroundColor, int x, int y);
 
 #endif // __GRAPHIC_H__
