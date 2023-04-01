@@ -24,6 +24,8 @@ void TextColor(WORD color);
 void button(int x, int y, int w, int h, int color, int buttonColor, int backgroundColor, string text);
 void drawBorder();
 void drawBackButton();
+void createScreen();
+void drawCredtitBoard();
 void box(double x, double y, double w, double h, int textColor, int buttonColor, int color, char chr);
 
 #endif // __SETUP_H__

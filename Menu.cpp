@@ -211,7 +211,7 @@ void printMenu(int selection, int x, int y, int w, int h, int textColor, int but
 {
     drawBorder();
     art_at_pos("ascii_art\\pikachu.txt", LIGHT_YELLOW, backgroundColor, 21, 1);
-    pokemon_ball("ascii_art\\pokemonball.txt", BLACK, 4, 14);
+    pokemon_ball("ascii_art\\pokemonball.txt", BLACK, 4, 15);
     pikachu_small("ascii_art\\pikachu_small.txt", BLACK, 70, 11);
     selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 }
@@ -262,15 +262,11 @@ void MainMenuBack()
             switch (selection)
             {
             case 1:
-                clearScreen();
-                drawBorder();
-                drawBackButton();
+                createScreen();
                 login(email);
                 break;
             case 2:
-                clearScreen();
-                drawBorder();
-                drawBackButton();
+                createScreen();
                 while (true)
                 {
                     if (kbhit())
@@ -286,11 +282,10 @@ void MainMenuBack()
                 }
                 break;
             case 3:
-                clearScreen();
-                drawBorder();
-                drawBackButton();
-                art_at_pos("ascii_art\\credit.txt", LIGHT_GREEN, backgroundColor, 36, 5);
-                read_file_at_pos("ascii_art\\content.txt", CYAN, backgroundColor, 35, 13);
+                createScreen();
+                art_at_pos("ascii_art\\credit.txt", CYAN, backgroundColor, 36, 3);
+                drawCredtitBoard();
+                read_file_at_pos("ascii_art\\content.txt", WHITE, backgroundColor, 28, 13);
                 while (true)
                 {
                     if (kbhit())
@@ -356,9 +351,7 @@ void MenuLoginBack()
             switch (selection)
             {
             case 1:
-                clearScreen();
-                drawBorder();
-                drawBackButton();
+                createScreen();
                 while (true)
                 {
                     if (kbhit())
@@ -374,9 +367,7 @@ void MenuLoginBack()
                 }
                 break;
             case 2:
-                clearScreen();
-                drawBorder();
-                drawBackButton();
+                createScreen();
                 printLeaderboard();
                 while (true)
                 {
@@ -393,9 +384,7 @@ void MenuLoginBack()
                 }
                 break;
             case 3:
-                clearScreen();
-                drawBorder();
-                drawBackButton();
+                createScreen();
                 while (true)
                 {
                     if (kbhit())
@@ -461,9 +450,7 @@ void MenuLogin()
             switch (selection)
             {
             case 1:
-                clearScreen();
-                drawBorder();          
-                drawBackButton();
+                createScreen();
                 while (true)
                 {
                     if (kbhit())
@@ -479,9 +466,7 @@ void MenuLogin()
                 }
                 break;
             case 2:
-                clearScreen();
-                drawBorder();
-                drawBackButton();
+                createScreen();
                 printLeaderboard();
                 while (true)
                 {
@@ -498,9 +483,7 @@ void MenuLogin()
                 }
                 break;
             case 3:
-                clearScreen();
-                drawBorder();
-                drawBackButton();
+                createScreen();
                 while (true)
                 {
                     if (kbhit())
@@ -567,15 +550,11 @@ void MainMenu()
             switch (selection)
             {
             case 1:
-                clearScreen();
-                drawBorder();
-                drawBackButton();
+                createScreen();
                 login(email);
                 break;
             case 2:
-                clearScreen();
-                drawBorder();
-                drawBackButton();
+                createScreen();
                 while (true)
                 {
                     if (kbhit())
@@ -591,11 +570,10 @@ void MainMenu()
                 }
                 break;
             case 3:
-               clearScreen();
-                drawBorder();
-                drawBackButton();
-                art_at_pos("ascii_art\\credit.txt", LIGHT_GREEN, backgroundColor, 36, 5);
-                read_file_at_pos("ascii_art\\content.txt", CYAN, backgroundColor, 35, 13);
+                createScreen();
+                art_at_pos("ascii_art\\credit.txt", CYAN, backgroundColor, 36, 3);
+                drawCredtitBoard();
+                read_file_at_pos("ascii_art\\content.txt", WHITE, backgroundColor, 28, 13);
                 while (true)
                 {
                     if (kbhit())

@@ -243,6 +243,29 @@ void drawBackButton()
     cout << char(193);
 }
 
+void createScreen(){
+    clearScreen();
+    drawBorder();
+    drawBackButton();
+}
+
+void drawCredtitBoard(){
+    //NAM
+    TextColor(CYAN);
+    drawRectangle(27, 12, 29, 2);
+    drawRectangle(57, 12, 34, 9);
+
+    moveCursor(57, 12); cout << char(194);
+    moveCursor(57, 14); cout << char(180);
+    //TRIET
+    TextColor(YELLOW);
+    drawRectangle(27, 22, 29, 2);
+    drawRectangle(57, 22, 34, 9);
+
+    moveCursor(57, 22); cout << char(194);
+    moveCursor(57, 24); cout << char(180);
+}
+
 void box(double x, double y, double w, double h, int textColor, int buttonColor, int color, char chr)
 {
    consoleColor(color, textColor);

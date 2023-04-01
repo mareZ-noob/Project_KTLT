@@ -58,7 +58,7 @@ void pokemon_ball(string fileName, int backgroundColor, int x, int y) {
                 cout << c;
                 posX++;
             }
-            else if (c == '0') {
+            else if (c == 'J') {
                 consoleColor(backgroundColor, LIGHT_WHITE);
                 moveCursor(posX, posY);
                 TextColor(LIGHT_WHITE);
