@@ -14,10 +14,8 @@
 #include <cstdlib>
 #include <fstream>
 #include <sstream>
-#include <cstring>
 #include <string>
 #include <string.h>
-#pragma comment(lib, "Winmm.lib")
 
 using std::cin;
 using std::cout;
@@ -61,10 +59,6 @@ using std::sort;
 #define KEY_d 'd'
 #define KEY_h 'h'
 
-#define KEY_UP 72
-#define KEY_DOWN 80
-#define KEY_LEFT 75
-#define KEY_RIGHT 77
 #define TAB_KEY 9
 #define ENTER_KEY 13
 #define ESC_KEY 27

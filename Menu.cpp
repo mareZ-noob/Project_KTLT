@@ -11,7 +11,6 @@ void quit()
     clearScreen();
     exit(1);
 }
-// PlaySound(TEXT(POKEMON_SOUND), NULL, SND_ASYNC);
 
 void login(string &email)
 {
@@ -51,6 +50,7 @@ void login(string &email)
             {
                 clearScreen();
                 MenuLogin();
+                break;
             }
         }
     }
@@ -222,7 +222,7 @@ void printMenuLogin(int selection, int x, int y, int w, int h, int textColor, in
     selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 }
 
-int MainMenuBack()
+void MainMenuBack()
 {
     int x = 50;
     int y = 24;
@@ -284,6 +284,7 @@ int MainMenuBack()
                         }
                     }
                 }
+                break;
             case 3:
                 clearScreen();
                 drawBorder();
@@ -303,11 +304,13 @@ int MainMenuBack()
                         }
                     }
                 }
+                break;
             case 4:
                 clearScreen();
                 drawBorder();
                 quit();
                 exit(1);
+                break;
             }
         }
     }
@@ -369,6 +372,7 @@ void MenuLoginBack()
                         }
                     }
                 }
+                break;
             case 2:
                 clearScreen();
                 drawBorder();
@@ -387,6 +391,7 @@ void MenuLoginBack()
                         }
                     }
                 }
+                break;
             case 3:
                 clearScreen();
                 drawBorder();
@@ -404,11 +409,13 @@ void MenuLoginBack()
                         }
                     }
                 }
+                break;
             case 4:
                 clearScreen();
                 drawBorder();
                 MainMenuBack();
                 Sleep(5000);
+                break;
             }
         }
     }
@@ -470,6 +477,7 @@ void MenuLogin()
                         }
                     }
                 }
+                break;
             case 2:
                 clearScreen();
                 drawBorder();
@@ -488,6 +496,7 @@ void MenuLogin()
                         }
                     }
                 }
+                break;
             case 3:
                 clearScreen();
                 drawBorder();
@@ -505,11 +514,13 @@ void MenuLogin()
                         }
                     }
                 }
+                break;
             case 4:
                 clearScreen();
                 drawBorder();
                 MainMenuBack();
                 Sleep(5000);
+                break;
             }
         }
     }
@@ -578,6 +589,7 @@ void MainMenu()
                         }
                     }
                 }
+                break;
             case 3:
                clearScreen();
                 drawBorder();
@@ -597,11 +609,13 @@ void MainMenu()
                         }
                     }
                 }
+                break;
             case 4:
                 clearScreen();
                 drawBorder();
                 quit();
                 exit(1);
+                break;
             }
         }
     }

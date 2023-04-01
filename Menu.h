@@ -12,7 +12,7 @@ void selectionMenu(int selection, int x, int y, int w, int h, int textColor, int
 void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text);
 void printMenu(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text);
 void printMenuLogin(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text);
-int MainMenuBack();
+void MainMenuBack();
 void MenuLogin();
 void MainMenu();
 

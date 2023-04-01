@@ -29,7 +29,7 @@ bool comparePlayers(const Players &p1, const Players &p2)
     }
 }
 
-long int fileSize(string file)
+long long unsigned int fileSize(string file)
 {
     const char *file_name = file.c_str();
     FILE *fp = fopen(file_name, "r");
@@ -50,7 +50,7 @@ long int fileSize(string file)
 
 void pushRecord(Players p)
 {
-    long int _size = fileSize("players.bin");
+    long long unsigned int _size = fileSize("players.bin");
     if (_size < sizeof(Players) * 5)
     {
         ofstream fileIn;
@@ -59,7 +59,7 @@ void pushRecord(Players p)
         fileIn.close();
 
         // rewrite and sort
-        int curSize = fileSize("players.bin") / sizeof(Players);
+        long long unsigned int curSize = fileSize("players.bin") / sizeof(Players);
         //Players players_read[curSize];
         Players* players_read = new Players[curSize];
         ifstream fi;
@@ -134,7 +134,7 @@ void printLeaderboard()
     moveCursor(76, 27); cout << char(193);
 
     TextColor(LIGHT_WHITE);
-    for (int i = 0; i < fileSize("players.bin") / sizeof(Players); i++)
+    for (long long unsigned int i = 0; i < fileSize("players.bin") / sizeof(Players); i++)
     {
         moveCursor(35, 15 + i); cout << i + 1 << ". " << players_read[i].name;
         moveCursor(70, 15 + i); cout << players_read[i].point;
