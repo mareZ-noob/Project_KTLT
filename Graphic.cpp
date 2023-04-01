@@ -44,9 +44,9 @@ void read_file_at_pos(string fileName, int textColor, int backgroundColor, int x
     file.close();
 }
 
-void pokemon_ball(string fileName, int backgroundColor, int x, int y) {
-    ifstream file(fileName);
-
+void pokemon_ball(int x, int y) {
+    ifstream file("ascii_art\\pokemonball.txt");
+    int backgroundColor = BLACK;
     if (file.is_open()) {
         char c;
         int posX = x, posY = y;
@@ -54,7 +54,7 @@ void pokemon_ball(string fileName, int backgroundColor, int x, int y) {
             if (c == '7') {
                 consoleColor(backgroundColor, LIGHT_RED);
                 moveCursor(posX, posY);
-                TextColor(LIGHT_RED);
+                TextColor(RED);
                 cout << c;
                 posX++;
             }
@@ -81,9 +81,9 @@ void pokemon_ball(string fileName, int backgroundColor, int x, int y) {
     }
 }
 
-void pikachu_small(string fileName, int backgroundColor, int x, int y) {
-    ifstream file(fileName);
-
+void pikachu_small(int x, int y) {
+    ifstream file("ascii_art\\pikachu_small.txt");
+    int backgroundColor = BLACK;
     if (file.is_open()) {
         char c;
         int posX = x, posY = y;
@@ -116,14 +116,21 @@ void pikachu_small(string fileName, int backgroundColor, int x, int y) {
                 cout << c;
                 posX++;
             }
+            else if (c == 'P') {
+                consoleColor(backgroundColor, LIGHT_WHITE);
+                moveCursor(posX, posY);
+                TextColor(LIGHT_WHITE);
+                cout << c;
+                posX++;
+            }
             else if (c == '\n') {
                 posY++;
                 posX = x;
             }
             else {
-                consoleColor(backgroundColor, LIGHT_WHITE);
+                consoleColor(backgroundColor, BLACK);
                 moveCursor(posX, posY);
-                TextColor(LIGHT_WHITE);
+                TextColor(BLACK);
                 cout << c;
                 posX++;
             }
@@ -132,9 +139,9 @@ void pikachu_small(string fileName, int backgroundColor, int x, int y) {
     }
 }
 
-void login_icon(string fileName, int backgroundColor, int x, int y) {
-    ifstream file(fileName);
-
+void login_icon(int x, int y) {
+    ifstream file("ascii_art\\login_icon.txt");
+    int backgroundColor = BLACK;
     if (file.is_open()) {
         char c;
         int posX = x, posY = y;
@@ -161,6 +168,87 @@ void login_icon(string fileName, int backgroundColor, int x, int y) {
                 consoleColor(backgroundColor, LIGHT_WHITE);
                 moveCursor(posX, posY);
                 TextColor(BLACK);
+                cout << c;
+                posX++;
+            }
+        }
+        file.close();
+    }
+}
+
+void pikachu_ava(int x, int y) {
+    ifstream file("ascii_art\\pikachu_ava.txt");
+    int backgroundColor = BLACK;
+    if (file.is_open()) {
+        char c;
+        int posX = x, posY = y;
+        while (file.get(c)) {
+            if (c == 'B' || c == 'G') {
+                consoleColor(backgroundColor, LIGHT_YELLOW);
+                moveCursor(posX, posY);
+                TextColor(LIGHT_YELLOW);
+                cout << c;
+                posX++;
+            }
+            else if (c == 'J') {
+                consoleColor(backgroundColor, LIGHT_RED);
+                moveCursor(posX, posY);
+                TextColor(LIGHT_RED);
+                cout << c;
+                posX++;
+            }
+            else if (c == 'P') {
+                consoleColor(backgroundColor, LIGHT_WHITE);
+                moveCursor(posX, posY);
+                TextColor(LIGHT_WHITE);
+                cout << c;
+                posX++;
+            }
+            else if (c == 'S') {
+                consoleColor(backgroundColor, GRAY);
+                moveCursor(posX, posY);
+                TextColor(GRAY);
+                cout << c;
+                posX++;
+            }
+            else if (c == '\n') {
+                posY++;
+                posX = x;
+            }
+            else {
+                consoleColor(backgroundColor, BLACK);
+                moveCursor(posX, posY);
+                TextColor(BLACK);
+                cout << c;
+                posX++;
+            }
+        }
+        file.close();
+    }
+}
+
+void charmander_ava(int x, int y) {
+    ifstream file("ascii_art\\charmander_ava.txt");
+    int backgroundColor = BLACK;
+    if (file.is_open()) {
+        char c;
+        int posX = x, posY = y;
+        while (file.get(c)) {
+            if (c == '5') {
+                consoleColor(backgroundColor, YELLOW);
+                moveCursor(posX, posY);
+                TextColor(YELLOW);
+                cout << c;
+                posX++;
+            }
+            else if (c == '\n') {
+                posY++;
+                posX = x;
+            }
+            else {
+                consoleColor(backgroundColor, GRAY);
+                moveCursor(posX, posY);
+                TextColor(GRAY);
                 cout << c;
                 posX++;
             }

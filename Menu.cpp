@@ -14,7 +14,7 @@ void quit()
 
 void login(string &email)
 {
-    login_icon("ascii_art\\login_icon.txt", BLACK, 41, 2);
+    login_icon(41, 2);
 
     TextColor(CYAN);
     drawRectangle(40, 17, 40, 10);
@@ -56,7 +56,7 @@ void login(string &email)
     }
     else
     {
-        TextColor(LIGHT_RED);
+        TextColor(RED);
         moveCursor(51, 29);
         cout << "INVALID EMAIL ADDRESS!";
         moveCursor(47, 30);
@@ -71,7 +71,7 @@ void selectionMenu(int selection, int x, int y, int w, int h, int textColor, int
 
     if (selection == 1)
     {
-        textColor = LIGHT_RED;
+        textColor = RED;
         button(x, y, w, h, textColor, buttonColor, backgroundColor, "     > LOGIN <");
     }
     else
@@ -81,7 +81,7 @@ void selectionMenu(int selection, int x, int y, int w, int h, int textColor, int
 
     if (selection == 2)
     {
-        textColor = LIGHT_RED;
+        textColor = RED;
         button(x, y + 2, w, h, textColor, buttonColor, backgroundColor, "  > HOW TO PLAY <");
         moveCursor(x, y + 2);
         cout << char(195);
@@ -99,7 +99,7 @@ void selectionMenu(int selection, int x, int y, int w, int h, int textColor, int
 
     if (selection == 3)
     {
-        textColor = LIGHT_RED;
+        textColor = RED;
         button(x, y + 4, w, h, textColor, buttonColor, backgroundColor, "    > CREDITS <");
         moveCursor(x, y + 4);
         cout << char(195);
@@ -117,7 +117,7 @@ void selectionMenu(int selection, int x, int y, int w, int h, int textColor, int
 
     if (selection == 4)
     {
-        textColor = LIGHT_RED;
+        textColor = RED;
         button(x, y + 6, w, h, textColor, buttonColor, backgroundColor, "     > EXIT <");
         moveCursor(x, y + 6);
         cout << char(195);
@@ -140,7 +140,7 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
 
     if (selection == 1)
     {
-        textColor = LIGHT_RED;
+        textColor = RED;
         button(x, y, w, h, textColor, buttonColor, backgroundColor, "   > PLAY GAME <");
     }
     else
@@ -151,7 +151,7 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
 
     if (selection == 2)
     {
-        textColor = LIGHT_RED;
+        textColor = RED;
         button(x, y + 2, w, h, textColor, buttonColor, backgroundColor, "  > LEADERBOARD <");
         moveCursor(x, y + 2);
         cout << char(195);
@@ -170,7 +170,7 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
 
     if (selection == 3)
     {
-        textColor = LIGHT_RED;
+        textColor = RED;
         button(x, y + 4, w, h, textColor, buttonColor, backgroundColor, "  > FORGET EMAIL <");
         moveCursor(x, y + 4);
         cout << char(195);
@@ -189,7 +189,7 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
 
     if (selection == 4)
     {
-        textColor = LIGHT_RED;
+        textColor = RED;
         button(x, y + 6, w, h, textColor, buttonColor, backgroundColor, "     > BACK <");
         moveCursor(x, y + 6);
         cout << char(195);
@@ -211,8 +211,8 @@ void printMenu(int selection, int x, int y, int w, int h, int textColor, int but
 {
     drawBorder();
     art_at_pos("ascii_art\\pikachu.txt", LIGHT_YELLOW, backgroundColor, 21, 1);
-    pokemon_ball("ascii_art\\pokemonball.txt", BLACK, 4, 15);
-    pikachu_small("ascii_art\\pikachu_small.txt", BLACK, 70, 11);
+    pokemon_ball(4, 15);
+    pikachu_small(70, 11);
     selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 }
 

@@ -113,16 +113,16 @@ void printLeaderboard()
     infile.read(reinterpret_cast<char *>(&players_read), sizeof(Players) * 5);
     infile.close();
 
-    read_file_at_pos("ascii_art\\leaderboard.txt", OCEAN, BLACK, 20, 3);
+    read_file_at_pos("ascii_art\\leaderboard.txt", LIGHT_GREEN, BLACK, 20, 3);
 
-    TextColor(CYAN);
+    TextColor(LIGHT_GREEN);
     drawRectangle(33, 12, 32, 15);
     drawRectangle(66, 12, 9, 15);
     drawRectangle(76, 12, 8, 15);
 
-    button(33, 12, 33, 2, LIGHT_RED, CYAN, BLACK, "              NAME");
-    button(66, 12, 10, 2, LIGHT_RED, CYAN, BLACK, "  POINT");
-    button(76, 12, 9, 2, LIGHT_RED, CYAN, BLACK, "  TIME");
+    button(33, 12, 33, 2, RED, LIGHT_GREEN, BLACK, "              NAME");
+    button(66, 12, 10, 2, RED, LIGHT_GREEN, BLACK, "  POINT");
+    button(76, 12, 9, 2, RED, LIGHT_GREEN, BLACK, "  TIME");
 
     moveCursor(33, 14); cout << char(195);
     moveCursor(66, 14); cout << char(197);

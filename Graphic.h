@@ -7,8 +7,10 @@
 void art(string fileName, int pX, int pY);
 void art_at_pos(string fileName, int textColor, int backgroundColor, int x, int y);//Draw art at position (x, y);
 void read_file_at_pos(string fileName, int textColor, int backgroundColor, int x, int y);
-void pokemon_ball(string fileName, int backgroundColor, int x, int y);
-void pikachu_small(string fileName, int backgroundColor, int x, int y);
-void login_icon(string fileName, int backgroundColor, int x, int y);
+void pokemon_ball(int x, int y);
+void pikachu_small(int x, int y);
+void login_icon(int x, int y);
+void pikachu_ava(int x, int y);
+void charmander_ava(int x, int y);
 
 #endif // __GRAPHIC_H__
