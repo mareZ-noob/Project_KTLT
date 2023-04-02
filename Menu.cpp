@@ -43,16 +43,8 @@ void login(string &email)
 
     if (verify(email))
     {
-        while (true)
-        {
-            char c = _getch(); 
-            if (c == ENTER_KEY || c == '\n')
-            {
-                clearScreen();
-                MenuLogin();
-                break;
-            }
-        }
+        clearScreen();
+        MenuLogin();
     }
     else
     {
