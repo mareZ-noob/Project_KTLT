@@ -4,7 +4,7 @@
 #include "Main.h"
 #include "Setup.h"
 #include "User.h"
-#include "CHeck.h"
+#include "Check.h"
 
 void createBox();
 void deallocate(Board **board, int _row);
