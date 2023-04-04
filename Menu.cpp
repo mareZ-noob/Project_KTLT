@@ -216,22 +216,22 @@ void printMenuLogin(int selection, int x, int y, int w, int h, int textColor, in
 
 void MainMenuBack()
 {
-    int x = 50;
+     int x = 50;
     int y = 24;
     int w = 20;
     int h = 2;
-    int textColor = LIGHT_WHITE;
-    int buttonColor = BLUE;
+    int textColor = CYAN;
+    int buttonColor = YELLOW;
     int backgroundColor = BLACK;
     string email;
     string text;
     showCursor(0);
-    int selection = 1;
+    int selection = 1; 
     printMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 
     while (true)
     {
-        char c = _getch();
+        char c = _getch(); 
 
         if (c == KEY_w || c == KEY_W)
         { // move up
@@ -508,8 +508,8 @@ void MainMenu()
     int y = 24;
     int w = 20;
     int h = 2;
-    int textColor = LIGHT_WHITE;
-    int buttonColor = BLUE;
+    int textColor = CYAN;
+    int buttonColor = YELLOW;
     int backgroundColor = BLACK;
     string email;
     string text;
@@ -547,6 +547,8 @@ void MainMenu()
                 break;
             case 2:
                 createScreen();
+                pikachu_ava(3, 3);
+                charmander_ava(50, 3);
                 while (true)
                 {
                     if (kbhit())

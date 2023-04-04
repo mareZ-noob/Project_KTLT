@@ -305,3 +305,16 @@ void box(double x, double y, double w, double h, int textColor, int buttonColor,
 	moveCursor(x, y + h); cout << char(192);
 	moveCursor(x + w, y + h); cout << char(217);
 }
+
+/*bool printStatus(bool status){
+    if(status)
+    {
+        clearScreen();
+        art_at_pos("ascii_art\\youlose.txt", LIGHT_RED, BLACK, 50, 3);
+    }
+    else
+    {
+        clearScreen();
+        art_at_pos("ascii_art\\youwin.txt", LIGHT_GREEN, BLACK, 50, 3);
+    }
+}*/
