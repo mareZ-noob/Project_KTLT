@@ -177,6 +177,19 @@ bool check_U(Board **board, int _row, int _col, int x1, int y1, int x2, int y2)
     }
 }
 
+bool check_All(Board **board, int _row, int _col, int x1, int y1, int x2, int y2)
+{
+    if (check_I(board, x1, y1, x2, y2))
+        return true;
+    else if (check_L(board, x1, y1, x2, y2))
+        return true;
+    else if (check_Z(board, x1, y1, x2, y2))
+        return true;
+    else if (check_U(board, _row, _col, x1, y1, x2, y2))
+        return true;
+    return false;
+}
+
 bool checkGameWin(Board **board, int _row, int _col)
 {
     for (int i = 0; i < _row; i++)

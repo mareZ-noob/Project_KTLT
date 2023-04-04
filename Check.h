@@ -31,5 +31,7 @@ bool checkRectX(Board **board, int x1, int y1, int x2, int y2);
 bool checkRectY(Board **board, int x1, int y1, int x2, int y2);
 bool check_Z(Board **board, int x1, int y1, int x2, int y2);
 bool check_U(Board **board, int _row, int _col, int x1, int y1, int x2, int y2);
+bool check_All(Board **board, int _row, int _col, int x1, int y1, int x2, int y2);
+bool checkGameWin(Board **board, int _row, int _col);
 
 #endif // __CHECK_H__
