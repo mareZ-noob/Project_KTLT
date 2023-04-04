@@ -27,6 +27,8 @@ using std::ofstream;
 using std::string;
 using std::vector;
 using std::sort;
+using std::max;
+using std::min;
 
 // COLORS
 #define BLACK 0
