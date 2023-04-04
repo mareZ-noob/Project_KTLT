@@ -11,5 +11,7 @@ void pikachu_small(int x, int y);
 void login_icon(int x, int y);
 void pikachu_ava(int x, int y);
 void charmander_ava(int x, int y);
+void bulbasaur_ava(int x, int y);
+void clefairy_ava(int x, int y);
 
 #endif // __GRAPHIC_H__

@@ -204,7 +204,7 @@ void pikachu_ava(int x, int y) {
                 cout << c;
                 posX++;
             }
-            else if (c == 'S') {
+            else if (c == 'F') {
                 consoleColor(backgroundColor, GRAY);
                 moveCursor(posX, posY);
                 TextColor(GRAY);
@@ -241,14 +241,137 @@ void charmander_ava(int x, int y) {
                 cout << c;
                 posX++;
             }
+            else if (c == 'J') {
+                consoleColor(backgroundColor, LIGHT_RED);
+                moveCursor(posX, posY);
+                TextColor(LIGHT_RED);
+                cout << c;
+                posX++;
+            }
+            else if (c == 'Y') {
+                consoleColor(backgroundColor, GREEN);
+                moveCursor(posX, posY);
+                TextColor(GREEN);
+                cout << c;
+                posX++;
+            }
+            else if (c == '!') {
+                consoleColor(backgroundColor, LIGHT_WHITE);
+                moveCursor(posX, posY);
+                TextColor(LIGHT_WHITE);
+                cout << c;
+                posX++;
+            }
             else if (c == '\n') {
                 posY++;
                 posX = x;
             }
             else {
+                consoleColor(backgroundColor, BLACK);
+                moveCursor(posX, posY);
+                TextColor(BLACK);
+                cout << c;
+                posX++;
+            }
+        }
+        file.close();
+    }
+}
+
+void bulbasaur_ava(int x, int y) {
+    ifstream file("ascii_art\\bulbasaur_ava.txt");
+    int backgroundColor = BLACK;
+    if (file.is_open()) {
+        char c;
+        int posX = x, posY = y;
+        while (file.get(c)) {
+            if (c == 'G') {
+                consoleColor(backgroundColor, CYAN);
+                moveCursor(posX, posY);
+                TextColor(CYAN);
+                cout << c;
+                posX++;
+            }
+            else if (c == '5') {
+                consoleColor(backgroundColor, GREEN);
+                moveCursor(posX, posY);
+                TextColor(GREEN);
+                cout << c;
+                posX++;
+            }
+            else if (c == '@') {
+                consoleColor(backgroundColor, LIGHT_WHITE);
+                moveCursor(posX, posY);
+                TextColor(LIGHT_WHITE);
+                cout << c;
+                posX++;
+            }
+            else if (c == 'J' || c == 'Q') {
+                consoleColor(backgroundColor, LIGHT_RED);
+                moveCursor(posX, posY);
+                TextColor(LIGHT_RED);
+                cout << c;
+                posX++;
+            }
+            else if (c == 'S') {
                 consoleColor(backgroundColor, GRAY);
                 moveCursor(posX, posY);
                 TextColor(GRAY);
+                cout << c;
+                posX++;
+            }
+            else if (c == '\n') {
+                posY++;
+                posX = x;
+            }
+            else {
+                consoleColor(backgroundColor, BLACK);
+                moveCursor(posX, posY);
+                TextColor(BLACK);
+                cout << c;
+                posX++;
+            }
+        }
+        file.close();
+    }
+}
+
+void clefairy_ava(int x, int y) {
+    ifstream file("ascii_art\\clefairy_ava.txt");
+    int backgroundColor = BLACK;
+    if (file.is_open()) {
+        char c;
+        int posX = x, posY = y;
+        while (file.get(c)) {
+            if (c == 'B') {
+                consoleColor(backgroundColor, MAGENTA);
+                moveCursor(posX, posY);
+                TextColor(MAGENTA);
+                cout << c;
+                posX++;
+            }
+            else if (c == 'P') {
+                consoleColor(backgroundColor, LIGHT_WHITE);
+                moveCursor(posX, posY);
+                TextColor(LIGHT_WHITE);
+                cout << c;
+                posX++;
+            }
+            else if (c == 'J') {
+                consoleColor(backgroundColor, LIGHT_RED);
+                moveCursor(posX, posY);
+                TextColor(LIGHT_RED);
+                cout << c;
+                posX++;
+            }
+            else if (c == '\n') {
+                posY++;
+                posX = x;
+            }
+            else {
+                consoleColor(backgroundColor, BLACK);
+                moveCursor(posX, posY);
+                TextColor(BLACK);
                 cout << c;
                 posX++;
             }
