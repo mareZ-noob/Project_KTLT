@@ -68,5 +68,6 @@ using std::min;
 // SOUNDS
 #define SIU_SOUND "sounds\\siu.wav"
 #define POKEMON_SOUND "sounds\\pokemon.wav"
+#define GLORY_SOUND "sounds\\glory_mu.wav"
 
 #endif // __MAIN_H__

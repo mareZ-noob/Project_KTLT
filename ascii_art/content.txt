@@ -1,13 +1,17 @@
- NGUYEN THANH NAM - 22127286	- Game starting
-					- Sound effects
-					- Leaderboard
+    For us, this project is always an important achievement after attending this "Programming Techniques" 
+    class. And we could not have completed it successfully without the dedicated guidance and instruction 
+    of our lecturer Mr.Nguyen Thanh Phuong, as well as our teaching assistants: Mr.Bui Huy Thong and 
+    Mrs.Nguyen Ngoc Thao. We sincerely thank you for your support, guidance, and help throughout the process.
 
+    In addition, during our studying and researching, we have also received valuable assistance and support 
+    from our classmates. We are grateful to all of you for your help.
 
+    Finally, we would like to express our gratitude to everyone who enter our project.
 
-
-
-
-
-  DINH DUY TRIET - 22127426		- Color effects
-					- Visual effects
-					- Background
+                                    We sincerely thank you all!
+    
+    From:       University of Science - VNUHCM
+    Class:      22CLC10
+    Students:   22127286 - NGUYEN THANH NAM
+                22127426 - DINH DUY TRIET
+    github:     https://github.com/mareZ-noob/Project_KTLT

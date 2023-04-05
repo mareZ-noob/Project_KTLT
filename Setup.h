@@ -26,7 +26,6 @@ void art_at_pos(string fileName, int textColor, int backgroundColor, int x, int 
 void drawBorder();
 void drawBackButton();
 void createScreen();
-void drawCredtitBoard();
 void box(double x, double y, double w, double h, int textColor, int buttonColor, int color, char chr);
 bool printStatus(bool status);
 
