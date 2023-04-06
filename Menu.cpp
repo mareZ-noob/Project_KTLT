@@ -43,7 +43,7 @@ void login(string &email)
     if (verify(email))
     {
         clearScreen();
-        MenuLogin();
+        LoginMenu();
     }
     else
     {
@@ -140,10 +140,10 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
         button(x, y, w, h, Color, buttonColor, backgroundColor, "     PLAY GAME");
     }
 
-    if (selection == 2)
+        if (selection == 2)
     {
         textColor = RED;
-        button(x, y + 2, w, h, textColor, buttonColor, backgroundColor, "  > LEADERBOARD <");
+        button(x, y + 2, w, h, textColor, buttonColor, backgroundColor, "  > CUSTOM PLAY <");
         moveCursor(x, y + 2);
         cout << char(195);
         moveCursor(x + w, y + 2);
@@ -152,7 +152,7 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
     else
     {
         textColor = Color;
-        button(x, y + 2, w, h, Color, buttonColor, backgroundColor, "    LEADERBOARD");
+        button(x, y + 2, w, h, Color, buttonColor, backgroundColor, "    CUSTOM PLAY");
         moveCursor(x, y + 2);
         cout << char(195);
         moveCursor(x + w, y + 2);
@@ -162,7 +162,7 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
     if (selection == 3)
     {
         textColor = RED;
-        button(x, y + 4, w, h, textColor, buttonColor, backgroundColor, "     > BACK <");
+        button(x, y + 4, w, h, textColor, buttonColor, backgroundColor, "  > LEADERBOARD <");
         moveCursor(x, y + 4);
         cout << char(195);
         moveCursor(x + w, y + 4);
@@ -171,10 +171,102 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
     else
     {
         textColor = Color;
-        button(x, y + 4, w, h, Color, buttonColor, backgroundColor, "       BACK");
+        button(x, y + 4, w, h, Color, buttonColor, backgroundColor, "    LEADERBOARD");
         moveCursor(x, y + 4);
         cout << char(195);
         moveCursor(x + w, y + 4);
+        cout << char(180);
+    }
+
+    if (selection == 4)
+    {
+        textColor = RED;
+        button(x, y + 6, w, h, textColor, buttonColor, backgroundColor, "     > BACK <");
+        moveCursor(x, y + 6);
+        cout << char(195);
+        moveCursor(x + w, y + 6);
+        cout << char(180);
+    }
+    else
+    {
+        textColor = Color;
+        button(x, y + 6, w, h, Color, buttonColor, backgroundColor, "       BACK");
+        moveCursor(x, y + 6);
+        cout << char(195);
+        moveCursor(x + w, y + 6);
+        cout << char(180);
+    }
+}
+
+void selectionPlayGame(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text)
+{
+    int Color = textColor;
+
+    if (selection == 1)
+    {
+        textColor = RED;
+        button(x, y, w, h, textColor, buttonColor, backgroundColor, "     > EASY <");
+    }
+    else
+    {
+        textColor = Color;
+        button(x, y, w, h, Color, buttonColor, backgroundColor, "       EASY");
+    }
+
+        if (selection == 2)
+    {
+        textColor = RED;
+        button(x, y + 2, w, h, textColor, buttonColor, backgroundColor, "    > MEDIUM <");
+        moveCursor(x, y + 2);
+        cout << char(195);
+        moveCursor(x + w, y + 2);
+        cout << char(180);
+    }
+    else
+    {
+        textColor = Color;
+        button(x, y + 2, w, h, Color, buttonColor, backgroundColor, "      MEDIUM");
+        moveCursor(x, y + 2);
+        cout << char(195);
+        moveCursor(x + w, y + 2);
+        cout << char(180);
+    }
+
+    if (selection == 3)
+    {
+        textColor = RED;
+        button(x, y + 4, w, h, textColor, buttonColor, backgroundColor, "     > HARD <");
+        moveCursor(x, y + 4);
+        cout << char(195);
+        moveCursor(x + w, y + 4);
+        cout << char(180);
+    }
+    else
+    {
+        textColor = Color;
+        button(x, y + 4, w, h, Color, buttonColor, backgroundColor, "       HARD");
+        moveCursor(x, y + 4);
+        cout << char(195);
+        moveCursor(x + w, y + 4);
+        cout << char(180);
+    }
+
+    if (selection == 4)
+    {
+        textColor = RED;
+        button(x, y + 6, w, h, textColor, buttonColor, backgroundColor, "     > BACK <");
+        moveCursor(x, y + 6);
+        cout << char(195);
+        moveCursor(x + w, y + 6);
+        cout << char(180);
+    }
+    else
+    {
+        textColor = Color;
+        button(x, y + 6, w, h, Color, buttonColor, backgroundColor, "       BACK");
+        moveCursor(x, y + 6);
+        cout << char(195);
+        moveCursor(x + w, y + 6);
         cout << char(180);
     }
 }
@@ -198,9 +290,15 @@ void printMenuLogin(int selection, int x, int y, int w, int h, int textColor, in
     selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 }
 
+void printPlayGame(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text) // menu when users press "LOGIN"
+{
+    drawBorder();
+    selectionPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+}
+
 void MainMenuBack()
 {
-     int x = 50;
+    int x = 50;
     int y = 24;
     int w = 20;
     int h = 2;
@@ -259,9 +357,10 @@ void MainMenuBack()
                 break;
             case 3:
                 createScreen();
-                art_at_pos("ascii_art\\credit.txt", CYAN, backgroundColor, 36, 3);
-                
-                read_file_at_pos("ascii_art\\content.txt", WHITE, backgroundColor, 5, 13);
+                art_at_pos("ascii_art\\credit.txt", LIGHT_GREEN, backgroundColor, 36, 2);
+                read_file_at_pos("ascii_art\\content.txt", WHITE, backgroundColor, 4, 12);
+                TextColor(LIGHT_GREEN);
+                drawRectangle(5, 10, 108, 20);
                 while (true)
                 {
                     if (kbhit())
@@ -288,10 +387,10 @@ void MainMenuBack()
     system("pause");
 }
 
-void MenuLoginBack()
+void LoginMenuBack()
 {
     int x = 50;
-    int y = 15;
+    int y = 14;
     int w = 20;
     int h = 2;
     int textColor = CYAN;
@@ -328,21 +427,13 @@ void MenuLoginBack()
             {
             case 1:
                 createScreen();
-                while (true)
-                {
-                    if (kbhit())
-                    {
-                        char key = _getch();
-                        if (key == ESC_KEY)
-                        {
-                            clearScreen();
-                            MenuLoginBack();
-                            break;
-                        }
-                    }
-                }
+                GamePlayMenu();
                 break;
             case 2:
+                createScreen();
+                //CustomPlay();
+                break;
+            case 3:
                 createScreen();
                 printLeaderboard();
                 while (true)
@@ -353,13 +444,13 @@ void MenuLoginBack()
                         if (key == ESC_KEY)
                         {
                             clearScreen();
-                            MenuLoginBack();
+                            LoginMenuBack();
                             break;
                         }
                     }
                 }
                 break;
-            case 3:
+            case 4:
                 clearScreen();
                 drawBorder();
                 MainMenuBack();
@@ -371,10 +462,145 @@ void MenuLoginBack()
     system("pause");
 }
 
-void MenuLogin()
+void GamePlayMenuBack()
 {
     int x = 50;
-    int y = 15;
+    int y = 13;
+    int w = 19;
+    int h = 2;
+    int textColor = CYAN;
+    int buttonColor = OCEAN;
+    int backgroundColor = BLACK;
+    string text;
+    showCursor(0);
+    int selection = 1; // start with the first button selected
+    printPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+
+    while (true)
+    {
+        char c = _getch(); 
+
+        if (c == KEY_w || c == KEY_W)
+        { // move up
+            selection--;
+            if (selection == 0) {
+                selection = 4;
+            }
+            selectionPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+        }
+        else if (c == KEY_s || c == KEY_S)
+        { // move down
+            selection++;
+            if (selection == 5) {
+                selection = 1;
+            }
+            selectionPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+        }
+        else if (c == ENTER_KEY || c == '\n')
+        { // pressed enter
+            switch (selection)
+            {
+            case 1:
+                drawBorder();
+                //Che do Easy: ít hàng, ít cột
+
+                break;
+            case 2:
+                drawBorder();
+                //Che do Medium: vừa hàng, vừa cột (có đảo)
+
+                break;
+            case 3:
+                drawBorder();
+                //Che do Hard: 10 x 10 (có đảo)
+
+                break;
+            case 4:
+                clearScreen();
+                drawBorder();
+                LoginMenuBack();
+                Sleep(5000);
+                break;
+            }
+        }
+    }
+    system("pause");
+}
+
+void GamePlayMenu()
+{
+    int x = 50;
+    int y = 13;
+    int w = 19;
+    int h = 2;
+    int textColor = CYAN;
+    int buttonColor = OCEAN;
+    int backgroundColor = BLACK;
+    string text;
+    showCursor(0);
+    int selection = 1; // start with the first button selected
+    printPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+
+    while (true)
+    {
+        char c = _getch(); 
+
+        if (c == KEY_w || c == KEY_W)
+        { // move up
+            selection--;
+            if (selection == 0) {
+                selection = 4;
+            }
+            selectionPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+        }
+        else if (c == KEY_s || c == KEY_S)
+        { // move down
+            selection++;
+            if (selection == 5) {
+                selection = 1;
+            }
+            selectionPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+        }
+        else if (c == ENTER_KEY || c == '\n')
+        { // pressed enter
+            switch (selection)
+            {
+            case 1:
+                drawBorder();
+                //Che do Easy: ít hàng, ít cột
+
+                break;
+            case 2:
+                drawBorder();
+                //Che do Medium: vừa hàng, vừa cột (có đảo)
+
+                break;
+            case 3:
+                drawBorder();
+                //Che do Hard: 10 x 10 (có đảo)
+
+                break;
+            case 4:
+                clearScreen();
+                drawBorder();
+                LoginMenuBack();
+                Sleep(5000);
+                break;
+            }
+        }
+    }
+    system("pause");
+}
+
+/*void CustomPlay()
+{
+    Cho điền tên, hàng cột ... như bản demo
+}*/
+
+void LoginMenu()
+{
+    int x = 50;
+    int y = 14;
     int w = 20;
     int h = 2;
     int textColor = CYAN;
@@ -411,21 +637,13 @@ void MenuLogin()
             {
             case 1:
                 createScreen();
-                while (true)
-                {
-                    if (kbhit())
-                    {
-                        char key = _getch();
-                        if (key == ESC_KEY)
-                        {
-                            clearScreen();
-                            MenuLoginBack();
-                            break;
-                        }
-                    }
-                }
+                GamePlayMenu();
                 break;
             case 2:
+                createScreen();
+                //CustomPlay();
+                break;
+            case 3:
                 createScreen();
                 printLeaderboard();
                 while (true)
@@ -436,13 +654,13 @@ void MenuLogin()
                         if (key == ESC_KEY)
                         {
                             clearScreen();
-                            MenuLoginBack();
+                            LoginMenuBack();
                             break;
                         }
                     }
                 }
                 break;
-            case 3:
+            case 4:
                 clearScreen();
                 drawBorder();
                 MainMenuBack();
