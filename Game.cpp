@@ -2,8 +2,43 @@
 
 void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Settings &sett, int &gameStatus, Point &curPos, int &couple, Point select[2])
 {
+	Point pCheck1, pCheck2;
 	if (checkGameWin(board, _row, _col))
 		gameStatus = 0;
+	else if (!moveSuggestion(board, _row, _col, pCheck1, pCheck2))
+	{
+		board[curPos.x][curPos.y].status = 0;
+		moveCursor(26, 1);
+		consoleColor(BLACK, LIGHT_RED);
+		printf("The board will be shuffled again because there are no valid moves!");
+		Sleep(2000);
+		consoleColor(BLACK, WHITE);
+		moveCursor(26, 1);
+
+		printf("                                                                  ");
+		randomize(board, _row, _col);
+
+		bool valid = false;
+		for (int i = 0; i < _row; i++)
+		{
+			for (int j = 0; j < _col; j++)
+			{
+				if (board[i][j].status != 2 && board[i][j].status != 1)
+				{
+					valid = true;
+					curPos.x = i;
+					curPos.y = j;
+					break;
+				}
+			}
+			if (valid)
+				break;
+		}
+		if (valid)
+			board[curPos.x][curPos.y].status = 1;
+		else
+			board[curPos.x][curPos.y].status = 2;
+	}
 	else
 	{
 		int _ch = _getch();
@@ -574,12 +609,13 @@ void normalGame(Players &p, int choice)
 	char c;
 	cout << "Do you want to play again?" << endl;
 	cin >> c;
-	if (c == 'y' || c == 'Y') {
+	if (c == 'y' || c == 'Y')
+	{
 		cin.ignore();
 		return normalGame(p, choice);
-	} else if (c == 'n' || c == 'N') { 
-		printLeaderboard();
 	}
+	else if (c == 'n' || c == 'N')
+		printLeaderboard();
 
 	deallocate(board, _size.row);
 }
@@ -611,7 +647,9 @@ void customForm(Board &_size, Players &p, Settings &sett)
 	printf("- Do you want to shuffle board after each move?(Y/N):");
 	TextColor(RED);
 	moveCursor(20, 30);
-	printf("*NOTE: Please enter at least one even number in rows/columns for better experience!");
+	printf("*NOTE: Please enter at least one even number in rows/columns to play game!");
+	moveCursor(34, 32);
+    printf("Rows & Columns must be positive integers from 1 to 10");
 
 	showCursor(1);
 	moveCursor(60, 15);
@@ -623,7 +661,7 @@ void customForm(Board &_size, Players &p, Settings &sett)
 	cin >> _size.row;
 	moveCursor(73, 19);
 	cin >> _size.col;
-	while ((_size.row * _size.col) & 1)
+	while (((_size.row*_size.col) & 1) || (_size.col <= 0) || (_size.row <= 0) || (_size.col > 10) || (_size.row > 10))
 	{
 		moveCursor(43, 27);
 		TextColor(LIGHT_RED);
@@ -725,11 +763,13 @@ void customGame(Players &p)
 	char c;
 	cout << "Do you want to play again?" << endl;
 	cin >> c;
-	if (c == 'y' || c == 'Y') {
+	if (c == 'y' || c == 'Y')
+	{
 		cin.ignore();
 		return customGame(p);
-	} else if (c == 'n' || c == 'N') { 
-		printLeaderboard();
 	}
+	else if (c == 'n' || c == 'N')
+		printLeaderboard();
+		
 	deallocate(board, _size.row);
 }
