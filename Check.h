@@ -3,35 +3,21 @@
 
 #include "Main.h"
 
-struct Point
-{
-    int x, y;
-};
-
-struct Board
-{
-	int row, col;
-	char ch = ' ';
-	int status;
-	/*
-	status = 0 -> unchoose
-	status = 1 -> choose
-	status = 2 -> box which deleted
-	status = 4 -> suggest move
-	*/
-	void drawBox(Board **&board);
-	void showBackground();
-};
-
 bool checkLineX(Board **board, int y1, int y2, int x);
 bool checkLineY(Board **board, int x1, int x2, int y);
 bool check_I(Board **board, int x1, int y1, int x2, int y2);
 bool check_L(Board **board, int x1, int y1, int x2, int y2);
+
 bool checkRectX(Board **board, int x1, int y1, int x2, int y2);
 bool checkRectY(Board **board, int x1, int y1, int x2, int y2);
 bool check_Z(Board **board, int x1, int y1, int x2, int y2);
+
+bool checkMoreLineX(Board **board, int _row, int _col, int x1, int y1, int x2, int y2);
+bool checkMoreLineY(Board **board, int _row, int _col, int x1, int y1, int x2, int y2);
 bool check_U(Board **board, int _row, int _col, int x1, int y1, int x2, int y2);
+
 bool check_All(Board **board, int _row, int _col, int x1, int y1, int x2, int y2);
 bool checkGameWin(Board **board, int _row, int _col);
+bool moveSuggestion(Board **board, int _row, int _col, Point &p1, Point &p2);
 
 #endif // __CHECK_H__

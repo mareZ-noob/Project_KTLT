@@ -154,13 +154,14 @@ void drawRectangle(int left, int top, int width, int height)
 
 void initConsole()
 {
-    SetWindowSize(1000, 750);
+    SetWindowSize(895, 620);
     consoleTitle();
     disableMouseInput();
     showCursor(0);
     ShowScrollbar(0);
     DisableSelection();
-    DisableCtrButton(1, 1, 1);
+    DisableResizeWindow();
+    DisableCtrButton(0, 1, 1);
 }
 
 void TextColor(WORD color)

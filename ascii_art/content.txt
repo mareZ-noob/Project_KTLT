@@ -14,4 +14,4 @@
     Class:      22CLC10
     Students:   22127286 - NGUYEN THANH NAM
                 22127426 - DINH DUY TRIET
-    github:     https://github.com/mareZ-noob/Project_KTLT
+    GitHub:     https://github.com/mareZ-noob/Project_KTLT

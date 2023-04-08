@@ -1,10 +1,8 @@
 #ifndef __MENU_H__
 #define __MENU_H__
 
-#include "Main.h"
-#include "Setup.h"
-#include "User.h"
 #include "Graphic.h"
+#include "Game.h"
 
 void quit();
 void login(string &email);
@@ -16,7 +14,6 @@ void MainMenuBack();
 void LoginMenuBack();
 void GamePlayMenuBack();
 void GamePlayMenu();
-void CustomPlay();
 void LoginMenu();
 void MainMenu();
 

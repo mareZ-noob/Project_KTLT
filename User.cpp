@@ -20,13 +20,9 @@ bool verify(string email)
 bool comparePlayers(const Players &p1, const Players &p2)
 {
     if (p1.point != p2.point)
-    {
         return p1.point > p2.point;
-    }
     else
-    {
         return p1.time < p2.time;
-    }
 }
 
 long long unsigned int fileSize(string file)
@@ -60,8 +56,8 @@ void pushRecord(Players p)
 
         // rewrite and sort
         long long unsigned int curSize = fileSize("players.bin") / sizeof(Players);
-        //Players players_read[curSize];
-        Players* players_read = new Players[curSize];
+        Players players_read[curSize];
+        // Players* players_read = new Players[curSize];
         ifstream fi;
         fi.open("players.bin", ios::binary);
         fi.read(reinterpret_cast<char *>(&players_read), sizeof(Players) * curSize);
@@ -70,7 +66,7 @@ void pushRecord(Players p)
 
         ofstream f("players.bin", ios::binary);
         f.write(reinterpret_cast<const char *>(&players_read), sizeof(Players) * curSize);
-        delete [] players_read;
+        // delete [] players_read;
         f.close();
     }
     else
@@ -108,6 +104,7 @@ void pushRecord(Players p)
 
 void printLeaderboard()
 {
+    createScreen();
     Players players_read[5];
     ifstream infile("players.bin", ios::binary);
     infile.read(reinterpret_cast<char *>(&players_read), sizeof(Players) * 5);
@@ -124,20 +121,44 @@ void printLeaderboard()
     button(66, 12, 10, 2, RED, LIGHT_GREEN, BLACK, "  POINT");
     button(76, 12, 9, 2, RED, LIGHT_GREEN, BLACK, "  TIME");
 
-    moveCursor(33, 14); cout << char(195);
-    moveCursor(66, 14); cout << char(197);
-    moveCursor(76, 14); cout << char(197);
-    moveCursor(85, 14); cout << char(180);
-    moveCursor(66, 12); cout << char(194);
-    moveCursor(66, 27); cout << char(193);
-    moveCursor(76, 12); cout << char(194);
-    moveCursor(76, 27); cout << char(193);
+    moveCursor(33, 14);
+    cout << char(195);
+    moveCursor(66, 14);
+    cout << char(197);
+    moveCursor(76, 14);
+    cout << char(197);
+    moveCursor(85, 14);
+    cout << char(180);
+    moveCursor(66, 12);
+    cout << char(194);
+    moveCursor(66, 27);
+    cout << char(193);
+    moveCursor(76, 12);
+    cout << char(194);
+    moveCursor(76, 27);
+    cout << char(193);
 
     TextColor(LIGHT_WHITE);
     for (long long unsigned int i = 0; i < fileSize("players.bin") / sizeof(Players); i++)
     {
-        moveCursor(35, 15 + i); cout << i + 1 << ". " << players_read[i].name;
-        moveCursor(70, 15 + i); cout << players_read[i].point;
-        moveCursor(80, 15 + i); cout << players_read[i].time;
+        moveCursor(35, 15 + i);
+        cout << i + 1 << ". " << players_read[i].name;
+        moveCursor(70, 15 + i);
+        cout << players_read[i].point;
+        moveCursor(80, 15 + i);
+        cout << players_read[i].time;
+    }
+    while (true)
+    {
+        if (kbhit())
+        {
+            char key = _getch();
+            if (key == ESC_KEY)
+            {
+                clearScreen();
+                LoginMenuBack();
+                break;
+            }
+        }
     }
 }

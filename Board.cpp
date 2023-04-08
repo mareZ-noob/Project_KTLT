@@ -28,10 +28,10 @@ void Board::drawBox(Board **&board)
 			moveCursor(posX * 6, posY * 3 + i - 1);
 			cout << s[i];
 		}
-		consoleColor(BLACK, WHITE);
+		consoleColor(BLACK, LIGHT_WHITE);
 		moveCursor(posX * 6 + 2, posY * 3);
 		printf("%c", board[row][col].ch);
-		consoleColor(BLACK, WHITE);
+		consoleColor(BLACK, LIGHT_WHITE);
 	}
 	else if (board[row][col].status == 1)
 	{
@@ -41,44 +41,28 @@ void Board::drawBox(Board **&board)
 			moveCursor(posX * 6, posY * 3 + i - 1);
 			cout << s[i];
 		}
-		consoleColor(WHITE, BLUE);
+		consoleColor(LIGHT_WHITE, RED);
 		moveCursor(posX * 6 + 1, posY * 3);
 		printf("   ");
 		moveCursor(posX * 6 + 2, posY * 3);
 		printf("%c", board[row][col].ch);
-		consoleColor(BLACK, WHITE);
+		consoleColor(BLACK, LIGHT_WHITE);
 	}
 	else if (board[row][col].status == 2)
 	{
+		board[row][col].ch = ' ';
 		for (int i = 0; i < 3; i++)
 		{
 			moveCursor(posX * 6, posY * 3 + i - 1);
 			printf("     ");
 		}
 	}
-	else if (board[row][col].status == 3)
-	{
-		for (int i = 0; i < 3; i++)
-		{
-			consoleColor(BLACK, YELLOW);
-			moveCursor(posX * 6, posY * 3 + i - 1);
-			cout << s[i];
-		}
-		consoleColor(CYAN, RED);
-		moveCursor(posX * 6 + 1, posY * 3);
-		printf("   ");
-		moveCursor(posX * 6 + 2, posY * 3);
-		printf("%c", board[row][col].ch);
-		consoleColor(BLACK, WHITE);
-	}
 }
 
 void deallocate(Board **board, int _row)
 {
 	for (int i = 0; i < _row; i++)
-	{
 		delete[] board[i];
-	}
 	delete[] board;
 	board = nullptr;
 }
@@ -89,12 +73,8 @@ Board **randomize(Board **&board, int _row, int _col)
 	// 1D from vector
 	vector<Board> vec;
 	for (int i = 0; i < _row; i++)
-	{
 		for (int j = 0; j < _col; j++)
-		{
 			vec.push_back(board[i][j]);
-		}
-	}
 
 	// Random
 	random_shuffle(vec.begin(), vec.end());
@@ -102,12 +82,9 @@ Board **randomize(Board **&board, int _row, int _col)
 	// Push again
 	int index = 0;
 	for (int i = 0; i < _row; i++)
-	{
 		for (int j = 0; j < _col; j++)
-		{
 			board[i][j] = vec[index++];
-		}
-	}
+
 	return board;
 }
 
@@ -161,10 +138,76 @@ Board **createBoard(Board **&board, int _row, int _col)
 void renderBoard(Board **&board, int _row, int _col)
 {
 	for (int i = 0; i < _row; i++)
-	{
 		for (int j = 0; j < _col; j++)
-		{
 			board[i][j].drawBox(board);
+}
+
+void trueMatch(Board **board, int _row, int _col)
+{
+	createBox();
+	for (int i = 0; i < 3; i++)
+	{
+		consoleColor(BLACK, YELLOW);
+		moveCursor((_col + 1) * 6, (_row + 1) * 3 + i - 1);
+		cout << s[i];
+	}
+	consoleColor(LIGHT_GREEN, BLACK);
+	moveCursor((_col + 1) * 6 + 1, (_row + 1) * 3);
+	printf("   ");
+	moveCursor((_col + 1) * 6 + 2, (_row + 1) * 3);
+	printf("%c", board[_row][_col].ch);
+	consoleColor(BLACK, LIGHT_WHITE);
+}
+
+void wrongMatch(Board **board, int _row, int _col)
+{
+	createBox();
+	for (int i = 0; i < 3; i++)
+	{
+		consoleColor(BLACK, YELLOW);
+		moveCursor((_col + 1) * 6, (_row + 1) * 3 + i - 1);
+		cout << s[i];
+	}
+	consoleColor(RED, LIGHT_WHITE);
+	moveCursor((_col + 1) * 6 + 1, (_row + 1) * 3);
+	printf("   ");
+	moveCursor((_col + 1) * 6 + 2, (_row + 1) * 3);
+	printf("%c", board[_row][_col].ch);
+	consoleColor(BLACK, LIGHT_WHITE);
+}
+
+void suggestMatch(Board **board, int _row, int _col)
+{
+	createBox();
+	for (int i = 0; i < 3; i++)
+	{
+		consoleColor(BLACK, YELLOW);
+		moveCursor((_col + 1) * 6, (_row + 1) * 3 + i - 1);
+		cout << s[i];
+	}
+	consoleColor(MAGENTA, WHITE);
+	moveCursor((_col + 1) * 6 + 1, (_row + 1) * 3);
+	printf("   ");
+	moveCursor((_col + 1) * 6 + 2, (_row + 1) * 3);
+	printf("%c", board[_row][_col].ch);
+	consoleColor(BLACK, WHITE);
+}
+
+Board **retreatBoard(Board **&board, int _row, int _col)
+{
+	int n = _col - 1;
+	while (n--)
+	{
+		for (int i = 0; i < _row; i++)
+		{
+			for (int j = 0; j < _col - 1; j++)
+			{
+				if (board[i][j].status == 2)
+				{
+					swap(board[i][j], board[i][j + 1]);
+				}
+			}
 		}
 	}
+	return board;
 }

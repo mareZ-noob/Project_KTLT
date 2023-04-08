@@ -25,9 +25,10 @@ void login(string &email)
     cout << char(180);
 
     moveCursor(42, 22);
-    TextColor(LIGHT_YELLOW); cout << "Email: ";
+    TextColor(LIGHT_YELLOW);
+    cout << "Email: ";
     moveCursor(48, 22);
-    button(48, 21, 30, 2, LIGHT_WHITE, OCEAN, BLACK, " "); 
+    button(48, 21, 30, 2, LIGHT_WHITE, OCEAN, BLACK, " ");
     moveCursor(43, 24);
     TextColor(LIGHT_GREEN);
     cout << "(Using \"@clc.fitus.edu.vn\" to login)";
@@ -140,7 +141,7 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
         button(x, y, w, h, Color, buttonColor, backgroundColor, "     PLAY GAME");
     }
 
-        if (selection == 2)
+    if (selection == 2)
     {
         textColor = RED;
         button(x, y + 2, w, h, textColor, buttonColor, backgroundColor, "  > CUSTOM PLAY <");
@@ -213,7 +214,7 @@ void selectionPlayGame(int selection, int x, int y, int w, int h, int textColor,
         button(x, y, w, h, Color, buttonColor, backgroundColor, "       EASY");
     }
 
-        if (selection == 2)
+    if (selection == 2)
     {
         textColor = RED;
         button(x, y + 2, w, h, textColor, buttonColor, backgroundColor, "    > MEDIUM <");
@@ -308,17 +309,18 @@ void MainMenuBack()
     string email;
     string text;
     showCursor(0);
-    int selection = 1; 
+    int selection = 1;
     printMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 
     while (true)
     {
-        char c = _getch(); 
+        char c = _getch();
 
         if (c == KEY_w || c == KEY_W)
         { // move up
             selection--;
-            if (selection == 0) {
+            if (selection == 0)
+            {
                 selection = 4;
             }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
@@ -326,7 +328,8 @@ void MainMenuBack()
         else if (c == KEY_s || c == KEY_S)
         { // move down
             selection++;
-            if (selection == 5) {
+            if (selection == 5)
+            {
                 selection = 1;
             }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
@@ -403,12 +406,13 @@ void LoginMenuBack()
 
     while (true)
     {
-        char c = _getch(); 
+        char c = _getch();
 
         if (c == KEY_w || c == KEY_W)
         { // move up
             selection--;
-            if (selection == 0) {
+            if (selection == 0)
+            {
                 selection = 4;
             }
             selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
@@ -416,7 +420,8 @@ void LoginMenuBack()
         else if (c == KEY_s || c == KEY_S)
         { // move down
             selection++;
-            if (selection == 5) {
+            if (selection == 5)
+            {
                 selection = 1;
             }
             selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
@@ -432,24 +437,25 @@ void LoginMenuBack()
                 break;
             case 2:
                 createScreen();
-                //CustomPlay();
+                Players p;
+                customGame(p);
                 break;
             case 3:
-                createScreen();
+                // createScreen();
                 printLeaderboard();
-                while (true)
-                {
-                    if (kbhit())
-                    {
-                        char key = _getch();
-                        if (key == ESC_KEY)
-                        {
-                            clearScreen();
-                            LoginMenuBack();
-                            break;
-                        }
-                    }
-                }
+                // while (true)
+                // {
+                //     if (kbhit())
+                //     {
+                //         char key = _getch();
+                //         if (key == ESC_KEY)
+                //         {
+                //             clearScreen();
+                //             LoginMenuBack();
+                //             break;
+                //         }
+                //     }
+                // }
                 break;
             case 4:
                 clearScreen();
@@ -479,12 +485,13 @@ void GamePlayMenuBack()
 
     while (true)
     {
-        char c = _getch(); 
+        char c = _getch();
 
         if (c == KEY_w || c == KEY_W)
         { // move up
             selection--;
-            if (selection == 0) {
+            if (selection == 0)
+            {
                 selection = 4;
             }
             selectionPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
@@ -492,7 +499,8 @@ void GamePlayMenuBack()
         else if (c == KEY_s || c == KEY_S)
         { // move down
             selection++;
-            if (selection == 5) {
+            if (selection == 5)
+            {
                 selection = 1;
             }
             selectionPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
@@ -503,17 +511,19 @@ void GamePlayMenuBack()
             {
             case 1:
                 drawBorder();
-                //Che do Easy: ít hàng, ít cột
-
+                Players p1;
+                normalGame(p1, 1);
                 break;
             case 2:
                 drawBorder();
-                //Che do Medium: vừa hàng, vừa cột (có đảo)
+                Players p2;
+                normalGame(p2, 2);
 
                 break;
             case 3:
                 drawBorder();
-                //Che do Hard: 10 x 10 (có đảo)
+                Players p3;
+                normalGame(p3, 3);
 
                 break;
             case 4:
@@ -544,12 +554,13 @@ void GamePlayMenu()
 
     while (true)
     {
-        char c = _getch(); 
+        char c = _getch();
 
         if (c == KEY_w || c == KEY_W)
         { // move up
             selection--;
-            if (selection == 0) {
+            if (selection == 0)
+            {
                 selection = 4;
             }
             selectionPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
@@ -557,7 +568,8 @@ void GamePlayMenu()
         else if (c == KEY_s || c == KEY_S)
         { // move down
             selection++;
-            if (selection == 5) {
+            if (selection == 5)
+            {
                 selection = 1;
             }
             selectionPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
@@ -568,17 +580,20 @@ void GamePlayMenu()
             {
             case 1:
                 drawBorder();
-                //Che do Easy: ít hàng, ít cột
+                Players p1;
+                normalGame(p1, 1);
 
                 break;
             case 2:
                 drawBorder();
-                //Che do Medium: vừa hàng, vừa cột (có đảo)
+                Players p2;
+                normalGame(p2, 2);
 
                 break;
             case 3:
                 drawBorder();
-                //Che do Hard: 10 x 10 (có đảo)
+                Players p3;
+                normalGame(p3, 3);
 
                 break;
             case 4:
@@ -592,11 +607,6 @@ void GamePlayMenu()
     }
     system("pause");
 }
-
-/*void CustomPlay()
-{
-    Cho điền tên, hàng cột ... như bản demo
-}*/
 
 void LoginMenu()
 {
@@ -614,12 +624,13 @@ void LoginMenu()
 
     while (true)
     {
-        char c = _getch(); 
+        char c = _getch();
 
         if (c == KEY_w || c == KEY_W)
         { // move up
             selection--;
-            if (selection == 0) {
+            if (selection == 0)
+            {
                 selection = 4;
             }
             selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
@@ -627,7 +638,8 @@ void LoginMenu()
         else if (c == KEY_s || c == KEY_S)
         { // move down
             selection++;
-            if (selection == 5) {
+            if (selection == 5)
+            {
                 selection = 1;
             }
             selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
@@ -643,10 +655,11 @@ void LoginMenu()
                 break;
             case 2:
                 createScreen();
-                //CustomPlay();
+                Players p;
+                customGame(p);
                 break;
             case 3:
-                createScreen();
+                // createScreen();
                 printLeaderboard();
                 while (true)
                 {
@@ -686,17 +699,18 @@ void MainMenu()
     string email;
     string text;
     showCursor(0);
-    int selection = 1; 
+    int selection = 1;
     printMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
 
     while (true)
     {
-        char c = _getch(); 
+        char c = _getch();
 
         if (c == KEY_w || c == KEY_W)
         { // move up
             selection--;
-            if (selection == 0) {
+            if (selection == 0)
+            {
                 selection = 4;
             }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
@@ -704,7 +718,8 @@ void MainMenu()
         else if (c == KEY_s || c == KEY_S)
         { // move down
             selection++;
-            if (selection == 5) {
+            if (selection == 5)
+            {
                 selection = 1;
             }
             selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);

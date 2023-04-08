@@ -60,52 +60,51 @@ bool check_L(Board **board, int x1, int y1, int x2, int y2)
 
 bool checkRectX(Board **board, int x1, int y1, int x2, int y2)
 {
-    Point p1{x1, y1};
-    Point p2{x2, y2};
-    Point pMinY = p1, pMaxY = p2;
-    if (p1.y > p2.y)
-    {
-        pMinY = p2;
-        pMaxY = p1;
-    }
-    for (int y = pMinY.y + 1; y < pMaxY.y; y++)
-    {
-        // check three line
-        if (checkLineX(board, pMinY.y, y, pMinY.x) && checkLineY(board, pMinY.x, pMaxY.x, y) && checkLineX(board, y, pMaxY.y, pMaxY.x))
-            return true;
-    }
-    return false;
-}
-
-bool checkRectY(Board **board, int x1, int y1, int x2, int y2)
-{
-    Point p1{x1, y1};
-    Point p2{x2, y2};
-    Point pMinX = p1, pMaxX = p2;
-    if (p1.x > p2.x)
-    {
-        pMinX = p2;
-        pMaxX = p1;
-    }
-    // find line and y begin
-    for (int x = pMinX.x + 1; x < pMaxX.x; x++)
-    {
-        if (checkLineY(board, pMinX.x, x, pMinX.y) && checkLineX(board, pMinX.y, pMaxX.y, x) && checkLineY(board, x, pMaxX.x, pMaxX.y))
-            return true;
-    }
-    return false;
-}
-
-bool check_Z(Board **board, int x1, int y1, int x2, int y2)
-{
     if (x1 == x2 && y1 == y2)
         return false;
     if (board[x1][y1].ch != board[x2][y2].ch)
         return false;
-    return checkRectX(board, x1, y1, x2, y2) || checkRectY(board, x1, y1, x2, y2);
+    else
+    {
+        if (y1 < y2)
+        {
+            for (int i = y1 + 1; i < y2; i++)
+            {
+                bool check1 = checkLineX(board, y1, i, x1);
+
+                bool check2;
+                if (x1 < x2)
+                    check2 = checkLineY(board, x1 - 1, x2 + 1, i);
+                else
+                    check2 = checkLineY(board, x1 + 1, x2 - 1, i);
+
+                bool check3 = checkLineX(board, y2, i, x2);
+                if (check1 && check2 && check3)
+                    return true;
+            }
+        }
+        else if (y1 > y2)
+        {
+            for (int i = y1 - 1; i > y2; i--)
+            {
+                bool check1 = checkLineX(board, y1, i, x1);
+
+                bool check2;
+                if (x1 < x2)
+                    check2 = checkLineY(board, x1 - 1, x2 + 1, i);
+                else
+                    check2 = checkLineY(board, x1 + 1, x2 - 1, i);
+
+                bool check3 = checkLineX(board, y2, i, x2);
+                if (check1 && check2 && check3)
+                    return true;
+            }
+        }
+        return false;
+    }
 }
 
-bool check_U(Board **board, int _row, int _col, int x1, int y1, int x2, int y2)
+bool checkRectY(Board **board, int x1, int y1, int x2, int y2)
 {
     if (x1 == x2 && y1 == y2)
         return false;
@@ -113,20 +112,82 @@ bool check_U(Board **board, int _row, int _col, int x1, int y1, int x2, int y2)
         return false;
     else
     {
-        if (check_I(board, x1, y1, x2, y2))
-            return false;
+        if (x1 < x2)
+        {
+            for (int i = x1 + 1; i < x2; i++)
+            {
+                bool check1 = checkLineY(board, x1, i, y1);
+
+                bool check2;
+                if (y1 < y2)
+                    check2 = checkLineX(board, y1 - 1, y2 + 1, i);
+                else
+                    check2 = checkLineX(board, y1 + 1, y2 - 1, i);
+
+                bool check3 = checkLineY(board, x2, i, y2);
+                if (check1 && check2 && check3)
+                    return true;
+            }
+        }
+        else if (x1 > x2)
+        {
+            for (int i = x1 - 1; i > x2; i--)
+            {
+                bool check1 = checkLineY(board, x1, i, y1);
+
+                bool check2;
+                if (y1 < y2)
+                    check2 = checkLineX(board, y1 - 1, y2 + 1, i);
+                else
+                    check2 = checkLineX(board, y1 + 1, y2 - 1, i);
+
+                bool check3 = checkLineY(board, x2, i, y2);
+                if (check1 && check2 && check3)
+                    return true;
+            }
+        }
+        return false;
+    }
+}
+
+bool check_Z(Board **board, int x1, int y1, int x2, int y2)
+{
+    return checkRectX(board, x1, y1, x2, y2) ||
+           checkRectY(board, x1, y1, x2, y2);
+}
+
+bool checkMoreLineX(Board **board, int _row, int _col, int x1, int y1, int x2, int y2)
+{
+    if (x1 == x2 && y1 == y2)
+        return false;
+    if (board[x1][y1].ch != board[x2][y2].ch)
+        return false;
+    else
+    {
         for (int i = y1 + 1; i <= _col; i++)
         {
             bool check1 = checkLineX(board, y1, i, x1);
 
             bool check2;
             if (i != _col)
-                check2 = checkLineY(board, x1 - 1, x2 + 1, i);
+            {
+                int startX, endX;
+                if (x1 < x2)
+                {
+                    startX = x1 - 1;
+                    endX = x2 + 1;
+                }
+                else
+                {
+                    startX = x1 + 1;
+                    endX = x2 - 1;
+                }
+                check2 = checkLineY(board, startX, endX, i);
+            }
             else
                 check2 = true;
 
             bool check3 = checkLineX(board, y2, i, x2);
-
             if (check1 && check2 && check3)
                 return true;
         }
@@ -136,22 +197,59 @@ bool check_U(Board **board, int _row, int _col, int x1, int y1, int x2, int y2)
 
             bool check2;
             if (i != -1)
-                check2 = checkLineY(board, x1 - 1, x2 + 1, i);
+            {
+                int startX, endX;
+                if (x1 < x2)
+                {
+                    startX = x1 - 1;
+                    endX = x2 + 1;
+                }
+                else
+                {
+                    startX = x1 + 1;
+                    endX = x2 - 1;
+                }
+                check2 = checkLineY(board, startX, endX, i);
+            }
             else
                 check2 = true;
 
             bool check3 = checkLineX(board, y2, i, x2);
-
             if (check1 && check2 && check3)
                 return true;
         }
+        return false;
+    }
+}
+
+bool checkMoreLineY(Board **board, int _row, int _col, int x1, int y1, int x2, int y2)
+{
+    if (x1 == x2 && y1 == y2)
+        return false;
+    if (board[x1][y1].ch != board[x2][y2].ch)
+        return false;
+    else
+    {
         for (int i = x1 + 1; i <= _row; i++)
         {
             bool check1 = checkLineY(board, x1, i, y1);
 
             bool check2;
             if (i != _row)
-                check2 = checkLineX(board, y1 - 1, y2 + 1, i);
+            {
+                int startY, endY;
+                if (y1 < y2)
+                {
+                    startY = y1 - 1;
+                    endY = y2 + 1;
+                }
+                else
+                {
+                    startY = y1 + 1;
+                    endY = y2 - 1;
+                }
+                check2 = checkLineX(board, startY, endY, i);
+            }
             else
                 check2 = true;
 
@@ -162,10 +260,23 @@ bool check_U(Board **board, int _row, int _col, int x1, int y1, int x2, int y2)
         for (int i = x1 - 1; i >= -1; i--)
         {
             bool check1 = checkLineY(board, x1, i, y1);
-            
+
             bool check2;
             if (i != -1)
-                check2 = checkLineX(board, y1 - 1, y2 + 1, i);
+            {
+                int startY, endY;
+                if (y1 < y2)
+                {
+                    startY = y1 - 1;
+                    endY = y2 + 1;
+                }
+                else
+                {
+                    startY = y1 + 1;
+                    endY = y2 - 1;
+                }
+                check2 = checkLineX(board, startY, endY, i);
+            }
             else
                 check2 = true;
 
@@ -175,6 +286,12 @@ bool check_U(Board **board, int _row, int _col, int x1, int y1, int x2, int y2)
         }
         return false;
     }
+}
+
+bool check_U(Board **board, int _row, int _col, int x1, int y1, int x2, int y2)
+{
+    return checkMoreLineX(board, _row, _col, x1, y1, x2, y2) ||
+           checkMoreLineY(board, _row, _col, x1, y1, x2, y2);
 }
 
 bool check_All(Board **board, int _row, int _col, int x1, int y1, int x2, int y2)
@@ -201,4 +318,31 @@ bool checkGameWin(Board **board, int _row, int _col)
         }
     }
     return true;
+}
+
+bool moveSuggestion(Board **board, int _row, int _col, Point &p1, Point &p2)
+{
+    for (int i = 0; i < _row; i++)
+    {
+        for (int j = 0; j < _col; j++)
+        {
+            if (board[i][j].status == 2)
+                continue;
+            for (int m = 0; m < _row; m++)
+            {
+                for (int n = 0; n < _col; n++)
+                {
+                    if (check_All(board, _row, _col, i, j, m, n))
+                    {
+                        p1.x = i;
+                        p1.y = j;
+                        p2.x = m;
+                        p2.y = n;
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    return false;
 }
