@@ -6,3 +6,4 @@ https://codelearn.io/sharing/windowsh-va-ham-dinh-dang-console-p1
 https://codelearn.io/sharing/windowsh-ham-dinh-dang-noi-dung-console
 https://stackoverflow.com/questions/2347770/how-do-you-clear-the-console-screen-in-c
 https://cachhoc.net/2014/03/25/thuat-toan-game-pokemon-pikachu/
+https://www.youtube.com/@ThoCode

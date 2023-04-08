@@ -426,7 +426,8 @@ void LoginMenuBack()
             switch (selection)
             {
             case 1:
-                createScreen();
+                clearScreen();
+                drawBorder();
                 GamePlayMenu();
                 break;
             case 2:
@@ -636,7 +637,8 @@ void LoginMenu()
             switch (selection)
             {
             case 1:
-                createScreen();
+                clearScreen();
+                drawBorder();
                 GamePlayMenu();
                 break;
             case 2:
