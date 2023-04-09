@@ -6,10 +6,7 @@ HWND hWnd = GetConsoleWindow();
 
 void SetWindowSize(int width, int height)
 {
-    // Get the console handle
-    HWND hConsole = GetConsoleWindow();
-    // MoveWindow(window_handle, x, y, width, height, redraw_window);
-    MoveWindow(hConsole, 280, 50, width, height, TRUE);
+    MoveWindow(hWnd, 280, 50, width, height, TRUE);
 }
 
 void SetScreenBufferSize(SHORT width, SHORT height)
@@ -47,11 +44,6 @@ void DisableCtrButton(bool Close, bool Min, bool Max)
 void ShowScrollbar(BOOL Show)
 {
     ShowScrollBar(hWnd, SB_BOTH, Show);
-}
-
-void DisableSelection()
-{
-    SetConsoleMode(hStdin, ~ENABLE_QUICK_EDIT_MODE);
 }
 
 void showCursor(bool visible)
@@ -97,12 +89,12 @@ void clearScreen()
     if (hStdOut == INVALID_HANDLE_VALUE)
         return;
 
-    // Get the number of cells in the current buffer
+    // get the number of cells in the current buffer
     if (!GetConsoleScreenBufferInfo(hStdOut, &csbi))
         return;
     cellCount = csbi.dwSize.X * csbi.dwSize.Y;
 
-    // Fill the entire buffer with spaces
+    // fill the entire buffer with spaces
     if (!FillConsoleOutputCharacter(
             hStdOut,
             (TCHAR)' ',
@@ -111,7 +103,7 @@ void clearScreen()
             &count))
         return;
 
-    // Fill the entire buffer with the current colors and attributes
+    // fill the entire buffer with the current colors and attributes
     if (!FillConsoleOutputAttribute(
             hStdOut,
             csbi.wAttributes,
@@ -120,7 +112,7 @@ void clearScreen()
             &count))
         return;
 
-    // Move the cursor home
+    // move the cursor home
     SetConsoleCursorPosition(hStdOut, homeCoords);
 }
 
@@ -159,7 +151,6 @@ void initConsole()
     disableMouseInput();
     showCursor(0);
     ShowScrollbar(0);
-    DisableSelection();
     DisableResizeWindow();
     DisableCtrButton(0, 1, 1);
 }
@@ -227,7 +218,6 @@ void drawBorder()
 
 void drawBackButton()
 {
-    //button(0, 32, 22, 2, LIGHT_WHITE, YELLOW, BLACK, "<< Press Esc to back");
     drawRectangle(0, 32, 21 ,2);
     moveCursor(1,33);
     TextColor(LIGHT_WHITE);
@@ -289,16 +279,3 @@ void box(double x, double y, double w, double h, int textColor, int buttonColor,
 	moveCursor(x, y + h); cout << char(192);
 	moveCursor(x + w, y + h); cout << char(217);
 }
-
-/*bool printStatus(bool status){
-    if(status)
-    {
-        clearScreen();
-        art_at_pos("ascii_art\\youlose.txt", LIGHT_RED, BLACK, 50, 3);
-    }
-    else
-    {
-        clearScreen();
-        art_at_pos("ascii_art\\youwin.txt", LIGHT_GREEN, BLACK, 50, 3);
-    }
-}*/

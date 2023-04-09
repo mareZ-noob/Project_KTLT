@@ -597,18 +597,23 @@ void normalGame(Players &p, int choice)
 	moveCursor(10, 0);
 	if (!win)
 	{
-		cout << "You lose";
+		read_file_at_pos("ascii_art\\youlose.txt", LIGHT_RED, BLACK, 18, 10);
 	}
 	else if (win)
 	{
 		if (sett.music)
 			PlaySound(TEXT("sounds\\glory_mu.wav"), NULL, SND_ASYNC);
-		cout << "Win";
+		read_file_at_pos("ascii_art\\youwin.txt", LIGHT_GREEN, BLACK, 22, 10);
 	}
 	showCursor(1);
+	TextColor(LIGHT_WHITE);
+	moveCursor(40, 19);
+	printf("Do you want to play again?(Y/N)");
+
+	moveCursor(72, 19);
 	char c;
-	cout << "Do you want to play again?" << endl;
 	cin >> c;
+	showCursor(0);
 	if (c == 'y' || c == 'Y')
 	{
 		cin.ignore();
@@ -616,7 +621,7 @@ void normalGame(Players &p, int choice)
 	}
 	else if (c == 'n' || c == 'N')
 		printLeaderboard();
-
+		
 	deallocate(board, _size.row);
 }
 
@@ -748,21 +753,25 @@ void customGame(Players &p)
 	pushRecord(p);
 
 	clearScreen();
-	moveCursor(10, 0);
 	if (!win)
 	{
-		cout << "You lose";
+		read_file_at_pos("ascii_art\\youlose.txt", LIGHT_RED, BLACK, 18, 10);
 	}
 	else if (win)
 	{
 		if (sett.music)
 			PlaySound(TEXT("sounds\\glory_mu.wav"), NULL, SND_ASYNC);
-		cout << "Win";
+		read_file_at_pos("ascii_art\\youwin.txt", LIGHT_GREEN, BLACK, 22, 10);
 	}
 	showCursor(1);
+	TextColor(LIGHT_WHITE);
+	moveCursor(40, 19);
+	printf("Do you want to play again?(Y/N)");
+
+	moveCursor(72, 19);
 	char c;
-	cout << "Do you want to play again?" << endl;
 	cin >> c;
+	showCursor(0);
 	if (c == 'y' || c == 'Y')
 	{
 		cin.ignore();

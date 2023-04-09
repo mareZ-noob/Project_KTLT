@@ -2,19 +2,16 @@
 #define __MAIN_H__
 
 #include <iostream>
-#include <stdio.h>
+#include <cstdlib>
 #include <conio.h>
 #include <Windows.h>
 #include <algorithm>
 #include <vector>
 #include <random>
-#include <chrono>
 #include <ctime>
 #include <time.h>
 #include <mmsystem.h>
-#include <cstdlib>
 #include <fstream>
-#include <sstream>
 #include <string>
 #include <string.h>
 

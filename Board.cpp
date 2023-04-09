@@ -3,6 +3,7 @@
 char s[3][6];
 void createBox()
 {
+	// create a very square box
 	s[0][0] = char(218);
 	s[0][1] = s[0][2] = s[0][3] = char(196);
 	s[0][4] = char(191);
@@ -70,16 +71,16 @@ void deallocate(Board **board, int _row)
 Board **randomize(Board **&board, int _row, int _col)
 {
 	srand(time(0));
-	// 1D from vector
+	// 1D array from vector
 	vector<Board> vec;
 	for (int i = 0; i < _row; i++)
 		for (int j = 0; j < _col; j++)
 			vec.push_back(board[i][j]);
 
-	// Random
+	// random
 	random_shuffle(vec.begin(), vec.end());
 
-	// Push again
+	// push again
 	int index = 0;
 	for (int i = 0; i < _row; i++)
 		for (int j = 0; j < _col; j++)
@@ -142,6 +143,7 @@ void renderBoard(Board **&board, int _row, int _col)
 			board[i][j].drawBox(board);
 }
 
+// effects when match correct
 void trueMatch(Board **board, int _row, int _col)
 {
 	createBox();
@@ -159,6 +161,7 @@ void trueMatch(Board **board, int _row, int _col)
 	consoleColor(BLACK, LIGHT_WHITE);
 }
 
+// effects when match wrong
 void wrongMatch(Board **board, int _row, int _col)
 {
 	createBox();
@@ -176,6 +179,7 @@ void wrongMatch(Board **board, int _row, int _col)
 	consoleColor(BLACK, LIGHT_WHITE);
 }
 
+// effects when suggest
 void suggestMatch(Board **board, int _row, int _col)
 {
 	createBox();
@@ -193,6 +197,7 @@ void suggestMatch(Board **board, int _row, int _col)
 	consoleColor(BLACK, WHITE);
 }
 
+// shift all blocks to left
 Board **retreatBoard(Board **&board, int _row, int _col)
 {
 	int n = _col - 1;

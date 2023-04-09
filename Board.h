@@ -15,6 +15,8 @@ void renderBoard(Board **&board, int _row, int _col);
 void trueMatch(Board **board, int _row, int _col);
 void wrongMatch(Board **board, int _row, int _col);
 void suggestMatch(Board **board, int _row, int _col);
+
+// shift all blocks to left
 Board **retreatBoard(Board **&board, int _row, int _col);
 
 #endif // __BOARD_H__

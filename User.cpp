@@ -156,7 +156,7 @@ void printLeaderboard()
             if (key == ESC_KEY)
             {
                 clearScreen();
-                LoginMenuBack();
+                return LoginMenu();
                 break;
             }
         }

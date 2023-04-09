@@ -3,9 +3,8 @@
 void quit()
 {
     clearScreen();
-    consoleColor(BLACK, CYAN);
-    clearScreen();
-    art("ascii_art\\goodbye.txt", 30, 13);
+    pikachu_bye(4, 4);
+    read_file_at_pos("ascii_art\\goodbye.txt", CYAN, BLACK, 46, 10);
     consoleColor(BLACK, WHITE);
     Sleep(5000);
     clearScreen();
@@ -126,6 +125,108 @@ void selectionMenu(int selection, int x, int y, int w, int h, int textColor, int
     }
 }
 
+void printMenu(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text)
+{
+    drawBorder();
+    art_at_pos("ascii_art\\pikachu.txt", LIGHT_YELLOW, backgroundColor, 21, 1);
+    pokemon_ball(4, 15);
+    pikachu_small(70, 12);
+    selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+}
+
+void MainMenu()
+{
+    int x = 50;
+    int y = 24;
+    int w = 20;
+    int h = 2;
+    int textColor = CYAN;
+    int buttonColor = OCEAN;
+    int backgroundColor = BLACK;
+    string email;
+    string text;
+    showCursor(0);
+    int selection = 1;
+    printMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+
+    while (true)
+    {
+        char c = _getch();
+
+        if (c == KEY_w || c == KEY_W)
+        { // move up
+            selection--;
+            if (selection == 0)
+            {
+                selection = 4;
+            }
+            selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+        }
+        else if (c == KEY_s || c == KEY_S)
+        { // move down
+            selection++;
+            if (selection == 5)
+            {
+                selection = 1;
+            }
+            selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+        }
+        else if (c == ENTER_KEY || c == '\n')
+        { // pressed enter
+            switch (selection)
+            {
+            case 1:
+                createScreen();
+                login(email);
+                break;
+            case 2:
+                createScreen();
+                while (true)
+                {
+                    if (kbhit())
+                    {
+                        char key = _getch();
+                        if (key == ESC_KEY)
+                        {
+                            clearScreen();
+                            return MainMenu();
+                            break;
+                        }
+                    }
+                }
+                break;
+            case 3:
+                createScreen();
+                art_at_pos("ascii_art\\credit.txt", LIGHT_GREEN, backgroundColor, 36, 2);
+                read_file_at_pos("ascii_art\\content.txt", WHITE, backgroundColor, 4, 12);
+                TextColor(LIGHT_GREEN);
+                drawRectangle(5, 10, 108, 20);
+                while (true)
+                {
+                    if (kbhit())
+                    {
+                        char key = _getch();
+                        if (key == ESC_KEY)
+                        {
+                            clearScreen();
+                            return MainMenu();
+                            break;
+                        }
+                    }
+                }
+                break;
+            case 4:
+                clearScreen();
+                drawBorder();
+                quit();
+                exit(1);
+                break;
+            }
+        }
+    }
+    system("pause");
+}
+
 void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text)
 {
     int Color = textColor;
@@ -197,6 +298,80 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
         moveCursor(x + w, y + 6);
         cout << char(180);
     }
+}
+void printMenuLogin(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text)
+{
+    drawBorder();
+    pikachu_ava(3, 3);
+    charmander_ava(70, 1);
+    bulbasaur_ava(85, 15);
+    clefairy_ava(20, 23);
+    selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+}
+
+void LoginMenu()
+{
+    int x = 50;
+    int y = 14;
+    int w = 20;
+    int h = 2;
+    int textColor = CYAN;
+    int buttonColor = OCEAN;
+    int backgroundColor = BLACK;
+    string text;
+    showCursor(0);
+    int selection = 1; // start with the first button selected
+    printMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+
+    while (true)
+    {
+        char c = _getch();
+
+        if (c == KEY_w || c == KEY_W)
+        { // move up
+            selection--;
+            if (selection == 0)
+            {
+                selection = 4;
+            }
+            selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+        }
+        else if (c == KEY_s || c == KEY_S)
+        { // move down
+            selection++;
+            if (selection == 5)
+            {
+                selection = 1;
+            }
+            selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+        }
+        else if (c == ENTER_KEY || c == '\n')
+        { // pressed enter
+            switch (selection)
+            {
+            case 1:
+                clearScreen();
+                drawBorder();
+                GamePlayMenu();
+                break;
+            case 2:
+                createScreen();
+                Players p;
+                customGame(p);
+                break;
+            case 3:
+                printLeaderboard();
+                break;
+            case 4:
+                clearScreen();
+                drawBorder();
+                return MainMenu();
+                Sleep(5000);
+                break;
+            }
+        }
+    }
+    system("pause");
 }
 
 void selectionPlayGame(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text)
@@ -272,270 +447,10 @@ void selectionPlayGame(int selection, int x, int y, int w, int h, int textColor,
     }
 }
 
-void printMenu(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text) // main menu
-{
-    drawBorder();
-    art_at_pos("ascii_art\\pikachu.txt", LIGHT_YELLOW, backgroundColor, 21, 1);
-    pokemon_ball(4, 15);
-    pikachu_small(70, 12);
-    selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-}
-
-void printMenuLogin(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text) // menu when users press "LOGIN"
-{
-    drawBorder();
-    pikachu_ava(3, 3);
-    charmander_ava(70, 1);
-    bulbasaur_ava(85, 15);
-    clefairy_ava(20, 23);
-    selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-}
-
-void printPlayGame(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text) // menu when users press "LOGIN"
+void printPlayGame(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text)
 {
     drawBorder();
     selectionPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-}
-
-void MainMenuBack()
-{
-    int x = 50;
-    int y = 24;
-    int w = 20;
-    int h = 2;
-    int textColor = CYAN;
-    int buttonColor = OCEAN;
-    int backgroundColor = BLACK;
-    string email;
-    string text;
-    showCursor(0);
-    int selection = 1;
-    printMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-
-    while (true)
-    {
-        char c = _getch();
-
-        if (c == KEY_w || c == KEY_W)
-        { // move up
-            selection--;
-            if (selection == 0)
-            {
-                selection = 4;
-            }
-            selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-        }
-        else if (c == KEY_s || c == KEY_S)
-        { // move down
-            selection++;
-            if (selection == 5)
-            {
-                selection = 1;
-            }
-            selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-        }
-        else if (c == ENTER_KEY || c == '\n')
-        { // pressed enter
-            switch (selection)
-            {
-            case 1:
-                createScreen();
-                login(email);
-                break;
-            case 2:
-                createScreen();
-                while (true)
-                {
-                    if (kbhit())
-                    {
-                        char key = _getch();
-                        if (key == ESC_KEY)
-                        {
-                            clearScreen();
-                            MainMenuBack();
-                            break;
-                        }
-                    }
-                }
-                break;
-            case 3:
-                createScreen();
-                art_at_pos("ascii_art\\credit.txt", LIGHT_GREEN, backgroundColor, 36, 2);
-                read_file_at_pos("ascii_art\\content.txt", WHITE, backgroundColor, 4, 12);
-                TextColor(LIGHT_GREEN);
-                drawRectangle(5, 10, 108, 20);
-                while (true)
-                {
-                    if (kbhit())
-                    {
-                        char key = _getch();
-                        if (key == ESC_KEY)
-                        {
-                            clearScreen();
-                            MainMenuBack();
-                            break;
-                        }
-                    }
-                }
-                break;
-            case 4:
-                clearScreen();
-                drawBorder();
-                quit();
-                exit(1);
-                break;
-            }
-        }
-    }
-    system("pause");
-}
-
-void LoginMenuBack()
-{
-    int x = 50;
-    int y = 14;
-    int w = 20;
-    int h = 2;
-    int textColor = CYAN;
-    int buttonColor = OCEAN;
-    int backgroundColor = BLACK;
-    string text;
-    showCursor(0);
-    int selection = 1; // start with the first button selected
-    printMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-
-    while (true)
-    {
-        char c = _getch();
-
-        if (c == KEY_w || c == KEY_W)
-        { // move up
-            selection--;
-            if (selection == 0)
-            {
-                selection = 4;
-            }
-            selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-        }
-        else if (c == KEY_s || c == KEY_S)
-        { // move down
-            selection++;
-            if (selection == 5)
-            {
-                selection = 1;
-            }
-            selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-        }
-        else if (c == ENTER_KEY || c == '\n')
-        { // pressed enter
-            switch (selection)
-            {
-            case 1:
-                clearScreen();
-                drawBorder();
-                GamePlayMenu();
-                break;
-            case 2:
-                createScreen();
-                Players p;
-                customGame(p);
-                break;
-            case 3:
-                // createScreen();
-                printLeaderboard();
-                // while (true)
-                // {
-                //     if (kbhit())
-                //     {
-                //         char key = _getch();
-                //         if (key == ESC_KEY)
-                //         {
-                //             clearScreen();
-                //             LoginMenuBack();
-                //             break;
-                //         }
-                //     }
-                // }
-                break;
-            case 4:
-                clearScreen();
-                drawBorder();
-                MainMenuBack();
-                Sleep(5000);
-                break;
-            }
-        }
-    }
-    system("pause");
-}
-
-void GamePlayMenuBack()
-{
-    int x = 50;
-    int y = 13;
-    int w = 19;
-    int h = 2;
-    int textColor = CYAN;
-    int buttonColor = OCEAN;
-    int backgroundColor = BLACK;
-    string text;
-    showCursor(0);
-    int selection = 1; // start with the first button selected
-    printPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-
-    while (true)
-    {
-        char c = _getch();
-
-        if (c == KEY_w || c == KEY_W)
-        { // move up
-            selection--;
-            if (selection == 0)
-            {
-                selection = 4;
-            }
-            selectionPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-        }
-        else if (c == KEY_s || c == KEY_S)
-        { // move down
-            selection++;
-            if (selection == 5)
-            {
-                selection = 1;
-            }
-            selectionPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-        }
-        else if (c == ENTER_KEY || c == '\n')
-        { // pressed enter
-            switch (selection)
-            {
-            case 1:
-                drawBorder();
-                Players p1;
-                normalGame(p1, 1);
-                break;
-            case 2:
-                drawBorder();
-                Players p2;
-                normalGame(p2, 2);
-
-                break;
-            case 3:
-                drawBorder();
-                Players p3;
-                normalGame(p3, 3);
-
-                break;
-            case 4:
-                clearScreen();
-                drawBorder();
-                LoginMenuBack();
-                Sleep(5000);
-                break;
-            }
-        }
-    }
-    system("pause");
 }
 
 void GamePlayMenu()
@@ -599,180 +514,8 @@ void GamePlayMenu()
             case 4:
                 clearScreen();
                 drawBorder();
-                LoginMenuBack();
+                return LoginMenu();
                 Sleep(5000);
-                break;
-            }
-        }
-    }
-    system("pause");
-}
-
-void LoginMenu()
-{
-    int x = 50;
-    int y = 14;
-    int w = 20;
-    int h = 2;
-    int textColor = CYAN;
-    int buttonColor = OCEAN;
-    int backgroundColor = BLACK;
-    string text;
-    showCursor(0);
-    int selection = 1; // start with the first button selected
-    printMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-
-    while (true)
-    {
-        char c = _getch();
-
-        if (c == KEY_w || c == KEY_W)
-        { // move up
-            selection--;
-            if (selection == 0)
-            {
-                selection = 4;
-            }
-            selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-        }
-        else if (c == KEY_s || c == KEY_S)
-        { // move down
-            selection++;
-            if (selection == 5)
-            {
-                selection = 1;
-            }
-            selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-        }
-        else if (c == ENTER_KEY || c == '\n')
-        { // pressed enter
-            switch (selection)
-            {
-            case 1:
-                clearScreen();
-                drawBorder();
-                GamePlayMenu();
-                break;
-            case 2:
-                createScreen();
-                Players p;
-                customGame(p);
-                break;
-            case 3:
-                // createScreen();
-                printLeaderboard();
-                while (true)
-                {
-                    if (kbhit())
-                    {
-                        char key = _getch();
-                        if (key == ESC_KEY)
-                        {
-                            clearScreen();
-                            LoginMenuBack();
-                            break;
-                        }
-                    }
-                }
-                break;
-            case 4:
-                clearScreen();
-                drawBorder();
-                MainMenuBack();
-                Sleep(5000);
-                break;
-            }
-        }
-    }
-    system("pause");
-}
-
-void MainMenu()
-{
-    int x = 50;
-    int y = 24;
-    int w = 20;
-    int h = 2;
-    int textColor = CYAN;
-    int buttonColor = OCEAN;
-    int backgroundColor = BLACK;
-    string email;
-    string text;
-    showCursor(0);
-    int selection = 1;
-    printMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-
-    while (true)
-    {
-        char c = _getch();
-
-        if (c == KEY_w || c == KEY_W)
-        { // move up
-            selection--;
-            if (selection == 0)
-            {
-                selection = 4;
-            }
-            selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-        }
-        else if (c == KEY_s || c == KEY_S)
-        { // move down
-            selection++;
-            if (selection == 5)
-            {
-                selection = 1;
-            }
-            selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
-        }
-        else if (c == ENTER_KEY || c == '\n')
-        { // pressed enter
-            switch (selection)
-            {
-            case 1:
-                createScreen();
-                login(email);
-                break;
-            case 2:
-                createScreen();
-                while (true)
-                {
-                    if (kbhit())
-                    {
-                        char key = _getch();
-                        if (key == ESC_KEY)
-                        {
-                            clearScreen();
-                            MainMenuBack();
-                            break;
-                        }
-                    }
-                }
-                break;
-            case 3:
-                createScreen();
-                art_at_pos("ascii_art\\credit.txt", LIGHT_GREEN, backgroundColor, 36, 2);
-                read_file_at_pos("ascii_art\\content.txt", WHITE, backgroundColor, 4, 12);
-                TextColor(LIGHT_GREEN);
-                drawRectangle(5, 10, 108, 20);
-                while (true)
-                {
-                    if (kbhit())
-                    {
-                        char key = _getch();
-                        if (key == ESC_KEY)
-                        {
-                            clearScreen();
-                            MainMenuBack();
-                            break;
-                        }
-                    }
-                }
-                break;
-            case 4:
-                clearScreen();
-                drawBorder();
-                quit();
-                exit(1);
                 break;
             }
         }

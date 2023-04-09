@@ -1,19 +1,5 @@
 #include "Graphic.h"
 
-void art(string fileName, int pX, int pY)
-{
-    ifstream file;
-    file.open(fileName);
-    string line;
-    // pY = 13;
-    while (getline(file, line))
-    {
-        moveCursor(pX, pY++);
-        cout << line << endl;
-    }
-    file.close();
-}
-
 void art_at_pos(string fileName, int textColor, int backgroundColor, int x, int y)
 {
 	ifstream file;
@@ -372,6 +358,57 @@ void clefairy_ava(int x, int y) {
                 consoleColor(backgroundColor, BLACK);
                 moveCursor(posX, posY);
                 TextColor(BLACK);
+                cout << c;
+                posX++;
+            }
+        }
+        file.close();
+    }
+}
+
+void pikachu_bye(int x, int y) {
+    ifstream file("ascii_art\\pikachu_bye.txt");
+    int backgroundColor = BLACK;
+    if (file.is_open()) {
+        char c;
+        int posX = x, posY = y;
+        while (file.get(c)) {
+            if (c == 'B'||c == 'G') {
+                consoleColor(backgroundColor, LIGHT_YELLOW);
+                moveCursor(posX, posY);
+                TextColor(LIGHT_YELLOW);
+                cout << c;
+                posX++;
+            }
+            else if (c == 'J') {
+                consoleColor(backgroundColor, LIGHT_RED);
+                moveCursor(posX, posY);
+                TextColor(LIGHT_RED);
+                cout << c;
+                posX++;
+            }
+            else if (c == 'W') {
+                consoleColor(backgroundColor, OCEAN);
+                moveCursor(posX, posY);
+                TextColor(OCEAN);
+                cout << c;
+                posX++;
+            }
+            else if (c == 'R') {
+                consoleColor(backgroundColor, GRAY);
+                moveCursor(posX, posY);
+                TextColor(GRAY);
+                cout << c;
+                posX++;
+            }
+            else if (c == '\n') {
+                posY++;
+                posX = x;
+            }
+            else {
+                consoleColor(backgroundColor, LIGHT_WHITE);
+                moveCursor(posX, posY);
+                TextColor(LIGHT_WHITE);
                 cout << c;
                 posX++;
             }
