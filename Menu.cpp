@@ -56,7 +56,7 @@ void login(string &email)
     }
 }
 
-void selectionMenu(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text)
+void selectionMenu(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor)
 {
     int Color = textColor;
 
@@ -125,13 +125,13 @@ void selectionMenu(int selection, int x, int y, int w, int h, int textColor, int
     }
 }
 
-void printMenu(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text)
+void printMenu(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor)
 {
     drawBorder();
     art_at_pos("ascii_art\\pikachu.txt", LIGHT_YELLOW, backgroundColor, 21, 1);
     pokemon_ball(4, 15);
     pikachu_small(70, 12);
-    selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+    selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor);
 }
 
 void MainMenu()
@@ -144,10 +144,9 @@ void MainMenu()
     int buttonColor = OCEAN;
     int backgroundColor = BLACK;
     string email;
-    string text;
     showCursor(0);
     int selection = 1;
-    printMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+    printMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor);
 
     while (true)
     {
@@ -160,7 +159,7 @@ void MainMenu()
             {
                 selection = 4;
             }
-            selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+            selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor);
         }
         else if (c == KEY_s || c == KEY_S)
         { // move down
@@ -169,14 +168,15 @@ void MainMenu()
             {
                 selection = 1;
             }
-            selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+            selectionMenu(selection, x, y, w, h, textColor, buttonColor, backgroundColor);
         }
         else if (c == ENTER_KEY || c == '\n')
         { // pressed enter
             switch (selection)
             {
             case 1:
-                createScreen();
+                clearScreen();
+                drawBorder();
                 login(email);
                 break;
             case 2:
@@ -227,7 +227,7 @@ void MainMenu()
     system("pause");
 }
 
-void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text)
+void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor)
 {
     int Color = textColor;
 
@@ -299,14 +299,14 @@ void selectionMenuLogin(int selection, int x, int y, int w, int h, int textColor
         cout << char(180);
     }
 }
-void printMenuLogin(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text)
+void printMenuLogin(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor)
 {
     drawBorder();
     pikachu_ava(3, 3);
     charmander_ava(70, 1);
     bulbasaur_ava(85, 15);
     clefairy_ava(20, 23);
-    selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+    selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor);
 }
 
 void LoginMenu()
@@ -318,10 +318,9 @@ void LoginMenu()
     int textColor = CYAN;
     int buttonColor = OCEAN;
     int backgroundColor = BLACK;
-    string text;
     showCursor(0);
     int selection = 1; // start with the first button selected
-    printMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+    printMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor);
 
     while (true)
     {
@@ -334,7 +333,7 @@ void LoginMenu()
             {
                 selection = 4;
             }
-            selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+            selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor);
         }
         else if (c == KEY_s || c == KEY_S)
         { // move down
@@ -343,7 +342,7 @@ void LoginMenu()
             {
                 selection = 1;
             }
-            selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+            selectionMenuLogin(selection, x, y, w, h, textColor, buttonColor, backgroundColor);
         }
         else if (c == ENTER_KEY || c == '\n')
         { // pressed enter
@@ -374,7 +373,7 @@ void LoginMenu()
     system("pause");
 }
 
-void selectionPlayGame(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text)
+void selectionPlayGame(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor)
 {
     int Color = textColor;
 
@@ -447,10 +446,10 @@ void selectionPlayGame(int selection, int x, int y, int w, int h, int textColor,
     }
 }
 
-void printPlayGame(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text)
+void printPlayGame(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor)
 {
     drawBorder();
-    selectionPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+    selectionPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor);
 }
 
 void GamePlayMenu()
@@ -462,10 +461,9 @@ void GamePlayMenu()
     int textColor = CYAN;
     int buttonColor = OCEAN;
     int backgroundColor = BLACK;
-    string text;
     showCursor(0);
     int selection = 1; // start with the first button selected
-    printPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+    printPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor);
 
     while (true)
     {
@@ -478,7 +476,7 @@ void GamePlayMenu()
             {
                 selection = 4;
             }
-            selectionPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+            selectionPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor);
         }
         else if (c == KEY_s || c == KEY_S)
         { // move down
@@ -487,7 +485,7 @@ void GamePlayMenu()
             {
                 selection = 1;
             }
-            selectionPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor, text);
+            selectionPlayGame(selection, x, y, w, h, textColor, buttonColor, backgroundColor);
         }
         else if (c == ENTER_KEY || c == '\n')
         { // pressed enter
