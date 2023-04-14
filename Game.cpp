@@ -3,8 +3,10 @@
 void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Settings &sett, int &gameStatus, Point &curPos, int &couple, Point select[2])
 {
 	Point pCheck1, pCheck2;
+	// win
 	if (checkGameWin(board, _row, _col))
 		gameStatus = 0;
+	// shuffle when no valid moves
 	else if (!moveSuggestion(board, _row, _col, pCheck1, pCheck2))
 	{
 		board[curPos.x][curPos.y].status = 0;
@@ -49,7 +51,7 @@ void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Setting
 			clearScreen();
 		}
 		else if (_ch == KEY_w || _ch == KEY_W)
-		{
+		{	// up
 			board[curPos.x][curPos.y].status = 0;
 			bool check = false;
 			for (int j = curPos.y; j < curPos.y + 1; j++)
@@ -101,11 +103,12 @@ void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Setting
 						break;
 				}
 			}
-
+			if (sett.music)
+				PlaySound(TEXT(MOVE_SOUND), NULL, SND_ASYNC);
 			board[curPos.x][curPos.y].status = 1;
 		}
 		else if (_ch == KEY_s || _ch == KEY_S)
-		{
+		{	// down
 			board[curPos.x][curPos.y].status = 0;
 			bool check = false;
 			for (int j = curPos.y; j < curPos.y + 1; j++)
@@ -157,10 +160,12 @@ void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Setting
 						break;
 				}
 			}
+			if (sett.music)
+				PlaySound(TEXT(MOVE_SOUND), NULL, SND_ASYNC);
 			board[curPos.x][curPos.y].status = 1;
 		}
 		else if (_ch == KEY_a || _ch == KEY_A)
-		{
+		{	// left
 			board[curPos.x][curPos.y].status = 0;
 			bool check = false;
 
@@ -214,10 +219,12 @@ void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Setting
 						break;
 				}
 			}
+			if (sett.music)
+				PlaySound(TEXT(MOVE_SOUND), NULL, SND_ASYNC);
 			board[curPos.x][curPos.y].status = 1;
 		}
 		else if (_ch == KEY_d || _ch == KEY_D)
-		{
+		{	// right
 			board[curPos.x][curPos.y].status = 0;
 			bool check = false;
 
@@ -271,11 +278,15 @@ void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Setting
 						break;
 				}
 			}
+			if (sett.music)
+				PlaySound(TEXT(MOVE_SOUND), NULL, SND_ASYNC);
 			board[curPos.x][curPos.y].status = 1;
 		}
 		else if (_ch == KEY_h || _ch == KEY_H)
-		{
+		{	// hint
 			Point p1, p2;
+			if (sett.music)
+				PlaySound(TEXT(MOVE_SOUND), NULL, SND_ASYNC);
 
 			if (moveSuggestion(board, _row, _col, p1, p2))
 			{
@@ -295,7 +306,7 @@ void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Setting
 				printf("%d point", p.point);
 		}
 		else if (_ch == KEY_r || _ch == KEY_R)
-		{
+		{	// random board
 			board[curPos.x][curPos.y].status = 0;
 			randomize(board, _row, _col);
 
@@ -328,9 +339,12 @@ void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Setting
 				board[curPos.x][curPos.y].status = 1;
 			else
 				board[curPos.x][curPos.y].status = 2;
+
+			if (sett.music)
+				PlaySound(TEXT(MOVE_SOUND), NULL, SND_ASYNC);
 		}
 		else if (_ch == KEY_m || _ch == KEY_M)
-		{
+		{	// mute/unmute
 			if (sett.music)
 			{
 				sett.music = 0;
@@ -343,6 +357,8 @@ void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Setting
 				moveCursor(89, 9);
 				printf("On   ");
 			}
+			if (sett.music)
+				PlaySound(TEXT(MOVE_SOUND), NULL, SND_ASYNC);
 		}
 		else if (_ch == ENTER_KEY)
 		{
@@ -351,12 +367,15 @@ void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Setting
 				select[0].x = curPos.x;
 				select[0].y = curPos.y;
 				couple--;
+				if (sett.music)
+					PlaySound(TEXT(MOVE_SOUND), NULL, SND_ASYNC);
 			}
 			else if (couple == 1)
 			{
 				select[1].x = curPos.x;
 				select[1].y = curPos.y;
-
+				if (sett.music)
+					PlaySound(TEXT(MOVE_SOUND), NULL, SND_ASYNC);
 				// refresh point
 				moveCursor(90, 22);
 				printf("              ");
@@ -390,6 +409,9 @@ void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Setting
 					trueMatch(board, select[0].x, select[0].y);
 					trueMatch(board, select[1].x, select[1].y);
 
+					if (sett.music)
+						PlaySound(TEXT(CORRECT_SOUND), NULL, SND_ASYNC);
+
 					p.point += 20;
 					moveCursor(90, 22);
 					if (p.point > 1)
@@ -412,7 +434,7 @@ void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Setting
 					wrongMatch(board, select[1].x, select[1].y);
 
 					if (sett.music)
-						PlaySound(TEXT("sounds\\siu.wav"), NULL, SND_ASYNC);
+						PlaySound(TEXT(SIU_SOUND), NULL, SND_ASYNC);
 
 					board[select[0].x][select[0].y].status = 0;
 					board[select[1].x][select[1].y].status = 0;
@@ -517,7 +539,6 @@ void normalForm(Players &p)
 	TextColor(LIGHT_WHITE);
 	moveCursor(56, 14);
 	cin.getline(p.name, 20);
-	// cin.ignore();
 	p.point = 0;
 	p.time = 0;
 }
@@ -595,14 +616,20 @@ void normalGame(Players &p, int choice)
 	pushRecord(p);
 	clearScreen();
 	moveCursor(10, 0);
-	if (!win)
+	if (gameStatus == 2)
 	{
+		return printLeaderboard();
+	}
+	else if (!win)
+	{
+		if (sett.music)
+			PlaySound(TEXT(LOSE_SOUND), NULL, SND_ASYNC);
 		read_file_at_pos("ascii_art\\youlose.txt", LIGHT_RED, BLACK, 18, 10);
 	}
 	else if (win)
 	{
 		if (sett.music)
-			PlaySound(TEXT("sounds\\glory_mu.wav"), NULL, SND_ASYNC);
+			PlaySound(TEXT(GLORY_SOUND), NULL, SND_ASYNC);
 		read_file_at_pos("ascii_art\\youwin.txt", LIGHT_GREEN, BLACK, 22, 10);
 	}
 	showCursor(1);
@@ -621,7 +648,7 @@ void normalGame(Players &p, int choice)
 	}
 	else if (c == 'n' || c == 'N')
 		printLeaderboard();
-		
+
 	deallocate(board, _size.row);
 }
 
@@ -654,7 +681,7 @@ void customForm(Board &_size, Players &p, Settings &sett)
 	moveCursor(20, 30);
 	printf("*NOTE: Please enter at least one even number in rows/columns to play game!");
 	moveCursor(34, 32);
-    printf("Rows & Columns must be positive integers from 1 to 10");
+	printf("Rows & Columns must be positive integers from 1 to 10");
 
 	showCursor(1);
 	moveCursor(60, 15);
@@ -666,7 +693,7 @@ void customForm(Board &_size, Players &p, Settings &sett)
 	cin >> _size.row;
 	moveCursor(73, 19);
 	cin >> _size.col;
-	while (((_size.row*_size.col) & 1) || (_size.col <= 0) || (_size.row <= 0) || (_size.col > 10) || (_size.row > 10))
+	while (((_size.row * _size.col) & 1) || (_size.col <= 0) || (_size.row <= 0) || (_size.col > 10) || (_size.row > 10))
 	{
 		moveCursor(43, 27);
 		TextColor(LIGHT_RED);
@@ -753,14 +780,20 @@ void customGame(Players &p)
 	pushRecord(p);
 
 	clearScreen();
-	if (!win)
+	if (gameStatus == 2)
 	{
+		return printLeaderboard();
+	}
+	else if (!win)
+	{
+		if (sett.music)
+			PlaySound(TEXT(LOSE_SOUND), NULL, SND_ASYNC);
 		read_file_at_pos("ascii_art\\youlose.txt", LIGHT_RED, BLACK, 18, 10);
 	}
 	else if (win)
 	{
 		if (sett.music)
-			PlaySound(TEXT("sounds\\glory_mu.wav"), NULL, SND_ASYNC);
+			PlaySound(TEXT(GLORY_SOUND), NULL, SND_ASYNC);
 		read_file_at_pos("ascii_art\\youwin.txt", LIGHT_GREEN, BLACK, 22, 10);
 	}
 	showCursor(1);
@@ -779,6 +812,6 @@ void customGame(Players &p)
 	}
 	else if (c == 'n' || c == 'N')
 		printLeaderboard();
-		
+
 	deallocate(board, _size.row);
 }

@@ -1,5 +1,6 @@
 #include "User.h"
 
+// check email
 bool verify(string email)
 {
     int n = email.size();
@@ -25,6 +26,7 @@ bool comparePlayers(const Players &p1, const Players &p2)
         return p1.time < p2.time;
 }
 
+// sizes of binary file
 long long unsigned int fileSize(string file)
 {
     const char *file_name = file.c_str();
@@ -54,19 +56,18 @@ void pushRecord(Players p)
         fileIn.write(reinterpret_cast<const char *>(&p), sizeof(Players));
         fileIn.close();
 
-        // rewrite and sort
+        // sort
         long long unsigned int curSize = fileSize("players.bin") / sizeof(Players);
         Players players_read[curSize];
-        // Players* players_read = new Players[curSize];
         ifstream fi;
         fi.open("players.bin", ios::binary);
         fi.read(reinterpret_cast<char *>(&players_read), sizeof(Players) * curSize);
         fi.close();
         sort(players_read, players_read + curSize, comparePlayers);
 
+        // rewrite new datas
         ofstream f("players.bin", ios::binary);
         f.write(reinterpret_cast<const char *>(&players_read), sizeof(Players) * curSize);
-        // delete [] players_read;
         f.close();
     }
     else

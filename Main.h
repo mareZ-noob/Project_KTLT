@@ -72,6 +72,10 @@ using std::min;
 #define SIU_SOUND "sounds\\siu.wav"
 #define POKEMON_SOUND "sounds\\pokemon.wav"
 #define GLORY_SOUND "sounds\\glory_mu.wav"
+#define MOVE_SOUND "sounds\\move.wav"
+#define SELECT_SOUND "sounds\\select.wav"
+#define CORRECT_SOUND "sounds\\correct.wav"
+#define LOSE_SOUND "sounds\\lose.wav"
 
 struct Point
 {

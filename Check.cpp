@@ -16,8 +16,10 @@ bool checkLineX(Board **board, int y1, int y2, int x)
 // check with line y, from row x1 to x2
 bool checkLineY(Board **board, int x1, int x2, int y)
 {
+    // find point have row max and min
     int min_val = min(x1, x2);
     int max_val = max(x1, x2);
+    // run row
     for (int x = min_val + 1; x < max_val; x++)
         if (board[x][y].ch != ' ')
             return false;
@@ -26,6 +28,7 @@ bool checkLineY(Board **board, int x1, int x2, int y)
 
 bool check_I(Board **board, int x1, int y1, int x2, int y2)
 {
+    // use 2 functions above
     if (x1 == x2 && y1 == y2)
         return false;
     if (board[x1][y1].ch != board[x2][y2].ch)
@@ -46,6 +49,8 @@ bool check_I(Board **board, int x1, int y1, int x2, int y2)
 
 bool check_L(Board **board, int x1, int y1, int x2, int y2)
 {
+    // find the juction (call A) of 2 points (B, C)
+    // check path B->A, A->C
     if (x1 == x2 && y1 == y2)
         return false;
     if (board[x1][y1].ch != board[x2][y2].ch)
@@ -152,6 +157,7 @@ bool checkRectY(Board **board, int x1, int y1, int x2, int y2)
 
 bool check_Z(Board **board, int x1, int y1, int x2, int y2)
 {
+    // use 2 functions above
     return checkRectX(board, x1, y1, x2, y2) ||
            checkRectY(board, x1, y1, x2, y2);
 }
@@ -320,6 +326,7 @@ bool checkGameWin(Board **board, int _row, int _col)
     return true;
 }
 
+// loop to find valid pair
 bool moveSuggestion(Board **board, int _row, int _col, Point &p1, Point &p2)
 {
     for (int i = 0; i < _row; i++)

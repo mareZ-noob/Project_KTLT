@@ -3,7 +3,7 @@
 char s[3][6];
 void createBox()
 {
-	// create a very square box
+	// create a very square box 
 	s[0][0] = char(218);
 	s[0][1] = s[0][2] = s[0][3] = char(196);
 	s[0][4] = char(191);
@@ -20,9 +20,9 @@ void Board::drawBox(Board **&board)
 	createBox();
 	int posX = col + 1;
 	int posY = row + 1;
-
+	
 	if (board[row][col].status == 0)
-	{
+	{	// unselected boxes
 		for (int i = 0; i < 3; i++)
 		{
 			consoleColor(BLACK, YELLOW);
@@ -35,7 +35,7 @@ void Board::drawBox(Board **&board)
 		consoleColor(BLACK, LIGHT_WHITE);
 	}
 	else if (board[row][col].status == 1)
-	{
+	{	// selected boxes
 		for (int i = 0; i < 3; i++)
 		{
 			consoleColor(BLACK, YELLOW);
@@ -50,7 +50,7 @@ void Board::drawBox(Board **&board)
 		consoleColor(BLACK, LIGHT_WHITE);
 	}
 	else if (board[row][col].status == 2)
-	{
+	{	// terminate boxex
 		board[row][col].ch = ' ';
 		for (int i = 0; i < 3; i++)
 		{
@@ -61,7 +61,7 @@ void Board::drawBox(Board **&board)
 }
 
 void deallocate(Board **board, int _row)
-{
+{	// free memory
 	for (int i = 0; i < _row; i++)
 		delete[] board[i];
 	delete[] board;
@@ -71,7 +71,7 @@ void deallocate(Board **board, int _row)
 Board **randomize(Board **&board, int _row, int _col)
 {
 	srand(time(0));
-	// 1D array from vector
+	// create 1D array from vector
 	vector<Board> vec;
 	for (int i = 0; i < _row; i++)
 		for (int j = 0; j < _col; j++)
@@ -102,7 +102,7 @@ Board **createBoard(Board **&board, int _row, int _col)
 		}
 	}
 
-	// make the chars even
+	// make the appearence of chars even
 	if (_col & 1) // _col is odd
 	{
 		for (int i = 0; i <= _row / 2; i++)
@@ -125,6 +125,7 @@ Board **createBoard(Board **&board, int _row, int _col)
 			}
 		}
 	}
+	// set all to unselected boxes (status = 0)
 	randomize(board, _row, _col);
 	for (int i = 0; i < _row; i++)
 	{
@@ -136,16 +137,17 @@ Board **createBoard(Board **&board, int _row, int _col)
 	return board;
 }
 
+
 void renderBoard(Board **&board, int _row, int _col)
-{
+{	// print board
 	for (int i = 0; i < _row; i++)
 		for (int j = 0; j < _col; j++)
 			board[i][j].drawBox(board);
 }
 
-// effects when match correct
+
 void trueMatch(Board **board, int _row, int _col)
-{
+{	// effects when matches correct
 	createBox();
 	for (int i = 0; i < 3; i++)
 	{
@@ -161,9 +163,9 @@ void trueMatch(Board **board, int _row, int _col)
 	consoleColor(BLACK, LIGHT_WHITE);
 }
 
-// effects when match wrong
+
 void wrongMatch(Board **board, int _row, int _col)
-{
+{	// effects when matches wrong
 	createBox();
 	for (int i = 0; i < 3; i++)
 	{
@@ -179,9 +181,9 @@ void wrongMatch(Board **board, int _row, int _col)
 	consoleColor(BLACK, LIGHT_WHITE);
 }
 
-// effects when suggest
+
 void suggestMatch(Board **board, int _row, int _col)
-{
+{	// effects when suggest move
 	createBox();
 	for (int i = 0; i < 3; i++)
 	{
@@ -197,9 +199,9 @@ void suggestMatch(Board **board, int _row, int _col)
 	consoleColor(BLACK, WHITE);
 }
 
-// shift all blocks to left
+
 Board **retreatBoard(Board **&board, int _row, int _col)
-{
+{	// shift all blocks to left
 	int n = _col - 1;
 	while (n--)
 	{

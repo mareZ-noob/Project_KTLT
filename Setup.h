@@ -9,7 +9,6 @@ void DisableResizeWindow();
 void DisableCtrButton(bool Close, bool Min, bool Max);
 void ShowScrollbar(BOOL Show);
 
-void DisableSelection();
 void showCursor(bool visible);
 void moveCursor(int posX, int posY);
 void disableMouseInput();

@@ -48,8 +48,8 @@ void ShowScrollbar(BOOL Show)
 
 void showCursor(bool visible)
 {
-	CONSOLE_CURSOR_INFO cursor = { 1, visible };
-	SetConsoleCursorInfo(console, &cursor);
+    CONSOLE_CURSOR_INFO cursor = {1, visible};
+    SetConsoleCursorInfo(console, &cursor);
 }
 
 void moveCursor(int posX, int posY)
@@ -146,6 +146,7 @@ void drawRectangle(int left, int top, int width, int height)
 
 void initConsole()
 {
+    clearScreen();
     SetWindowSize(895, 620);
     consoleTitle();
     disableMouseInput();
@@ -157,57 +158,62 @@ void initConsole()
 
 void TextColor(WORD color)
 {
-	HANDLE hConsoleOutput;
-	hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    HANDLE hConsoleOutput;
+    hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
 
-	CONSOLE_SCREEN_BUFFER_INFO screen_buffer_info;
-	GetConsoleScreenBufferInfo(hConsoleOutput, &screen_buffer_info);
+    CONSOLE_SCREEN_BUFFER_INFO screen_buffer_info;
+    GetConsoleScreenBufferInfo(hConsoleOutput, &screen_buffer_info);
 
-	WORD wAttributes = screen_buffer_info.wAttributes;
-	color &= 0x000f;
-	wAttributes &= 0xfff0;
-	wAttributes |= color;
+    WORD wAttributes = screen_buffer_info.wAttributes;
+    color &= 0x000f;
+    wAttributes &= 0xfff0;
+    wAttributes |= color;
 
-	SetConsoleTextAttribute(hConsoleOutput, wAttributes);
+    SetConsoleTextAttribute(hConsoleOutput, wAttributes);
 }
 
 void button(int x, int y, int w, int h, int textColor, int buttonColor, int color, string text)
 {
-	consoleColor(color, textColor);
-	for (int iy = y + 1; iy <= y + h - 1; iy++)
-	{
-		for (int ix = x + 1; ix <= x + w - 1; ix++)
-		{
-			moveCursor(ix, iy); cout << " ";
-		}
-	}
-    
-	moveCursor(x + 1, y + 1);
-	TextColor(textColor);
-	cout << text;
+    consoleColor(color, textColor);
+    for (int iy = y + 1; iy <= y + h - 1; iy++)
+    {
+        for (int ix = x + 1; ix <= x + w - 1; ix++)
+        {
+            moveCursor(ix, iy);
+            cout << " ";
+        }
+    }
 
-	consoleColor(color, textColor);
-	TextColor(buttonColor);
-	if (h <= 1 || w <= 1)
-		return;
-	for (int ix = x; ix <= x + w; ix++)
-	{
-		moveCursor(ix, y);
-		cout << char(196);
-		moveCursor(ix, y + h);
-		cout << char(196);
-	}
-	for (int iy = y; iy <= y + h; iy++)
-	{
-		moveCursor(x, iy);
-		cout << char(179);
-		moveCursor(x + w, iy);
-		cout << char(179);
-	}
-	moveCursor(x, y); cout << char(218);
-	moveCursor(x + w, y); cout << char(191);
-	moveCursor(x, y + h); cout << char(192);
-	moveCursor(x + w, y + h); cout << char(217);
+    moveCursor(x + 1, y + 1);
+    TextColor(textColor);
+    cout << text;
+
+    consoleColor(color, textColor);
+    TextColor(buttonColor);
+    if (h <= 1 || w <= 1)
+        return;
+    for (int ix = x; ix <= x + w; ix++)
+    {
+        moveCursor(ix, y);
+        cout << char(196);
+        moveCursor(ix, y + h);
+        cout << char(196);
+    }
+    for (int iy = y; iy <= y + h; iy++)
+    {
+        moveCursor(x, iy);
+        cout << char(179);
+        moveCursor(x + w, iy);
+        cout << char(179);
+    }
+    moveCursor(x, y);
+    cout << char(218);
+    moveCursor(x + w, y);
+    cout << char(191);
+    moveCursor(x, y + h);
+    cout << char(192);
+    moveCursor(x + w, y + h);
+    cout << char(217);
 }
 
 void drawBorder()
@@ -218,14 +224,14 @@ void drawBorder()
 
 void drawBackButton()
 {
-    drawRectangle(0, 32, 21 ,2);
-    moveCursor(1,33);
+    drawRectangle(0, 32, 21, 2);
+    moveCursor(1, 33);
     TextColor(LIGHT_WHITE);
-    cout << "<< Press ";
+    printf("<< Press ");
     TextColor(LIGHT_RED);
-    cout << "Esc";
+    printf("Esc");
     TextColor(LIGHT_WHITE);
-    cout << " to back";
+    printf(" to back");
 
     TextColor(YELLOW);
     moveCursor(0, 32);
@@ -234,7 +240,8 @@ void drawBackButton()
     cout << char(193);
 }
 
-void createScreen(){
+void createScreen()
+{
     clearScreen();
     drawBorder();
     drawBackButton();
@@ -242,40 +249,45 @@ void createScreen(){
 
 void box(double x, double y, double w, double h, int textColor, int buttonColor, int color, char chr)
 {
-   consoleColor(color, textColor);
-	for (double iy = y + 1; iy <= y + h - 1; iy++)
-	{
-		for (double ix = x + 1; ix <= x + w - 1; ix++)
-		{
-			moveCursor(ix, iy); cout << " ";
-		}
-	}
-    
-	moveCursor((double)x + w / 2, (double)y + h / 2);
-	TextColor(textColor);
-	cout << chr;
+    consoleColor(color, textColor);
+    for (double iy = y + 1; iy <= y + h - 1; iy++)
+    {
+        for (double ix = x + 1; ix <= x + w - 1; ix++)
+        {
+            moveCursor(ix, iy);
+            cout << " ";
+        }
+    }
 
-	consoleColor(color, textColor);
-	TextColor(buttonColor);
-	if (h <= 1 || w <= 1)
-		return;
-	for (double ix = x; ix <= x + w; ix++)
-	{
-		moveCursor(ix, y);
-		cout << char(196);
-		moveCursor(ix, y + h);
-		cout << char(196);
-	}
-	for (double iy = y; iy <= y + h; iy++)
-	{
-		moveCursor(x, iy);
-		cout << char(179);
-		moveCursor(x + w, iy);
-		cout << char(179);
-	}
+    moveCursor((double)x + w / 2, (double)y + h / 2);
+    TextColor(textColor);
+    cout << chr;
 
-	moveCursor(x, y); cout << char(218);
-	moveCursor(x + w, y); cout << char(191);
-	moveCursor(x, y + h); cout << char(192);
-	moveCursor(x + w, y + h); cout << char(217);
+    consoleColor(color, textColor);
+    TextColor(buttonColor);
+    if (h <= 1 || w <= 1)
+        return;
+    for (double ix = x; ix <= x + w; ix++)
+    {
+        moveCursor(ix, y);
+        cout << char(196);
+        moveCursor(ix, y + h);
+        cout << char(196);
+    }
+    for (double iy = y; iy <= y + h; iy++)
+    {
+        moveCursor(x, iy);
+        cout << char(179);
+        moveCursor(x + w, iy);
+        cout << char(179);
+    }
+
+    moveCursor(x, y);
+    cout << char(218);
+    moveCursor(x + w, y);
+    cout << char(191);
+    moveCursor(x, y + h);
+    cout << char(192);
+    moveCursor(x + w, y + h);
+    cout << char(217);
 }

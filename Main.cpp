@@ -1,7 +1,7 @@
 #include "Menu.h"
 
-int main() {
-    clearScreen();
+int main()
+{
     initConsole();
     PlaySound(TEXT(POKEMON_SOUND), NULL, SND_ASYNC);
     MainMenu();

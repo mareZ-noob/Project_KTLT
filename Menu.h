@@ -6,6 +6,7 @@
 
 void quit();
 void login(string &email);
+void HowToPlay();
 
 // start menu
 void selectionMenu(int selection, int x, int y, int w, int h, int textColor, int buttonColor, int backgroundColor, string text);

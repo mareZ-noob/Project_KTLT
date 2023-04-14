@@ -25,15 +25,15 @@ void login(string &email)
 
     moveCursor(42, 22);
     TextColor(LIGHT_YELLOW);
-    cout << "Email: ";
+    printf("Email: ");
     moveCursor(48, 22);
     button(48, 21, 30, 2, LIGHT_WHITE, OCEAN, BLACK, " ");
     moveCursor(43, 24);
     TextColor(LIGHT_GREEN);
-    cout << "(Using \"@clc.fitus.edu.vn\" to login)";
+    printf("(Using \"@clc.fitus.edu.vn\" to login)");
     moveCursor(49, 26);
     TextColor(LIGHT_YELLOW);
-    cout << "Press ENTER to continue";
+    printf("Press ENTER to continue");
 
     moveCursor(49, 22);
     TextColor(LIGHT_WHITE);
@@ -49,9 +49,9 @@ void login(string &email)
     {
         TextColor(RED);
         moveCursor(51, 30);
-        cout << "INVALID EMAIL ADDRESS!";
+        printf("INVALID EMAIL ADDRESS!");
         moveCursor(47, 31);
-        cout << "Please enter your email again";
+        printf("Please enter your email again");
         return login(email);
     }
 }
@@ -181,6 +181,7 @@ void MainMenu()
                 break;
             case 2:
                 createScreen();
+                HowToPlay();
                 while (true)
                 {
                     if (kbhit())
@@ -219,7 +220,6 @@ void MainMenu()
                 clearScreen();
                 drawBorder();
                 quit();
-                exit(1);
                 break;
             }
         }
@@ -521,4 +521,42 @@ void GamePlayMenu()
         }
     }
     system("pause");
+}
+
+void HowToPlay()
+{
+    art_at_pos("ascii_art\\howtoplay.txt", CYAN, BLACK, 30, 2);
+    drawRectangle(15, 8, 90, 20);
+    drawRectangle(15, 8, 20, 4);
+    drawRectangle(15, 12, 90, 12);
+    drawRectangle(15, 12, 20, 12);
+    drawRectangle(15, 24, 20, 4);
+
+    moveCursor(15, 12);
+    cout << char(195);
+    moveCursor(15, 24);
+    cout << char(195);
+    moveCursor(36, 8);
+    cout << char(194);
+    moveCursor(36, 12);
+    cout << char(197);
+    moveCursor(36, 24);
+    cout << char(197);
+    moveCursor(36, 28);
+    cout << char(193);
+    moveCursor(106, 12);
+    cout << char(180);
+    moveCursor(106, 24);
+    cout << char(180);
+
+    moveCursor(23, 10);
+    TextColor(LIGHT_YELLOW);
+    cout << "MOVES:";
+    moveCursor(21, 18);
+    TextColor(LIGHT_GREEN);
+    cout << "GAME RULES:";
+    moveCursor(23, 26);
+    TextColor(LIGHT_BLUE);
+    cout << "SCORES:";
+    read_file_at_pos("ascii_art\\howtoplay_content.txt", WHITE, BLACK, 38, 9);
 }

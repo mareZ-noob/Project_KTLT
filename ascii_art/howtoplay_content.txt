@@ -1,0 +1,19 @@
+        - Up:   W/w         - Down:  S/s
+
+        - Left: A/a         - Right: D/d
+
+- The Matching Game consists of a board containing multiple cells 
+that represent characters or letters.
+
+- The objective of the player is to select two cells with matching 
+characters or letters that can be connected by 1 of 4 patterns: 
+I, L, U, and Z.
+
+- Validly connected shapes will make the two cells disappear.
+
+- The game will end if the player clears all the cells on the board 
+or runs out of the provided number of lives.
+
+        - Right matching:   +20 pts
+        - Wrong matching:   -5 pts, -1 live
+        - Move suggestion:  -5 pts
