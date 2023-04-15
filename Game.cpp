@@ -51,7 +51,7 @@ void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Setting
 			clearScreen();
 		}
 		else if (_ch == KEY_w || _ch == KEY_W)
-		{	// up
+		{ // up
 			board[curPos.x][curPos.y].status = 0;
 			bool check = false;
 			for (int j = curPos.y; j < curPos.y + 1; j++)
@@ -108,7 +108,7 @@ void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Setting
 			board[curPos.x][curPos.y].status = 1;
 		}
 		else if (_ch == KEY_s || _ch == KEY_S)
-		{	// down
+		{ // down
 			board[curPos.x][curPos.y].status = 0;
 			bool check = false;
 			for (int j = curPos.y; j < curPos.y + 1; j++)
@@ -165,7 +165,7 @@ void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Setting
 			board[curPos.x][curPos.y].status = 1;
 		}
 		else if (_ch == KEY_a || _ch == KEY_A)
-		{	// left
+		{ // left
 			board[curPos.x][curPos.y].status = 0;
 			bool check = false;
 
@@ -224,7 +224,7 @@ void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Setting
 			board[curPos.x][curPos.y].status = 1;
 		}
 		else if (_ch == KEY_d || _ch == KEY_D)
-		{	// right
+		{ // right
 			board[curPos.x][curPos.y].status = 0;
 			bool check = false;
 
@@ -283,7 +283,7 @@ void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Setting
 			board[curPos.x][curPos.y].status = 1;
 		}
 		else if (_ch == KEY_h || _ch == KEY_H)
-		{	// hint
+		{ // hint
 			Point p1, p2;
 			if (sett.music)
 				PlaySound(TEXT(MOVE_SOUND), NULL, SND_ASYNC);
@@ -306,7 +306,7 @@ void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Setting
 				printf("%d point", p.point);
 		}
 		else if (_ch == KEY_r || _ch == KEY_R)
-		{	// random board
+		{ // random board
 			board[curPos.x][curPos.y].status = 0;
 			randomize(board, _row, _col);
 
@@ -344,7 +344,7 @@ void gameLoop(Board **&board, int _row, int _col, Players &p, int &life, Setting
 				PlaySound(TEXT(MOVE_SOUND), NULL, SND_ASYNC);
 		}
 		else if (_ch == KEY_m || _ch == KEY_M)
-		{	// mute/unmute
+		{ // mute/unmute
 			if (sett.music)
 			{
 				sett.music = 0;
@@ -618,18 +618,54 @@ void normalGame(Players &p, int choice)
 	moveCursor(10, 0);
 	if (gameStatus == 2)
 	{
+		clearScreen();
+		createScreen();
+		moveCursor(50,13);
+		cout << "Your name: " << p.name << endl;
+		moveCursor(50,14);
+		cout << "Your scores: " << p.point << endl;
+		moveCursor(50,15);
+		cout << "Lifes remain: " << life << endl;
+		moveCursor(50,16);
+		cout << "Total time: " << p.time;
+		Sleep(3000);
+		clearScreen();
 		return printLeaderboard();
 	}
 	else if (!win)
 	{
 		if (sett.music)
 			PlaySound(TEXT(LOSE_SOUND), NULL, SND_ASYNC);
+		clearScreen();
+		createScreen();
+		moveCursor(50,13);
+		cout << "Your name: " << p.name << endl;
+		moveCursor(50,14);
+		cout << "Your scores: " << p.point << endl;
+		moveCursor(50,15);
+		cout << "Lifes remain: " << life << endl;
+		moveCursor(50,16);
+		cout << "Total time: " << p.time;
+		Sleep(3000);
+		clearScreen();
 		read_file_at_pos("ascii_art\\youlose.txt", LIGHT_RED, BLACK, 18, 10);
 	}
 	else if (win)
 	{
 		if (sett.music)
 			PlaySound(TEXT(GLORY_SOUND), NULL, SND_ASYNC);
+		clearScreen();
+		createScreen();
+		moveCursor(50,13);
+		cout << "Your name: " << p.name << endl;
+		moveCursor(50,14);
+		cout << "Your scores: " << p.point << endl;
+		moveCursor(50,15);
+		cout << "Lifes remain: " << life << endl;
+		moveCursor(50,16);
+		cout << "Total time: " << p.time;
+		Sleep(3000);
+		clearScreen();
 		read_file_at_pos("ascii_art\\youwin.txt", LIGHT_GREEN, BLACK, 22, 10);
 	}
 	showCursor(1);
@@ -647,7 +683,10 @@ void normalGame(Players &p, int choice)
 		return normalGame(p, choice);
 	}
 	else if (c == 'n' || c == 'N')
+	{
+		cin.ignore();
 		printLeaderboard();
+	}
 
 	deallocate(board, _size.row);
 }
@@ -782,18 +821,54 @@ void customGame(Players &p)
 	clearScreen();
 	if (gameStatus == 2)
 	{
+		clearScreen();
+		createScreen();
+		moveCursor(50,13);
+		cout << "Your name: " << p.name << endl;
+		moveCursor(50,14);
+		cout << "Your scores: " << p.point << endl;
+		moveCursor(50,15);
+		cout << "Lifes remain: " << life << endl;
+		moveCursor(50,16);
+		cout << "Total time: " << p.time;
+		Sleep(3000);
+		clearScreen();
 		return printLeaderboard();
 	}
 	else if (!win)
 	{
 		if (sett.music)
 			PlaySound(TEXT(LOSE_SOUND), NULL, SND_ASYNC);
+		clearScreen();
+		createScreen();
+		moveCursor(50,13);
+		cout << "Your name: " << p.name << endl;
+		moveCursor(50,14);
+		cout << "Your scores: " << p.point << endl;
+		moveCursor(50,15);
+		cout << "Lifes remain: " << life << endl;
+		moveCursor(50,16);
+		cout << "Total time: " << p.time;
+		Sleep(3000);
+		clearScreen();
 		read_file_at_pos("ascii_art\\youlose.txt", LIGHT_RED, BLACK, 18, 10);
 	}
 	else if (win)
 	{
 		if (sett.music)
 			PlaySound(TEXT(GLORY_SOUND), NULL, SND_ASYNC);
+		clearScreen();
+		createScreen();
+		moveCursor(50,13);
+		cout << "Your name: " << p.name << endl;
+		moveCursor(50,14);
+		cout << "Your scores: " << p.point << endl;
+		moveCursor(50,15);
+		cout << "Lifes remain: " << life << endl;
+		moveCursor(50,16);
+		cout << "Total time: " << p.time;
+		Sleep(3000);
+		clearScreen();
 		read_file_at_pos("ascii_art\\youwin.txt", LIGHT_GREEN, BLACK, 22, 10);
 	}
 	showCursor(1);
@@ -811,7 +886,10 @@ void customGame(Players &p)
 		return customGame(p);
 	}
 	else if (c == 'n' || c == 'N')
+	{
+		cin.ignore();
 		printLeaderboard();
+	}
 
 	deallocate(board, _size.row);
 }

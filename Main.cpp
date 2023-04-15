@@ -3,7 +3,7 @@
 int main()
 {
     initConsole();
-    PlaySound(TEXT(POKEMON_SOUND), NULL, SND_ASYNC);
+    PlaySound(TEXT(MARIO_SOUND), NULL, SND_ASYNC);
     MainMenu();
     return 0;
 }

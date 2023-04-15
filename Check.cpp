@@ -63,6 +63,7 @@ bool check_L(Board **board, int x1, int y1, int x2, int y2)
         return false;
 }
 
+// check 3 lines
 bool checkRectX(Board **board, int x1, int y1, int x2, int y2)
 {
     if (x1 == x2 && y1 == y2)
@@ -109,6 +110,7 @@ bool checkRectX(Board **board, int x1, int y1, int x2, int y2)
     }
 }
 
+// check 3 lines
 bool checkRectY(Board **board, int x1, int y1, int x2, int y2)
 {
     if (x1 == x2 && y1 == y2)
